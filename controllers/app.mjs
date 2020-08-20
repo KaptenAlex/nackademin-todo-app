@@ -1,13 +1,23 @@
 import express from 'express';
 import {createTodoItem} from '../models/create.mjs';
+import {loadAllTodoItems} from '../models/read.mjs';
 
 const port = 8080;
 const app = express();
 app.use(express.json());
 app.use(express.static('../views'));
 
-app.get('/', function(req, res) {
-    res.render('index.html');
+app.get('/', async(req, res) => {
+    res.redirect('index.html');
+});
+
+app.get('/loadAllTodoItems', async(req, res) => {
+    try {
+        let allTodoItems = await loadAllTodoItems();
+        res.json(allTodoItems);
+    } catch (error) {
+        res.json(error)
+    }
 });
 
 app.post('/createTodoItem', async(req, res) => {
