@@ -11,17 +11,16 @@ app.get('/', function(req, res) {
 });
 
 app.post('/createTodoItem', async(req, res) => {
-    let todoItem = {
-        title: req.body.title,
-        content: req.body.content,
-        completed: false,
-        created: Date.now(),
-        updated: Date.now()
-    };
     try {
-        let newTodoItem = await createTodoItem(todoItem);
-        res.json(newTodoItem);
-        //res.render('index.html');
+        let todoItem = {
+            title: req.body.title,
+            content: req.body.content,
+            completed: false,
+            created: Date.now(),
+            updated: Date.now()
+        };
+        await createTodoItem(todoItem);
+        res.redirect('/');
     } catch (error) {
         res.json(error)
     }
