@@ -66,5 +66,31 @@ module.exports = {
                 }
             })
         })
+    },
+    async loadNextPage() {
+        /*
+        return new Promise( (resolve, reject) => {
+            todoDatabase.find({}).sort({updated: -1}).exec( (err, todoItems) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(todoItems);
+                }
+            })
+        })
+        */
+    },
+    async loadPreviousPage() {
+        /*
+        return new Promise( (resolve, reject) => {
+            todoDatabase.find({}).sort({updated: -1}).exec( (err, todoItems) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(todoItems);
+                }
+            })
+        })
     }
+    */
 };

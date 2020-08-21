@@ -60,6 +60,20 @@ module.exports = {
         } catch (error) {
             res.json(error);
         }
+    },
+    loadNextPage: async(req, res) => {
+        try {
+            res.json(await todoModel.loadNextPage());
+        } catch (error) {
+            res.json(error);
+        }
+    },
+    loadPreviousPage: async(req, res) => {
+        try {
+            res.json(await todoModel.loadPreviousPage());
+        } catch (error) {
+            res.json(error);
+        }
     }
 
 };

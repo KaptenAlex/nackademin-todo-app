@@ -10,6 +10,10 @@ router.get('/loadLatestUpdated', todoController.loadLatestUpdated);
 
 router.get('/loadAllTodoItems', todoController.loadAllTodoItems);
 
+router.get('/loadNextPage', todoController.loadNextPage);
+
+router.get('/loadPreviousPage', todoController.loadPreviousPage);
+
 router.post('/createTodoItem', todoController.createTodoItem);
 
 router.put('/updateTodoItem/:id', todoController.updateTodoItem);
