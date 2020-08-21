@@ -21,8 +21,7 @@ module.exports = {
                 created: Date.now(),
                 updated: Date.now()
             };
-            await todoModel.createTodoItem(todoItem);
-            res.redirect('/');
+            res.json(await todoModel.createTodoItem(todoItem));
         } catch (error) {
             res.json(error);
         }

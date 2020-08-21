@@ -1,9 +1,13 @@
 import {editTodoItem} from './update.mjs';
+import {deleteTodoItem} from './delete.mjs';
+
 loadAllTodoItems();
-function loadAllTodoItems() {
+async function loadAllTodoItems() {
     fetch('http://localhost:8080/loadAllTodoItems')
     .then(response => response.json())
     .then(data => {
+        let todoListElement = document.getElementById('todoList');
+        todoListElement.innerHTML = '';
         data.forEach(todoItem => {
             // Todolist
             let todoListElement = document.getElementById('todoList');
@@ -40,6 +44,7 @@ function loadAllTodoItems() {
             deleteButton.classList.add('delete');
             deleteButton.id = todoItem._id;
             deleteButton.innerText = 'Delete';
+            deleteButton.addEventListener('click', () => deleteTodoItem(todoItem._id));
             
             //Append todoitem to todolist.
             todoListElement.appendChild(todoItemElement);
@@ -53,3 +58,5 @@ function loadAllTodoItems() {
     
     });
 }
+
+export {loadAllTodoItems}

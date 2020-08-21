@@ -8,8 +8,15 @@
 </head>
 <body>
     <h1 class="title">Todo list</h1>
+        <div class="create-item">
+            <p>Enter title of todo item</p>
+            <input type="text" name="newTodo-title" id="newTodo-title" autocomplete="off">
+            <button id="create-todo-btn">Add todo item</button>
+        </div>
     <div id="todoList" class="todoList"></div>
     <script type="module" src="./scripts/read.mjs"></script>
     <script type="module" src="./scripts/update.mjs"></script>
+    <script type="module" src="./scripts/delete.mjs"></script>
+    <script type="module" src="./scripts/create.mjs"></script>
 </body>
 </html>

@@ -14,7 +14,7 @@ body {
 }
 .todoList {
     display: grid;
-    grid-row-start: 2;
+    grid-row-start: 3;
     grid-template-rows: auto;
     grid-template-columns: 1fr 1fr 1fr 1fr;
 }
@@ -40,4 +40,21 @@ body {
     display: grid;
     align-self: center;
     margin: 0 auto;
+}
+.create-item {
+    width: fit-content;
+    display: grid;
+    grid-row-start: 2;
+    grid-template-rows: 1fr;
+    grid-template-columns: auto;
+    justify-content: center;
+    align-self: center;
+    margin: 0 auto;
+    padding: 10px 25px 25px 25px;
+    color: white;
+    background-color: black;
+}
+.create-item > button {
+    background-color: green;
+    margin-top: 10px;
 }
