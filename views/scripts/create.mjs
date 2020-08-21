@@ -4,10 +4,10 @@ let createTodoButton = document.getElementById('create-todo-btn');
 createTodoButton.addEventListener('click', () => createNewTodoItem());
 
 async function createNewTodoItem() {
-    let todoTitle = document.getElementById('newTodo-title').value;
+    let todoTitle = document.getElementById('newTodo-title');
     
     const newTodoItem = {
-        title: todoTitle,
+        title: todoTitle.value,
         completed: false
     };
     await fetch( 'http://localhost:8080/createTodoItem', {
@@ -21,8 +21,9 @@ async function createNewTodoItem() {
     
     .then(todoItem => {
         if (!todoItem) {
-            console.log('Something went wrong, shake programmer to get answers');
+            console.log('Something went wrong, shake student to get answers');
         } else {
+            todoTitle.value = '';
             loadAllTodoItems();
         }
     })
