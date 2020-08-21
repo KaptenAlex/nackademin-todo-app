@@ -62,7 +62,7 @@ body {
 }
 .sort-by {
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: 12.5% 12.5% 75%;
     justify-content: center;
     align-self: center;
@@ -75,7 +75,7 @@ body {
     width: 150px;
 }
 #sort-by-updated {
-    grid-row: 2;
+    grid-row: 3;
     background-color: pink;
     border-radius: 10px;
     width: 150px;

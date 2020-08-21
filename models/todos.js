@@ -47,7 +47,7 @@ module.exports = {
     },
     async loadLatestCreated() {
         return new Promise( (resolve, reject) => {
-            todoDatabase.find({}).sort({created: 1}).exec( (err, todoItems) => {
+            todoDatabase.find({}).sort({created: -1}).exec( (err, todoItems) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -58,7 +58,7 @@ module.exports = {
     },
     async loadLatestUpdated() {
         return new Promise( (resolve, reject) => {
-            todoDatabase.find({}).sort({updated: 1}).exec( (err, todoItems) => {
+            todoDatabase.find({}).sort({updated: -1}).exec( (err, todoItems) => {
                 if (err) {
                     reject(err);
                 } else {
