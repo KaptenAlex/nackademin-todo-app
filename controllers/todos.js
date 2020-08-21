@@ -46,6 +46,20 @@ module.exports = {
         } catch (error) {
             res.json(error);
         }
+    },
+    loadLatestCreated: async(req, res) => {
+        try {
+            res.json(await todoModel.loadLatestCreated());
+        } catch (error) {
+            res.json(error);
+        }
+    },
+    loadLatestUpdated: async(req, res) => {
+        try {
+            res.json(await todoModel.loadLatestUpdated());
+        } catch (error) {
+            res.json(error);
+        }
     }
 
 };
