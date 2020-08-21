@@ -2,6 +2,7 @@ import express from 'express';
 import {createTodoItem}     from '../models/create.mjs';
 import {loadAllTodoItems}   from '../models/read.mjs';
 import {updateTodoItem}     from '../models/update.mjs';
+import {deleteTodoItem}     from '../models/delete.mjs';
 
 const port = 8080;
 const app = express();
@@ -11,6 +12,7 @@ app.use(express.static('../views'));
 app.get('/', async(req, res) => {
     res.redirect('index.html');
 });
+
 
 app.get('/loadAllTodoItems', async(req, res) => {
     try {
@@ -52,6 +54,15 @@ app.put('/updateTodoItem/:id', async(req, res) => {
         res.json(error)
     }
 });
+
+app.delete('/deleteTodoItem/:id', async (req, res) => {
+    try {
+        let todoItemID = req.params.id;
+        res.json(await deleteTodoItem(todoItemID));
+    } catch (error) {
+        res.json(error)
+    }
+})
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`)
