@@ -8,11 +8,17 @@
 </head>
 <body>
     <h1 class="title">Todo list</h1>
-        <div class="create-item">
-            <p>Enter title of todo item</p>
-            <input type="text" name="newTodo-title" id="newTodo-title" autocomplete="off">
-            <button id="create-todo-btn">Add todo item</button>
-        </div>
+    <div class="create-item">
+        <p>Enter title of todo item</p>
+        <input type="text" name="newTodo-title" id="newTodo-title" autocomplete="off">
+        <button id="create-todo-btn">Add todo item</button>
+    </div>
+    <div class="sort-by">
+        <h2>Sort by latest:</h2>
+        <button id="sort-by-created">Created</button>
+        <button id="sort-by-updated">Updated</button>
+    </div>
+
     <div id="todoList" class="todoList"></div>
     <script type="module" src="./scripts/read.mjs"></script>
     <script type="module" src="./scripts/update.mjs"></script>

@@ -27,6 +27,7 @@ body {
     border-radius: 4px;
     background-color: black;
     color: white;
+    padding: 2px;
 }
 .edit {
     background-color: green;
@@ -53,8 +54,29 @@ body {
     padding: 10px 25px 25px 25px;
     color: white;
     background-color: black;
+    border-radius: 10px;
 }
 .create-item > button {
     background-color: green;
     margin-top: 10px;
+}
+.sort-by {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 12.5% 12.5% 75%;
+    justify-content: center;
+    align-self: center;
+    margin: 25px;
+}
+#sort-by-created {
+    grid-row: 2;
+    background-color: pink;
+    border-radius: 10px;
+    width: 150px;
+}
+#sort-by-updated {
+    grid-row: 2;
+    background-color: pink;
+    border-radius: 10px;
+    width: 150px;
 }
