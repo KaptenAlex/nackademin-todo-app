@@ -5,12 +5,10 @@ document.getElementById('sort-by-created').addEventListener('click', () => sortB
 document.getElementById('sort-by-updated').addEventListener('click', () => sortByLatestUpdated() );
 
 async function sortByLatestCreated() {
-    console.log("created");
     createTodoItems('loadLatestCreated');
 }
 
 async function sortByLatestUpdated() {
-    console.log("updated");
     createTodoItems('loadLatestUpdated');
 }
 

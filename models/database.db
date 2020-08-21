@@ -1,15 +1,9 @@
 {"title":"testa kod","completed":false,"created":1598030876571,"updated":1598030876571,"_id":"5ZbLR1vWwUgBobQ5"}
 {"title":"hejsan","completed":false,"created":1598034800826,"updated":1598034800826,"_id":"7sJau9Hhpv6wuKXk"}
-{"title":"hallå","completed":false,"created":1598034831918,"updated":1598034831918,"_id":"EBnvS4vM6TEmbRLX"}
-{"title":"rensa kod","completed":true,"created":1598030879657,"updated":1598034955521,"_id":"xlT1EyxG9e9xR7n8"}
-{"title":"gr","completed":false,"created":1598034994033,"updated":1598034994033,"_id":"u2mIvtfWTNgLW1iB"}
-{"title":"","completed":false,"created":1598034996062,"updated":1598034996062,"_id":"HPwWhhFEQ7XMfLpO"}
-{"$$deleted":true,"_id":"HPwWhhFEQ7XMfLpO"}
-{"title":"gr","completed":true,"created":1598034994033,"updated":1598035003990,"_id":"u2mIvtfWTNgLW1iB"}
-{"title":"gr","completed":false,"created":1598034994033,"updated":1598035009037,"_id":"u2mIvtfWTNgLW1iB"}
-{"title":"hej","completed":false,"created":1598035083564,"updated":1598035083564,"_id":"zabHeKp7QzKPI5mG"}
-{"title":"hej","completed":true,"created":1598035083564,"updated":1598035085466,"_id":"zabHeKp7QzKPI5mG"}
-{"$$deleted":true,"_id":"zabHeKp7QzKPI5mG"}
 {"title":"hallå","completed":true,"created":1598034831918,"updated":1598035096013,"_id":"EBnvS4vM6TEmbRLX"}
-{"title":"hallå","completed":false,"created":1598035103959,"updated":1598035103959,"_id":"63FcDgFo78J3p5we"}
-{"$$deleted":true,"_id":"63FcDgFo78J3p5we"}
+{"title":"gr","completed":false,"created":1598034994033,"updated":1598035009037,"_id":"u2mIvtfWTNgLW1iB"}
+{"title":"rensa kod","completed":true,"created":1598030879657,"updated":1598034955521,"_id":"xlT1EyxG9e9xR7n8"}
+{"title":"magic mike","completed":false,"created":1598035266200,"updated":1598035266200,"_id":"vJnMPL2i5KtKyFy5"}
+{"title":"magic mike","completed":true,"created":1598035266200,"updated":1598035269108,"_id":"vJnMPL2i5KtKyFy5"}
+{"$$deleted":true,"_id":"7sJau9Hhpv6wuKXk"}
+{"title":"rensa kod","completed":false,"created":1598030879657,"updated":1598035292882,"_id":"xlT1EyxG9e9xR7n8"}
