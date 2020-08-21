@@ -18,7 +18,6 @@ async function createNewTodoItem() {
         body: JSON.stringify(newTodoItem)
     })
     .then( response => response.json() )
-    
     .then(todoItem => {
         if (!todoItem) {
             console.log('Something went wrong, shake student to get answers');

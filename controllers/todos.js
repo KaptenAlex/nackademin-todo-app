@@ -32,8 +32,7 @@ module.exports = {
             let todoItem = {
                 title: req.body.title,
                 completed: req.body.completed,   
-                //content: req.body.content,
-                //updated: Date.now(),
+                updated: Date.now(),
             };
             res.json(await todoModel.updateTodoItem(todoItem, todoItemID));
         } catch (error) {

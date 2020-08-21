@@ -36,7 +36,7 @@ module.exports = {
     },
     async updateTodoItem(todoItem, todoItemID) {
         return new Promise( (resolve, reject) => {
-            todoDatabase.update({_id: todoItemID}, todoItem, (err, updatedTodoItem) => {
+            todoDatabase.update({_id: todoItemID}, {$set:todoItem}, (err, updatedTodoItem) => {
                 if (err) {
                     reject(err);
                 } else {
