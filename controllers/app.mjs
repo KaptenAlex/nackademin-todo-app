@@ -19,7 +19,7 @@ app.get('/loadAllTodoItems', async(req, res) => {
         let allTodoItems = await loadAllTodoItems();
         res.json(allTodoItems);
     } catch (error) {
-        res.json(error)
+        res.json(error);
     }
 });
 
@@ -35,14 +35,14 @@ app.post('/createTodoItem', async(req, res) => {
         await createTodoItem(todoItem);
         res.redirect('/');
     } catch (error) {
-        res.json(error)
+        res.json(error);
     }
 });
 
 app.put('/updateTodoItem/:id', async(req, res) => {
     //Have to replace /updateTodoItem/:id with id inside a hidden input field to make it possible in frontend.
     try {
-        let todoItemID = req.params.id
+        let todoItemID = req.params.id;
         let todoItem = {
             title: req.body.title,
             content: req.body.content,
@@ -51,7 +51,7 @@ app.put('/updateTodoItem/:id', async(req, res) => {
         };
         res.json(await updateTodoItem(todoItem, todoItemID));
     } catch (error) {
-        res.json(error)
+        res.json(error);
     }
 });
 
@@ -60,10 +60,10 @@ app.delete('/deleteTodoItem/:id', async (req, res) => {
         let todoItemID = req.params.id;
         res.json(await deleteTodoItem(todoItemID));
     } catch (error) {
-        res.json(error)
+        res.json(error);
     }
 })
 
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`)
+    console.log(`Server is running on port ${port}`);
 });

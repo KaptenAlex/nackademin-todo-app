@@ -20,11 +20,24 @@ body {
 }
 .todoItem {
     display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-columns: 10% 50% 20% 20%;
     margin: 25px;
     border: 1px solid black;
     border-radius: 4px;
     background-color: black;
     color: white;
+}
+.edit {
+    background-color: green;
+    color: black;
+}
+.delete {
+    background-color: red;
+    color: black;
+}
+.completed-checkbox {
+    display: grid;
+    align-self: center;
+    margin: 0 auto;
 }
