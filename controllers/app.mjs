@@ -40,14 +40,15 @@ app.post('/createTodoItem', async(req, res) => {
 });
 
 app.put('/updateTodoItem/:id', async(req, res) => {
-    //Have to replace /updateTodoItem/:id with id inside a hidden input field to make it possible in frontend.
     try {
         let todoItemID = req.params.id;
         let todoItem = {
             title: req.body.title,
-            content: req.body.content,
             completed: req.body.completed,
+            /*,
+            content: req.body.content
             updated: Date.now(),
+            */
         };
         res.json(await updateTodoItem(todoItem, todoItemID));
     } catch (error) {
