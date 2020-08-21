@@ -1,5 +1,3 @@
-import {loadAllTodoItems} from './read.mjs';
-
 async function editTodoItem( todoItemID ) {
     let todoItemElement = document.querySelector('div#' + todoItemID);
     let todoTitle = todoItemElement.querySelector('.todoTitle').value;

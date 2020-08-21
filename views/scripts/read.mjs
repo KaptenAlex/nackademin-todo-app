@@ -27,7 +27,7 @@ function loadAllTodoItems() {
             let todoItemTitleInputElement = document.createElement('input');
             todoItemTitleInputElement.value = todoItem.title;
             todoItemTitleInputElement.classList.add('todoTitle');
-            
+
             //Todo item's edit button
             let editButton = document.createElement('button');
             editButton.classList.add('edit');
@@ -53,4 +53,3 @@ function loadAllTodoItems() {
     
     });
 }
-export {loadAllTodoItems};
