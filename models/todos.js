@@ -34,6 +34,22 @@ module.exports = {
             });
         });
     },
+    async countTodoItems() {
+        return new Promise( (resolve, reject) => {
+            todoDatabase.count({}, (err, numOfTodoItems) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    //Calculate how many pages are required to show all documents on the SPA
+                    let numOfTodoItemsPages = numOfTodoItems / 8;
+                    // Then round it upwards to be able to show the last page of all todoitems.
+                    let numOfPagesNeeded = Math.ceil(numOfTodoItemsPages);
+                    //Have to add one extra page because neDB is weird like that
+                    resolve(numOfPagesNeeded + 1);
+                }
+            });
+        });
+    },
     async updateTodoItem(todoItem, todoItemID) {
         return new Promise( (resolve, reject) => {
             todoDatabase.update({_id: todoItemID}, {$set:todoItem}, (err, updatedTodoItem) => {

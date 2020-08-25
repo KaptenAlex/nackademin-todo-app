@@ -1,8 +1,5 @@
-/*
-import {deleteTodoItem} from './delete.mjs';
-import {editTodoItem} from './update.mjs';
-*/
 import {loadAllTodoItems} from './read.mjs';
+
 let page = 0;
 
 let previousPage = document.getElementById('previous-page');
@@ -12,14 +9,29 @@ let pageNumber = document.getElementById('page-number');
 previousPage.addEventListener('click', () => subtractIndexPage());
 nextPage.addEventListener('click', () => incrementIndexPage());
 
-
-function incrementIndexPage() {
-    page++;
-    loadAllTodoItems(page);
-    pageNumber.innerHTML = '<h1>Page ' + (page + 1) +'</h1>'
+function countTodoItemsPages() {
+    fetch('http://localhost:8080/countTodoItems')
+    .then(response => response.json() )
+    .then(data => {
+        let x = data;
+        console.log(x);
+        return x;
+    });
 }
 
-function subtractIndexPage() {
+async function incrementIndexPage() {
+    let checkNumberOfPages = countTodoItemsPages();
+    console.log(checkNumberOfPages);
+    if (checkNumberOfPages == page) {
+        pageNumber.innerHTML = '<h1>No more pages are available</h1>'
+    } else {
+        page++;
+        loadAllTodoItems(page);
+        pageNumber.innerHTML = '<h1>Page ' + (page + 1) +'</h1>'
+    }
+}
+
+async function subtractIndexPage() {
     if(page != 0 || page > 0) {
         page--;
         loadAllTodoItems(page);

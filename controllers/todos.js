@@ -13,6 +13,13 @@ module.exports = {
             res.json(error);
         }
     },
+    countTodoItems: async(req, res) => {
+        try {
+            res.json(await todoModel.countTodoItems());
+        } catch (error) {
+            res.json(error);
+        }
+    },
     createTodoItem: async(req, res) => {
         try {
             let todoItem = {

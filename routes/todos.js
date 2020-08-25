@@ -10,6 +10,8 @@ router.get('/loadLatestUpdated', todoController.loadLatestUpdated);
 
 router.get('/loadAllTodoItems/', todoController.loadAllTodoItems);
 
+router.get('/countTodoItems', todoController.countTodoItems);
+
 router.post('/createTodoItem', todoController.createTodoItem);
 
 router.put('/updateTodoItem/:id', todoController.updateTodoItem);
