@@ -8,11 +8,7 @@ router.get('/loadLatestCreated', todoController.loadLatestCreated);
 
 router.get('/loadLatestUpdated', todoController.loadLatestUpdated);
 
-router.get('/loadAllTodoItems', todoController.loadAllTodoItems);
-
-router.get('/loadNextPage', todoController.loadNextPage);
-
-router.get('/loadPreviousPage', todoController.loadPreviousPage);
+router.get('/loadAllTodoItems/', todoController.loadAllTodoItems);
 
 router.post('/createTodoItem', todoController.createTodoItem);
 

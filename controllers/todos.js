@@ -6,7 +6,8 @@ module.exports = {
     },
     loadAllTodoItems: async(req, res) => {
         try {
-            let allTodoItems = await todoModel.loadAllTodoItems();
+            let page = req.query.page;
+            let allTodoItems = await todoModel.loadAllTodoItems(page);
             res.json(allTodoItems);
         } catch (error) {
             res.json(error);
@@ -60,20 +61,5 @@ module.exports = {
         } catch (error) {
             res.json(error);
         }
-    },
-    loadNextPage: async(req, res) => {
-        try {
-            res.json(await todoModel.loadNextPage());
-        } catch (error) {
-            res.json(error);
-        }
-    },
-    loadPreviousPage: async(req, res) => {
-        try {
-            res.json(await todoModel.loadPreviousPage());
-        } catch (error) {
-            res.json(error);
-        }
     }
-
 };

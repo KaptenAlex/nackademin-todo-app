@@ -2,12 +2,13 @@ import {editTodoItem} from './update.mjs';
 import {deleteTodoItem} from './delete.mjs';
 
 loadAllTodoItems();
-async function loadAllTodoItems() {
-    fetch('http://localhost:8080/loadAllTodoItems')
+async function loadAllTodoItems(pageNumber = 0) {
+    fetch('http://localhost:8080/loadAllTodoItems/?page=' + pageNumber)
     .then(response => response.json())
     .then(data => {
         let todoListElement = document.getElementById('todoList');
         todoListElement.innerHTML = '';
+        console.log(data);
         data.forEach(todoItem => {
             // Todolist
             let todoListElement = document.getElementById('todoList');

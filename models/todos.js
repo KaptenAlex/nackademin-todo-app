@@ -23,9 +23,9 @@ module.exports = {
             });
         });
     },
-    async loadAllTodoItems() {
+    async loadAllTodoItems(skipNumber = 5) {
         return new Promise( (resolve, reject) => {
-            todoDatabase.find({}, (err, allTodoItems) => {
+            todoDatabase.find({}).sort({ created: -1}).skip(skipNumber * 5).limit(8).exec((err, allTodoItems) => {
                 if (err) {
                     reject(err)
                 } else {
@@ -66,31 +66,5 @@ module.exports = {
                 }
             })
         })
-    },
-    async loadNextPage() {
-        /*
-        return new Promise( (resolve, reject) => {
-            todoDatabase.find({}).sort({updated: -1}).exec( (err, todoItems) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(todoItems);
-                }
-            })
-        })
-        */
-    },
-    async loadPreviousPage() {
-        /*
-        return new Promise( (resolve, reject) => {
-            todoDatabase.find({}).sort({updated: -1}).exec( (err, todoItems) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(todoItems);
-                }
-            })
-        })
-        */
     }
 };

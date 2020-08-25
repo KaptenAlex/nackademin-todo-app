@@ -80,3 +80,18 @@ body {
     border-radius: 10px;
     width: 150px;
 }
+.pagination-container {
+    display: grid;
+    grid-template: 1fr / 50% 50%;
+    margin-left: 25px;
+}
+#next-page {
+    margin-left: 5%;
+    height: 50px;
+    background-color: green;
+}
+#previous-page {
+    margin-right: 5%;
+    height: 50px;
+    background-color: red;
+}
