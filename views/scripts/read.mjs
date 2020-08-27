@@ -9,7 +9,6 @@ async function loadAllTodoItems(pageNumber = 0) {
         let todoListElement = document.getElementById('todoList');
         todoListElement.innerHTML = '';
         data.forEach(todoItem => {
-            console.log(todoItem);
             // Todolist
             let todoListElement = document.getElementById('todoList');
     
