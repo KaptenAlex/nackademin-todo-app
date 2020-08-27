@@ -8,6 +8,45 @@
 </head>
 <body>
     <h1 class="title">Todo list</h1>
+    <div id="user-interface" class="user">
+        <div id="signed-out-interface">
+            <h3>Login</h3>
+            <div>
+                <label for="username-sign-in">Username</label>
+                <br>
+                <input type="text" name="username-sign-in" id="username-sign-in">
+            </div>
+            <div>
+                <label for="password-sign-in">Password</label>
+                <br>
+                <input type="text" name="password-sign-in" id="password-sign-in">
+            </div>
+            <br>
+            <button id="sign-in">Sign in</button>
+        </div>
+        <div id="signed-in-interface">
+            <div class="signed-in">
+                <h3>Logged in as: <span id="account-username"></span></h3>
+                <br>
+                <button id="sign-out">Sign out of account</button>
+            </div>
+        </div>
+        <div id="create-user-interface">
+            <h3>Create user</h3>
+            <div>
+                <label for="create-user-username">Username</label>
+                <br>
+                <input type="text" name="create-user-username" id="create-user-username">
+            </div>
+            <div>
+                <label for="create-user-password">Password</label>
+                <br>
+                <input type="text" name="create-user-password" id="create-user-password">
+            </div>
+            <br>
+            <button id="create-user">Create account</button>
+        </div>
+    </div>
     <div class="create-item">
         <p>Enter title of todo item</p>
         <input type="text" name="newTodo-title" id="newTodo-title" autocomplete="off">
@@ -30,5 +69,6 @@
     <script type="module" src="./scripts/create.mjs"></script>
     <script type="module" src="./scripts/sortby.mjs"></script>
     <script type="module" src="./scripts/pagination.mjs"></script>
+    <script type="module" src="./scripts/user.mjs"></script>
 </body>
 </html>

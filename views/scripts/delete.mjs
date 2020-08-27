@@ -1,7 +1,7 @@
 import {loadAllTodoItems} from './read.mjs';
 
 async function deleteTodoItem( todoItemID ) { 
-    await fetch( 'http://localhost:8080/deleteTodoItem/' + todoItemID, {
+    await fetch( 'http://localhost:8080/todos/deleteTodoItem/' + todoItemID, {
         method: "DELETE"
     })
     .then( response => response.json() )

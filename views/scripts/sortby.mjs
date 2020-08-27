@@ -13,7 +13,7 @@ async function sortByLatestUpdated() {
 }
 
 function createTodoItems (sortByEndpoint) {
-    fetch('http://localhost:8080/' + sortByEndpoint)
+    fetch('http://localhost:8080/todos/' + sortByEndpoint)
     .then(response => response.json())
     .then(data => {
         let todoListElement = document.getElementById('todoList');

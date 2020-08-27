@@ -3,13 +3,13 @@ import {deleteTodoItem} from './delete.mjs';
 
 loadAllTodoItems();
 async function loadAllTodoItems(pageNumber = 0) {
-    fetch('http://localhost:8080/loadAllTodoItems/?page=' + pageNumber)
+    fetch('http://localhost:8080/todos/loadAllTodoItems/?page=' + pageNumber)
     .then(response => response.json())
     .then(data => {
         let todoListElement = document.getElementById('todoList');
         todoListElement.innerHTML = '';
-        console.log(data);
         data.forEach(todoItem => {
+            console.log(todoItem);
             // Todolist
             let todoListElement = document.getElementById('todoList');
     
@@ -38,6 +38,8 @@ async function loadAllTodoItems(pageNumber = 0) {
             editButton.classList.add('edit');
             editButton.id = todoItem._id;
             editButton.innerText = 'Edit';
+            //Todo: remove disabled edit and fix issue that edit has with new todo items
+            editButton.disabled = true;
             editButton.addEventListener('click', () => editTodoItem(todoItem._id));
             
             //Todo item's delete button

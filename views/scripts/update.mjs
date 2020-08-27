@@ -7,7 +7,7 @@ async function editTodoItem( todoItemID ) {
         title: todoTitle,
         completed: todoCompleted
     };
-    await fetch( 'http://localhost:8080/updateTodoItem/' + todoItemID, {
+    await fetch( 'http://localhost:8080/todos/updateTodoItem/' + todoItemID, {
         method: 'PUT',
         headers: {
             'Content-type': 'application/json'

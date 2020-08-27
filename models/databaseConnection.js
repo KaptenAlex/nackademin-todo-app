@@ -1,4 +1,4 @@
 const nedb = require('nedb');
-let dataStore = new nedb({ filename: './models/database.db', autoload: true });
-//'../models/database.db'
-module.exports = dataStore;
+let postsDatabase = new nedb({ filename: './models/database.db', autoload: true });
+let usersDatabase = new nedb({ filename: './models/users.db', autoload: true });
+module.exports = {postsDatabase, usersDatabase};

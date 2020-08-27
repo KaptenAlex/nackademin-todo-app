@@ -14,7 +14,7 @@ body {
 }
 .todoList {
     display: grid;
-    grid-row-start: 3;
+    grid-row-start: 7;
     grid-template-rows: auto;
     grid-template-columns: 1fr 1fr 1fr 1fr;
 }
@@ -45,7 +45,7 @@ body {
 .create-item {
     width: fit-content;
     display: grid;
-    grid-row-start: 2;
+    grid-row-start: 3;
     grid-template-rows: 1fr;
     grid-template-columns: auto;
     justify-content: center;
@@ -62,20 +62,17 @@ body {
 }
 .sort-by {
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
     grid-template-columns: 12.5% 12.5% 75%;
-    justify-content: center;
-    align-self: center;
+    grid-row: 4;
     margin: 25px;
 }
 #sort-by-created {
-    grid-row: 2;
     background-color: pink;
     border-radius: 10px;
     width: 150px;
 }
 #sort-by-updated {
-    grid-row: 3;
     background-color: pink;
     border-radius: 10px;
     width: 150px;
@@ -94,4 +91,31 @@ body {
     margin-right: 5%;
     height: 50px;
     background-color: red;
+}
+.user {
+    display: grid;
+    grid-row: 2;
+    grid-template:  1fr / 1fr 1fr 1fr;
+    justify-content: center;
+}
+/* vänster */
+#signed-out-interface {
+    background-color: yellow;
+    width: auto;
+}
+/* mitten */
+#signed-in-interface {
+    background-color: yellow;
+    width: auto;
+    height: min-content;
+    padding: 25px;
+    margin: 0 auto;
+    margin-left: 8.9rem;
+}
+/* höger */
+#create-user-interface {
+    background-color: yellow;
+    width: auto;
+    display: grid;
+    justify-content: flex-end;
 }

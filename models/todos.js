@@ -1,9 +1,9 @@
-const todoDatabase = require('./databaseConnection.js');
+const {postsDatabase} = require('./databaseConnection.js');
 
 module.exports = {
     async createTodoItem(todoItem) {
         return new Promise( (resolve, reject) => {
-            todoDatabase.insert(todoItem, (err, newTodoItem) => {
+            postsDatabase.insert(todoItem, (err, newTodoItem) => {
                     if(err) {
                         reject(err);
                     } else {
@@ -14,7 +14,7 @@ module.exports = {
     }, 
     async deleteTodoItem(todoItemID) {
         return new Promise( (resolve, reject) => {
-            todoDatabase.remove({_id: todoItemID}, {}, (err, numOfTodoItemRemoved) => {
+            postsDatabase.remove({_id: todoItemID}, {}, (err, numOfTodoItemRemoved) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -25,7 +25,7 @@ module.exports = {
     },
     async loadAllTodoItems(skipNumber = 5) {
         return new Promise( (resolve, reject) => {
-            todoDatabase.find({}).sort({ created: -1}).skip(skipNumber * 5).limit(8).exec((err, allTodoItems) => {
+            postsDatabase.find({}).sort({ created: -1}).skip(skipNumber * 5).limit(8).exec((err, allTodoItems) => {
                 if (err) {
                     reject(err)
                 } else {
@@ -36,7 +36,7 @@ module.exports = {
     },
     async countTodoItems() {
         return new Promise( (resolve, reject) => {
-            todoDatabase.count({}, (err, numOfTodoItems) => {
+            postsDatabase.count({}, (err, numOfTodoItems) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -52,7 +52,7 @@ module.exports = {
     },
     async updateTodoItem(todoItem, todoItemID) {
         return new Promise( (resolve, reject) => {
-            todoDatabase.update({_id: todoItemID}, {$set:todoItem}, (err, updatedTodoItem) => {
+            postsDatabase.update({_id: todoItemID}, {$set:todoItem}, (err, updatedTodoItem) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -63,7 +63,7 @@ module.exports = {
     },
     async loadLatestCreated() {
         return new Promise( (resolve, reject) => {
-            todoDatabase.find({}).sort({created: -1}).exec( (err, todoItems) => {
+            postsDatabase.find({}).sort({created: -1}).exec( (err, todoItems) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -74,7 +74,7 @@ module.exports = {
     },
     async loadLatestUpdated() {
         return new Promise( (resolve, reject) => {
-            todoDatabase.find({}).sort({updated: -1}).exec( (err, todoItems) => {
+            postsDatabase.find({}).sort({updated: -1}).exec( (err, todoItems) => {
                 if (err) {
                     reject(err);
                 } else {

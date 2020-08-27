@@ -10,7 +10,7 @@ async function createNewTodoItem() {
         title: todoTitle.value,
         completed: false
     };
-    await fetch( 'http://localhost:8080/createTodoItem', {
+    await fetch( 'http://localhost:8080/todos/createTodoItem', {
         method: 'POST',
         headers: {
             'Content-type': 'application/json'

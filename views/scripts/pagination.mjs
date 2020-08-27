@@ -10,7 +10,7 @@ previousPage.addEventListener('click', () => subtractIndexPage());
 nextPage.addEventListener('click', () => incrementIndexPage());
 
 function countTodoItemsPages() {
-    fetch('http://localhost:8080/countTodoItems')
+    fetch('http://localhost:8080/todos/countTodoItems')
     .then(response => response.json() )
     .then(data => {
         let x = data;
@@ -20,6 +20,7 @@ function countTodoItemsPages() {
 }
 
 async function incrementIndexPage() {
+    //TODO : Make it not possible to go to a page without todo's.
     let checkNumberOfPages = countTodoItemsPages();
     console.log(checkNumberOfPages);
     if (checkNumberOfPages == page) {
