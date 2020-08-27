@@ -11,7 +11,7 @@ module.exports = {
                     }
                });
         });
-    }, 
+    },
     async deleteTodoItem(todoItemID) {
         return new Promise( (resolve, reject) => {
             postsDatabase.remove({_id: todoItemID}, {}, (err, numOfTodoItemRemoved) => {

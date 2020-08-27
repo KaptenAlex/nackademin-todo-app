@@ -12,5 +12,12 @@ module.exports = {
         } catch (error) {
             res.json(error)
         }
+    },
+    userIsAuthorized: (req, res) => {
+        let user = {
+            username: req.user.username,
+            role: req.user.role
+        }
+        res.json(user);
     }
 }

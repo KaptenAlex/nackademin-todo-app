@@ -18,6 +18,8 @@ const authorizationController = require('../controllers/authorization.js')
 // router.get('/:userId/todos', authorizationController.authorize, userController.getUserTodoItems);
 
 // Anonymous routers
-router.post("/createUser", usersController.createUserAccount)
+router.post("/createUser", usersController.createUserAccount);
+router.post("/signinUser", authorizationController.login);
+router.get("/authorizeUser", authorizationController.authorize, usersController.userIsAuthorized);
 
 module.exports = router;
