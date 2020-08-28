@@ -9,27 +9,25 @@ let pageNumber = document.getElementById('page-number');
 previousPage.addEventListener('click', () => subtractIndexPage());
 nextPage.addEventListener('click', () => incrementIndexPage());
 
-function countTodoItemsPages() {
-    fetch('http://localhost:8080/todos/countTodoItems')
-    .then(response => response.json() )
-    .then(data => {
-        let x = data;
-        console.log(x);
-        return x;
-    });
-}
-
 async function incrementIndexPage() {
-    //TODO : Make it not possible to go to a page without todo's.
-    let checkNumberOfPages = countTodoItemsPages();
-    console.log(checkNumberOfPages);
-    if (checkNumberOfPages == page) {
-        pageNumber.innerHTML = '<h1>No more pages are available</h1>'
-    } else {
-        page++;
-        loadAllTodoItems(page);
-        pageNumber.innerHTML = '<h1>Page ' + (page + 1) +'</h1>'
-    }
+    await fetch('http://localhost:8080/todos/countTodoItems', {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + window.sessionStorage.getItem('token')
+        }
+    })
+    .then(response => response.json() )
+    .then(numOfPages => {
+        console.log(numOfPages);
+        //TODO : Make it not possible to go to a page without todo's.
+        if (page == numOfPages || page > numOfPages) {
+            pageNumber.innerHTML = '<h1>No more pages are available</h1>'
+        } else {
+            page++;
+            loadAllTodoItems(page);
+            pageNumber.innerHTML = '<h1>Page ' + (page + 1) +'</h1>'
+        }
+    });
 }
 
 async function subtractIndexPage() {

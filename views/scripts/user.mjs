@@ -1,3 +1,5 @@
+import { loadAllTodoItems } from './read.mjs';
+
 let signInBtn = document.getElementById('sign-in');
 let signOutBtn = document.getElementById('sign-out');
 let createAccountBtn = document.getElementById('create-user');
@@ -49,7 +51,7 @@ async function signIn() {
         let signedOutBtn = document.getElementById('sign-out');
         signedOutBtn.disabled = false;
     });
-
+    loadAllTodoItems();
     if(window.sessionStorage.getItem('role') == 'admin') {
         createAccountBtn.disabled = false;
 

@@ -1,9 +1,13 @@
 import {editTodoItem} from './update.mjs';
 import {deleteTodoItem} from './delete.mjs';
 
-loadAllTodoItems();
 async function loadAllTodoItems(pageNumber = 0) {
-    fetch('http://localhost:8080/todos/loadAllTodoItems/?page=' + pageNumber)
+    fetch('http://localhost:8080/todos/loadAllTodoItems/?page=' + pageNumber, {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + window.sessionStorage.getItem('token')
+        }
+    })
     .then(response => response.json())
     .then(data => {
         let todoListElement = document.getElementById('todoList');

@@ -34,6 +34,17 @@ module.exports = {
             });
         });
     },
+    async loadAllTodoItemsForUser(skipNumber = 5, id) {
+        return new Promise( (resolve, reject) => {
+            postsDatabase.find({_id: id}).sort({ created: -1}).skip(skipNumber * 5).limit(8).exec((err, allTodoItems) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(allTodoItems)
+                }
+            });
+        });
+    },
     async countTodoItems() {
         return new Promise( (resolve, reject) => {
             postsDatabase.count({}, (err, numOfTodoItems) => {
@@ -45,7 +56,7 @@ module.exports = {
                     // Then round it upwards to be able to show the last page of all todoitems.
                     let numOfPagesNeeded = Math.ceil(numOfTodoItemsPages);
                     //Have to add one extra page because neDB is weird like that
-                    resolve(numOfPagesNeeded + 1);
+                    resolve(numOfPagesNeeded);
                 }
             });
         });
