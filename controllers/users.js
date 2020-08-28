@@ -19,5 +19,16 @@ module.exports = {
             role: req.user.role
         }
         res.json(user);
+    },
+    getAllUsers: async(req, res) => {
+        try {
+            if (req.user.role == "admin") {
+                res.json(await usersModel.getUsers());
+            } else {
+                res.json({message: "User lacks privliges for this function"});
+            }   
+        } catch (error) {
+            res.json(error)
+        }
     }
 }

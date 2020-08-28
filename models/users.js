@@ -34,5 +34,16 @@ module.exports = {
                 }
             })
         })
+    },
+    async getUsers() {
+        return new Promise( (resolve, reject) => {
+            usersDatabase.find({}).projection({password: 0}).sort({username: 1}).exec((err, usersObject) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(usersObject);
+                }
+            })
+        })
     }
 }

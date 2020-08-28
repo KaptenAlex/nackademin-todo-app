@@ -4,11 +4,12 @@ const usersController = require('../controllers/users.js')
 const authorizationController = require('../controllers/authorization.js')
 
 // Admin routers
-// router.get("/getAllUsers", authorizationController.authorize, usersController.getAllUsers)
+router.get("/getAllUsers", authorizationController.authorize, usersController.getAllUsers)
 
 // Users routers
 
 // Admin/Users routers
+
 // router.get('/:userId', authorizationController.authorize, userController.getOne);
 // router.delete('/:userId', authorizationController.authorize, userController.remove);
 // router.patch('/:userId', authorizationController.authorize, userController.update);
