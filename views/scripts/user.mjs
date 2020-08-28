@@ -2,6 +2,7 @@ let signInBtn = document.getElementById('sign-in');
 let signOutBtn = document.getElementById('sign-out');
 let createAccountBtn = document.getElementById('create-user');
 let createAccountResponse = document.getElementById('create-account-response');
+let userInterface = document.getElementById('signed-in-interface');
 
 signInBtn.addEventListener('click', () => signIn() );
 signOutBtn.addEventListener('click', () => signOut() );
@@ -45,11 +46,54 @@ async function signIn() {
 
         let signedOutBtn = document.getElementById('sign-out');
         signedOutBtn.disabled = false;
-
-        if(window.sessionStorage.getItem('role') == 'admin') {
-            createAccountBtn.disabled = false;
-        }
     });
+
+    if(window.sessionStorage.getItem('role') == 'admin') {
+        createAccountBtn.disabled = false;
+
+        //For creating elements for deleting users.
+        let deleteUsersLabel = document.createElement('label');
+        deleteUsersLabel.innerText = 'Delete user';
+        userInterface.append(deleteUsersLabel);
+
+        let deleteUsersDiv = document.createElement('div');
+        userInterface.append(deleteUsersDiv);
+
+        let usersSelectBox = document.createElement('select');
+        usersSelectBox.id = 'delete-user-select';
+        deleteUsersDiv.append(usersSelectBox);
+
+        let deleteUsersResponse = document.createElement('p');
+        deleteUsersResponse.id = 'delete-user-response';
+        userInterface.append(deleteUsersResponse);
+
+        let deleteUserBtn = document.createElement('button');
+        deleteUserBtn.id = 'delete-user';
+        deleteUserBtn.innerText = 'Delete selected user';
+        deleteUserBtn.addEventListener('click', () => deleteUser() ) 
+        userInterface.append(deleteUserBtn);
+        
+        // After appending everything for deleting a user, load all users.
+        getAllUsers();
+    }
+}
+
+async function getAllUsers() {
+    await fetch('http://localhost:8080/users/getAllUsers', {
+        headers: {
+            'Authorization': 'Bearer ' + window.sessionStorage.getItem('token')
+        }
+    })
+    .then(response => response.json())
+    .then(users => {
+        let usersSelectBox = document.getElementById('delete-user-select');
+        users.forEach(user => {
+            let userOption = document.createElement('option');
+            userOption.value = user._id;
+            userOption.innerText = user.username + ' | ' + user.role;
+            usersSelectBox.appendChild(userOption);
+        });
+    })
 }
 
 function signOut() {
@@ -93,4 +137,35 @@ async function createAccount() {
             createAccountResponse.innerHTML = '';
         }, 3500)
     });
+}
+
+async function deleteUser() {
+    let usersSelectBox = document.getElementById('delete-user-select');
+    let selectedUser = {
+        id: usersSelectBox.value
+    };
+
+    await fetch('http://localhost:8080/users/removeUser', {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + window.sessionStorage.getItem('token')
+        },
+        body: JSON.stringify(selectedUser)
+    })
+    .then(response => response.json() )
+    .then(data => {
+        let deleteUserResponse = document.getElementById('delete-user-response');
+        deleteUserResponse.innerText = data;
+
+        let deleteUsersSelect = document.getElementById('delete-user-select');
+        deleteUsersSelect.innerHTML = '';
+
+        getAllUsers();
+
+        //For removing the message from delete user
+        setTimeout( () => {
+            deleteUserResponse.innerHTML = '';
+        }, 3500);
+    })
 }

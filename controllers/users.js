@@ -30,8 +30,24 @@ module.exports = {
             if (req.user.role == "admin") {
                 res.json(await usersModel.getUsers());
             } else {
-                res.json({message: "User lacks privliges for this function"});
+                res.json({message: "User lacks privileges for this function"});
             }   
+        } catch (error) {
+            res.json(error)
+        }
+    },
+    removeUserAccount: async(req, res) => {
+        try {
+            if(req.user.role == "admin") {
+                let deleteResults = await usersModel.removeUser(req.body.id);
+                if (deleteResults == 1) {
+                    res.json('User has been deleted');
+                } else {
+                    res.json('User has not been deleted');
+                }
+            } else {
+                res.json({message: "User lacks privileges for this function"});
+            }
         } catch (error) {
             res.json(error)
         }

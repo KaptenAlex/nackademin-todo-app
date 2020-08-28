@@ -41,5 +41,16 @@ module.exports = {
                 }
             })
         })
+    },
+    async removeUser(id) {
+        return new Promise( (resolve, reject) => {
+            usersDatabase.remove({_id: id}, (err, result) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(result)
+                }
+            });
+        })
     }
 }

@@ -111,6 +111,9 @@ body {
     padding: 25px;
     margin: 0 auto;
 }
+.signed-in {
+    margin-bottom: 10px;
+}
 /* höger */
 #create-user-interface {
     background-color: yellow;
