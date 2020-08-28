@@ -17,7 +17,7 @@ module.exports = {
     async login(req, res) {
         try {
         const user = await userModel.loginUser(req.body.username, req.body.password);
-        const token = jwt.sign({username: user.username, role: user.role}, secret, {expiresIn: "4h"})
+        const token = jwt.sign({username: user.username, role: user.role, id: user._id}, secret, {expiresIn: "4h"})
         res.json(token);
         } catch(err) {
           res.sendStatus(401)

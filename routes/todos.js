@@ -9,13 +9,13 @@ const authorizationController = require('../controllers/authorization.js')
 // User routes
 
 // Admin/User routes
-router.get('/loadLatestCreated', todoController.loadLatestCreated);
-router.get('/loadLatestUpdated', todoController.loadLatestUpdated);
-router.get('/loadAllTodoItems/', todoController.loadAllTodoItems);
-router.get('/countTodoItems', todoController.countTodoItems);
-router.post('/createTodoItem', todoController.createTodoItem);
-router.put('/updateTodoItem/:id', todoController.updateTodoItem);
-router.delete('/deleteTodoItem/:id', todoController.deleteTodoItem);
+router.get('/loadLatestCreated', authorizationController.authorize, todoController.loadLatestCreated);
+router.get('/loadLatestUpdated', authorizationController.authorize, todoController.loadLatestUpdated);
+router.get('/loadAllTodoItems', authorizationController.authorize, todoController.loadAllTodoItems);
+router.get('/countTodoItems', authorizationController.authorize, todoController.countTodoItems);
+router.post('/createTodoItem', authorizationController.authorize, todoController.createTodoItem);
+router.put('/updateTodoItem/:id', authorizationController.authorize, todoController.updateTodoItem);
+router.delete('/deleteTodoItem/:id', authorizationController.authorize, todoController.deleteTodoItem);
 
 // Anonymous routes
 router.get('/', todoController.loadIndex);

@@ -37,9 +37,11 @@ async function signIn() {
     .then(dataFromAuth => {
         window.sessionStorage.setItem('username', dataFromAuth.username);
         window.sessionStorage.setItem('role', dataFromAuth.role);
+        window.sessionStorage.setItem('id', dataFromAuth.id);
 
         let signedInUser = document.getElementById('account-username');
-        signedInUser.innerHTML = 'Logged in as: ' + window.sessionStorage.getItem('username') + '<br>' + 'Role: ' + window.sessionStorage.getItem('role');
+        signedInUser.innerHTML = 'Logged in as: ' + window.sessionStorage.getItem('username') + '<br>' + 'Role: ' + window.sessionStorage.getItem('role') + '<br>' + 'id: '
+        + window.sessionStorage.getItem('id');
 
         usernameInput.value = '';
         passwordInput.value = '';
@@ -52,12 +54,13 @@ async function signIn() {
         createAccountBtn.disabled = false;
 
         //For creating elements for deleting users.
-        let deleteUsersLabel = document.createElement('label');
-        deleteUsersLabel.innerText = 'Delete user';
-        userInterface.append(deleteUsersLabel);
-
         let deleteUsersDiv = document.createElement('div');
+        deleteUsersDiv.id = "delete-users-element";
         userInterface.append(deleteUsersDiv);
+
+        let deleteUsersLabel = document.createElement('p');
+        deleteUsersLabel.innerText = 'Delete user';
+        deleteUsersDiv.append(deleteUsersLabel);
 
         let usersSelectBox = document.createElement('select');
         usersSelectBox.id = 'delete-user-select';
@@ -65,13 +68,13 @@ async function signIn() {
 
         let deleteUsersResponse = document.createElement('p');
         deleteUsersResponse.id = 'delete-user-response';
-        userInterface.append(deleteUsersResponse);
+        deleteUsersDiv.append(deleteUsersResponse);
 
         let deleteUserBtn = document.createElement('button');
         deleteUserBtn.id = 'delete-user';
         deleteUserBtn.innerText = 'Delete selected user';
         deleteUserBtn.addEventListener('click', () => deleteUser() ) 
-        userInterface.append(deleteUserBtn);
+        deleteUsersDiv.append(deleteUserBtn);
         
         // After appending everything for deleting a user, load all users.
         getAllUsers();
@@ -107,6 +110,7 @@ function signOut() {
     signOutBtn.disabled = true;
 
     signedInUser.innerHTML = '';
+    document.getElementById('delete-users-element').remove();
 }
 
 async function createAccount() {

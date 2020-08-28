@@ -21,7 +21,8 @@ module.exports = {
     userIsAuthorized: (req, res) => {
         let user = {
             username: req.user.username,
-            role: req.user.role
+            role: req.user.role,
+            id: req.user.id
         }
         res.json(user);
     },
