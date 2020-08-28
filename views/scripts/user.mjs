@@ -1,8 +1,9 @@
-let signInButton = document.getElementById('sign-in');
-let signOutButton = document.getElementById('sign-out');
+let signInBtn = document.getElementById('sign-in');
+let signOutBtn = document.getElementById('sign-out');
+let createAccountBtn = document.getElementById('create-user');
 
-signInButton.addEventListener('click', () => signIn() );
-signOutButton.addEventListener('click', () => signOut() );
+signInBtn.addEventListener('click', () => signIn() );
+signOutBtn.addEventListener('click', () => signOut() );
 
 async function signIn() {
     let usernameInput = document.getElementById('username-sign-in');
@@ -42,6 +43,10 @@ async function signIn() {
 
         let signedOutBtn = document.getElementById('sign-out');
         signedOutBtn.disabled = false;
+
+        if(window.sessionStorage.getItem('role') == 'admin') {
+            createAccountBtn.disabled = false;
+        }
     });
 }
 
@@ -51,7 +56,9 @@ function signOut() {
     window.sessionStorage.removeItem('role');
 
     let signedInUser = document.getElementById('account-username');
-    let signedOutBtn = document.getElementById('sign-out');
-    signedOutBtn.disabled = true;
+
+    createAccountBtn.disabled = true;
+    signOutBtn.disabled = true;
+
     signedInUser.innerHTML = '';
 }
