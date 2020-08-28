@@ -6,9 +6,6 @@ module.exports = {
         return new Promise ( (resolve, reject) => {
             let salt = bcryptjs.genSaltSync(10);
             let password = bcryptjs.hashSync(oldPassword, salt);
-            if(role != "admin" && role != "user") {
-                reject({error: "User was not created, try again", reason: "Role was invalid"}) 
-            } else {
                 usersDatabase.insert({username, password, role}, (err, newUser) => {
                     if (err) {
                         reject({ error: err, message: "User was not created, try again", status: false })
@@ -16,7 +13,6 @@ module.exports = {
                         resolve({ message: "User has been created", status: true })
                     }
                 })
-            }
         });
     },
     async loginUser(username, password) {

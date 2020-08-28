@@ -5,6 +5,7 @@ const authorizationController = require('../controllers/authorization.js')
 
 // Admin routers
 router.get("/getAllUsers", authorizationController.authorize, usersController.getAllUsers)
+router.post("/createUser", authorizationController.authorize, usersController.createUserAccount);
 
 // Users routers
 
@@ -18,7 +19,6 @@ router.get("/getAllUsers", authorizationController.authorize, usersController.ge
 // router.get('/:userId/todos', authorizationController.authorize, userController.getUserTodoItems);
 
 // Anonymous routers
-router.post("/createUser", usersController.createUserAccount);
 router.post("/signinUser", authorizationController.login);
 router.get("/authorizeUser", authorizationController.authorize, usersController.userIsAuthorized);
 
