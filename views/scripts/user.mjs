@@ -1,9 +1,11 @@
 let signInBtn = document.getElementById('sign-in');
 let signOutBtn = document.getElementById('sign-out');
 let createAccountBtn = document.getElementById('create-user');
+let createAccountResponse = document.getElementById('create-account-response');
 
 signInBtn.addEventListener('click', () => signIn() );
 signOutBtn.addEventListener('click', () => signOut() );
+createAccountBtn.addEventListener('click', () => createAccount() ) 
 
 async function signIn() {
     let usernameInput = document.getElementById('username-sign-in');
@@ -61,4 +63,34 @@ function signOut() {
     signOutBtn.disabled = true;
 
     signedInUser.innerHTML = '';
+}
+
+async function createAccount() {
+    let createUsernameInput = document.getElementById('create-user-username');
+    let createPasswordInput = document.getElementById('create-user-password');
+    let createRoleInput = document.getElementById('create-user-role');
+
+    let newUser = {
+        username: createUsernameInput.value,
+        password: createPasswordInput.value,
+        role: createRoleInput.value
+    };
+
+    await fetch('http://localhost:8080/users/createUser', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + window.sessionStorage.getItem('token')
+        },
+        body: JSON.stringify(newUser)
+    })
+    .then(response => response.json() )
+    .then(dataFromCreation => {
+        createUsernameInput.value = '';
+        createPasswordInput.value = '';
+        createAccountResponse.innerHTML = dataFromCreation;
+        setTimeout( () => {
+            createAccountResponse.innerHTML = '';
+        }, 3500)
+    });
 }
