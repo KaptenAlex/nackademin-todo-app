@@ -10,7 +10,6 @@ router.get("/getAllUsers", authorizationController.authorize, usersController.ge
 
 // Admin/Users routers
 
-// router.get('/:userId', authorizationController.authorize, userController.getOne);
 // router.delete('/:userId', authorizationController.authorize, userController.remove);
 // router.patch('/:userId', authorizationController.authorize, userController.update);
 
