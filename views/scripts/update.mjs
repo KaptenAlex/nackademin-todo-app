@@ -17,11 +17,20 @@ async function editTodoItem( todoItemID ) {
     })
     .then( response => response.json() )
     .then(todoItem => {
-        // TODO: Return answer to user instead of console log
+        let editResponse = document.createElement('span');
+        editResponse.classList.add('edit-response');
         if(todoItem == 1) {
-            console.log("Item has been updated", todoItem);
+            todoItemElement.append(editResponse);
+            editResponse.innerText = "Item has been updated";
+            setTimeout( () => {
+                editResponse.innerText = '';
+            }, 2000);
         } else {
-            console.log("Item hasn't been updated", todoItem);
+            todoItemElement.append(editResponse);
+            editResponse.innerText = "Item hasn't been updated";
+            setTimeout( () => {
+                editResponse.innerText = '';
+            }, 2000);
         }
     })
 }

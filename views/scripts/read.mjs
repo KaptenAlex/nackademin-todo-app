@@ -41,8 +41,6 @@ async function loadAllTodoItems(pageNumber = 0) {
             editButton.classList.add('edit');
             editButton.id = todoItem._id;
             editButton.innerText = 'Edit';
-            //Todo: remove disabled edit and fix issue that edit has with new todo items
-            //editButton.disabled = true;
             editButton.addEventListener('click', () => editTodoItem(todoItem._id));
             
             //Todo item's delete button
