@@ -5,15 +5,20 @@ document.getElementById('sort-by-created').addEventListener('click', () => sortB
 document.getElementById('sort-by-updated').addEventListener('click', () => sortByLatestUpdated() );
 
 async function sortByLatestCreated() {
-    createTodoItems('loadLatestCreated');
+    sortTodos('sort/created');
 }
 
 async function sortByLatestUpdated() {
-    createTodoItems('loadLatestUpdated');
+    sortTodos('sort/updated');
 }
 
-function createTodoItems (sortByEndpoint) {
-    fetch('http://localhost:8080/todos/' + sortByEndpoint)
+function sortTodos (sortByEndpoint) {
+    fetch('http://localhost:8080/todos/' + sortByEndpoint, {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + window.sessionStorage.getItem('token')
+        }
+    })
     .then(response => response.json())
     .then(data => {
         let todoListElement = document.getElementById('todoList');

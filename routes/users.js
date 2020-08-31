@@ -4,9 +4,9 @@ const usersController = require('../controllers/users.js')
 const authorizationController = require('../controllers/authorization.js')
 
 // Admin routers
-router.get("/getAllUsers", authorizationController.authorize, usersController.getAllUsers)
-router.post("/createUser", authorizationController.authorize, usersController.createUserAccount);
-router.delete('/removeUser', authorizationController.authorize, usersController.removeUserAccount);
+router.get("/", authorizationController.authorize, usersController.getAllUsers)
+router.post("/", authorizationController.authorize, usersController.createUserAccount);
+router.delete('/', authorizationController.authorize, usersController.removeUserAccount);
 
 // Users routers
 
@@ -18,7 +18,7 @@ router.delete('/removeUser', authorizationController.authorize, usersController.
 // router.get('/:userId/todos', authorizationController.authorize, userController.getUserTodoItems);
 
 // Anonymous routers
-router.post("/signinUser", authorizationController.login);
-router.get("/authorizeUser", authorizationController.authorize, usersController.userIsAuthorized);
+router.post("/signin", authorizationController.login);
+router.get("/authorize", authorizationController.authorize, usersController.userIsAuthorized);
 
 module.exports = router;

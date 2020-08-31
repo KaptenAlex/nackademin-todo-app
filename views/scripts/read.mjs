@@ -2,7 +2,7 @@ import {editTodoItem} from './update.mjs';
 import {deleteTodoItem} from './delete.mjs';
 
 async function loadAllTodoItems(pageNumber = 0) {
-    fetch('http://localhost:8080/todos/loadAllTodoItems/?page=' + pageNumber, {
+    fetch('http://localhost:8080/todos/todos/?page=' + pageNumber, {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + window.sessionStorage.getItem('token')
@@ -42,7 +42,7 @@ async function loadAllTodoItems(pageNumber = 0) {
             editButton.id = todoItem._id;
             editButton.innerText = 'Edit';
             //Todo: remove disabled edit and fix issue that edit has with new todo items
-            editButton.disabled = true;
+            //editButton.disabled = true;
             editButton.addEventListener('click', () => editTodoItem(todoItem._id));
             
             //Todo item's delete button

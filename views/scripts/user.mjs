@@ -18,7 +18,7 @@ async function signIn() {
         username: usernameInput.value,
         password: passwordInput.value
     }
-    await fetch('http://localhost:8080/users/signinUser', {
+    await fetch('http://localhost:8080/users/signin', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -29,7 +29,7 @@ async function signIn() {
         window.sessionStorage.setItem('token', dataFromSignIn);
     });
 
-    await fetch('http://localhost:8080/users/authorizeUser', {
+    await fetch('http://localhost:8080/users/authorize', {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + window.sessionStorage.getItem('token')
@@ -84,7 +84,7 @@ async function signIn() {
 }
 
 async function getAllUsers() {
-    await fetch('http://localhost:8080/users/getAllUsers', {
+    await fetch('http://localhost:8080/users/', {
         headers: {
             'Authorization': 'Bearer ' + window.sessionStorage.getItem('token')
         }
@@ -126,7 +126,7 @@ async function createAccount() {
         role: createRoleInput.value
     };
 
-    await fetch('http://localhost:8080/users/createUser', {
+    await fetch('http://localhost:8080/users/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -139,6 +139,7 @@ async function createAccount() {
         createUsernameInput.value = '';
         createPasswordInput.value = '';
         createAccountResponse.innerHTML = dataFromCreation;
+        //TODO: Update select box with the new users when user has been created
         setTimeout( () => {
             createAccountResponse.innerHTML = '';
         }, 3500)
@@ -151,7 +152,7 @@ async function deleteUser() {
         id: usersSelectBox.value
     };
 
-    await fetch('http://localhost:8080/users/removeUser', {
+    await fetch('http://localhost:8080/users/', {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
