@@ -1,6 +1,8 @@
+{"username":"pelle","password":"$2a$10$SMh97ygIoxrjeMEf4si.aOaz7E5I7trpVfaJ45CNuvRTSj9i8xqnW","role":"user","_id":"3WaMDw8WQRoTYzc3"}
 {"username":"kalle","password":"$2a$10$dpD971O.YiS.mDlBhXVSz.pPnxtBDj.fa72mjCYvWxYCchHXUEcuu","role":"user","_id":"BJg9HjaQibXm7p4l"}
 {"username":"alex","password":"$2a$10$MBoIhJQV8Hptu/t7FK61rOO2NPO/641zL14sHVMTxmpeyJw.X4Psa","role":"admin","_id":"T6a6VjdQ6JPlSznD"}
 {"username":"polis","password":"$2a$10$z77tzhy7dy7cc.5LeaHg/OTuOASX.oZwa2ympfKRE96JZ6HDHgoCK","role":"user","_id":"UzFUoJ5azjn8XUU8"}
 {"username":"karl","password":"$2a$10$3tQuqVj.2BPPuSC91GGoWOKlLbMegPJMzMxuTM1D5Xg6QZNV4fXrK","role":"user","_id":"XEJjHHb9n9lOwE3s"}
 {"username":"ko","password":"$2a$10$a0w.PI4LL7ZXvXKfPdnL2.b/SrKh1SbLHsFBMUZl2Ec9sllR6pe8C","role":"user","_id":"YN3bUvOsqZkAWfok"}
 {"username":"david","password":"$2a$10$mrx0uk6HkjcHD.M1VH5i.OCgNJeSJUKrvf2V/whfYKkL/SSXWI6zK","role":"user","_id":"gYFvOCLyjbxdc9FF"}
+{"username":"trello","password":"$2a$10$glznJ5KHECekn0VdSGCLT.POQ2tqqazAShRp4zgpZvaXvR7raweR6","role":"user","_id":"XkfrtZpNUxcoMeQN"}

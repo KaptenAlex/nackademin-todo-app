@@ -51,39 +51,36 @@ async function signIn() {
         let signedOutBtn = document.getElementById('sign-out');
         signedOutBtn.disabled = false;
     });
-    loadAllTodoItems();
-    if(window.sessionStorage.getItem('role') == 'admin') {
-        createAccountBtn.disabled = false;
-
-        //For creating elements for deleting users.
-        let deleteUsersDiv = document.createElement('div');
-        deleteUsersDiv.id = "delete-users-element";
-        userInterface.append(deleteUsersDiv);
-
-        let deleteUsersLabel = document.createElement('p');
-        deleteUsersLabel.innerText = 'Delete user';
-        deleteUsersDiv.append(deleteUsersLabel);
-
-        let usersSelectBox = document.createElement('select');
-        usersSelectBox.id = 'delete-user-select';
-        deleteUsersDiv.append(usersSelectBox);
-
-        let deleteUsersResponse = document.createElement('p');
-        deleteUsersResponse.id = 'delete-user-response';
-        deleteUsersDiv.append(deleteUsersResponse);
-
-        let deleteUserBtn = document.createElement('button');
-        deleteUserBtn.id = 'delete-user';
-        deleteUserBtn.innerText = 'Delete selected user';
-        deleteUserBtn.addEventListener('click', () => deleteUser() ) 
-        deleteUsersDiv.append(deleteUserBtn);
-        
-        // After appending everything for deleting a user, load all users.
+    if(window.sessionStorage.getItem('role') == 'admin') { 
         getAllUsers();
-    }
+     }
+    loadAllTodoItems();
 }
 
 async function getAllUsers() {
+    createAccountBtn.disabled = false;
+    //For creating elements for deleting users.
+    let deleteUsersDiv = document.createElement('div');
+    deleteUsersDiv.id = "delete-users-element";
+    userInterface.append(deleteUsersDiv);
+    let deleteUsersLabel = document.createElement('p');
+    deleteUsersLabel.innerText = 'Delete user';
+    deleteUsersDiv.append(deleteUsersLabel);
+    let usersSelectBox = document.createElement('select');
+    usersSelectBox.id = 'delete-user-select';
+    deleteUsersDiv.append(usersSelectBox);
+    let deleteUsersResponse = document.createElement('p');
+    deleteUsersResponse.id = 'delete-user-response';
+    deleteUsersDiv.append(deleteUsersResponse);
+    let deleteUserBtn = document.createElement('button');
+    deleteUserBtn.id = 'delete-user';
+    deleteUserBtn.innerText = 'Delete selected user';
+    deleteUserBtn.addEventListener('click', () => deleteUser() ) 
+    deleteUsersDiv.append(deleteUserBtn);
+    
+    // After appending everything for deleting a user, load all users.
+    // getAllUsers();
+
     await fetch('http://localhost:8080/users/', {
         headers: {
             'Authorization': 'Bearer ' + window.sessionStorage.getItem('token')
@@ -110,9 +107,11 @@ function signOut() {
 
     createAccountBtn.disabled = true;
     signOutBtn.disabled = true;
-
     signedInUser.innerHTML = '';
-    document.getElementById('delete-users-element').remove();
+
+    if (document.getElementById('delete-users-element')) {
+        document.getElementById('delete-users-element').remove();
+    }
 }
 
 async function createAccount() {
@@ -139,7 +138,8 @@ async function createAccount() {
         createUsernameInput.value = '';
         createPasswordInput.value = '';
         createAccountResponse.innerHTML = dataFromCreation;
-        //TODO: Update select box with the new users when user has been created
+        document.getElementById('delete-users-element').remove();
+        getAllUsers();
         setTimeout( () => {
             createAccountResponse.innerHTML = '';
         }, 3500)
