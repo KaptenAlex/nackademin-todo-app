@@ -55,7 +55,6 @@ module.exports = {
                     let numOfTodoItemsPages = numOfTodoItems / 8;
                     // Then round it upwards to be able to show the last page of all todoitems.
                     let numOfPagesNeeded = Math.ceil(numOfTodoItemsPages);
-                    //Have to add one extra page because neDB is weird like that
                     resolve(numOfPagesNeeded);
                 }
             });
