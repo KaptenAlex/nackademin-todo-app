@@ -16,7 +16,7 @@ router.post('/', authorizationController.authorize, todoController.createTodoIte
 router.put('/:id', authorizationController.authorize, todoController.updateTodoItem);
 router.delete('/:id', authorizationController.authorize, todoController.deleteTodoItem);
 
-router.get('/countTodoItems', authorizationController.authorize, todoController.countTodoItems);
+router.get('/countTodoItems', authorizationController.authorize, todoController.countTodoItemsPages);
 
 // Anonymous routes
 router.get('/', todoController.loadIndex);

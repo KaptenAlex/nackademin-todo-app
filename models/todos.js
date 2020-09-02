@@ -3,6 +3,7 @@ const {postsDatabase} = require('./databaseConnection.js');
 module.exports = {
     async createTodoItem(todoItem) {
         return new Promise( (resolve, reject) => {
+            if(todoItem.title.length < 5 || todoItem.title.length < 50 ) { reject({error: "Title has to be between 5-50 characters long"})}
             postsDatabase.insert(todoItem, (err, newTodoItem) => {
                     if(err) {
                         reject(err);
@@ -36,7 +37,7 @@ module.exports = {
     },
     async loadAllTodoItemsForUser(skipNumber = 5, id) {
         return new Promise( (resolve, reject) => {
-            postsDatabase.find({_id: id}).sort({ created: -1}).skip(skipNumber * 5).limit(8).exec((err, allTodoItems) => {
+            postsDatabase.find({userId: id}).sort({ created: -1}).skip(skipNumber * 5).limit(8).exec((err, allTodoItems) => {
                 if (err) {
                     reject(err)
                 } else {
@@ -45,7 +46,7 @@ module.exports = {
             });
         });
     },
-    async countTodoItems() {
+    async countTodoItemsPages() {
         return new Promise( (resolve, reject) => {
             postsDatabase.count({}, (err, numOfTodoItems) => {
                 if (err) {
@@ -92,5 +93,38 @@ module.exports = {
                 }
             })
         })
+    },
+    async countTodosItems() {
+        return new Promise( (resolve, reject) => {
+            postsDatabase.count({}, (err, numOfTodos) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(numOfTodos)
+                }
+            })
+        })
+    },
+    async clearDatabase() {
+        return new Promise( (resolve, reject) => {
+            postsDatabase.remove({}, {multi: true}, (err, results) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(results);
+                }
+            });
+        })
+    },
+    async findOneTodoItem(id) {
+        return new Promise( (resolve, reject) => {
+            postsDatabase.findOne({_id: id}, (err, todoItem) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(todoItem);
+                }
+            });
+        });
     }
 };

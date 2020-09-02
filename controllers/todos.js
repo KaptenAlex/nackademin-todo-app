@@ -18,9 +18,9 @@ module.exports = {
             res.json(error);
         }
     },
-    countTodoItems: async(req, res) => {
+    countTodoItemsPages: async(req, res) => {
         try {
-            res.json(await todoModel.countTodoItems());
+            res.json(await todoModel.countTodoItemsPages());
         } catch (error) {
             res.json(error);
         }

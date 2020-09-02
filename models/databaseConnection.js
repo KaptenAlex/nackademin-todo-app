@@ -1,8 +1,6 @@
 require('dotenv').config();
 const nedb = require('nedb');
 
-console.log(process.env.ENVIROMENT);
-
 let postsDatabase, usersDatabase;
 switch (process.env.ENVIROMENT) {
     case 'development':
@@ -12,8 +10,8 @@ switch (process.env.ENVIROMENT) {
     case 'test':
         postsDatabase = new nedb({ filename: './test/todosTest.db', autoload: true });
         usersDatabase = new nedb({ filename: './test/usersTest.db', autoload: true });
-        postsDatabase.remove({});
-        usersDatabase.remove({});
+        postsDatabase.remove({}, {multi: true});
+        usersDatabase.remove({}, {multi: true});
         break;
 }
 

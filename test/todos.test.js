@@ -1,83 +1,99 @@
 const todosModel = require('../models/todos.js');
 const chai = require('chai').should();
 
-let createTodoItemId = '';
+let createTodoItemId;
 
-/*
-describe('hooks', function () {
-    before( function() {
-        
-    })
-})
-*/
+let todoItem = {
+    title: "Mocha/Chai test title",
+    completed: false,
+    created: Date.now(),
+    updated: Date.now(),
+    userId: 'testing_with_chai'
+};
 
-describe('createTodoItem function', function() {
-    it('Should return an object with the newly created todo item', async function() {
-        let todoItem = {
-            title: "Mocha/Chai test title",
-            content: "Mocha/Chai testing content",
-            completed: false,
-            created: Date.now(),
-            updated: Date.now()
-        };
+describe('Todo model', function() {
+    beforeEach('Clear todo database and create one todo item before the next it clause', async function() {
+        await todosModel.clearDatabase();
+        let createdTodoItem = await todosModel.createTodoItem(todoItem);
+        createTodoItemId = createdTodoItem._id;
+    });
+    
+    it('createTodoItem() | Should create a todo item, then return the same todo item and save its id', async function() {
         let createTodoItem = await todosModel.createTodoItem(todoItem);
         createTodoItemId = createTodoItem._id;
         createTodoItem.should.be.an('object');
-    });
-});
+        createTodoItemId.should.be.equal(createTodoItem._id);
 
-describe('loadAllTodoItems function', function() {
-    it('Should return a array with every todo item in todo db', async function() {
-        let loadAllTodoItems = await todosModel.loadAllTodoItems();
+        let findTodoItem = await todosModel.findOneTodoItem(createTodoItemId);
+        findTodoItem.should.be.an('object');
+        findTodoItem._id.should.be.equal(createTodoItem._id);
+    });
+
+    it('loadAllTodoItems() | Should return a array with one todo item from todo db', async function() {
+        let loadAllTodoItems = await todosModel.loadAllTodoItems(0);
+
         loadAllTodoItems.should.be.an('array');
+        loadAllTodoItems.should.have.lengthOf(1);
     });
-});
 
-describe('loadAllTodoItemsForUser function', function() {
-    it('Should return an array with todoitems for specific user', async function() {
-        let loadAllTodoItemsForUser = await todosModel.loadAllTodoItemsForUser(5, "testing_with_chai");
-        loadAllTodoItemsForUser.should.be.an('array'); 
+    it('loadAllTodoItemsForUser() | Should return an array with todoitems for specific user', async function() {
+        let loadAllTodoItemsForUser = await todosModel.loadAllTodoItemsForUser(0, 'testing_with_chai');
+
+        loadAllTodoItemsForUser.should.be.an('array');
+        loadAllTodoItemsForUser[0].should.have.property('userId').with.equal('testing_with_chai')
+        loadAllTodoItemsForUser.should.have.lengthOf(1);
     });
-});
 
-describe('countTodoItems function', function() {
-    it('Should return a number representing how many pages are available', async function() {
-        let loadAllTodoItemsForUser = await todosModel.countTodoItems();
-        loadAllTodoItemsForUser.should.be.an('number');
+    it('countTodoItemsPages() | Should return a number representing how many pages should be created for the available todo items', async function() {
+        let countTodoItems = await todosModel.countTodoItemsPages();
+
+        countTodoItems.should.be.an('number');
+        countTodoItems.should.equal(1);
     });
-});
 
-describe('updateTodoItem function', function() {
-    it('Should return a number with how many fields that have been updating in choosen document', async function() {
-        let todoItem = {
+    it('updateTodoItem() | Should return a value with 1 with how many fields that have been updated in targeted todo item', async function() {
+        let updateTodoItem = {
             title: "Mocha/Chai test update title",
-            content: "Mocha/Chai testing updating content",
             completed: true,
             updated: Date.now()
         };
-        let loadAllTodoItemsForUser = await todosModel.updateTodoItem(todoItem, createTodoItemId);
+
+        let loadAllTodoItemsForUser = await todosModel.updateTodoItem(updateTodoItem, createTodoItemId);
+
         loadAllTodoItemsForUser.should.be.an('number');
+        loadAllTodoItemsForUser.should.equal(1);
     });
-});
 
-describe('loadLatestCreated function', function() {
-    it('Should return an array with objects', async function() {
+    it('loadLatestCreated() | Should return an array with objects', async function() {
         let loadLatestCreated = await todosModel.loadLatestCreated();
-        loadLatestCreated.should.be.an('array');
-    });
-});
 
-describe('loadLatestUpdated function', function() {
-    it('Should return an array with objects', async function() {
-        let loadLatestCreated = await todosModel.loadLatestUpdated();
         loadLatestCreated.should.be.an('array');
+        loadLatestCreated.should.have.lengthOf(1);
     });
-});
 
-describe('deleteTodoItem function', function() {
-    it('Should return a number, with the value of 1 to indicate success in deleting a todo item', async function() {
+    it('loadLatestUpdated() | Should return an array with objects', async function() {
+        let loadLatestUpdated = await todosModel.loadLatestUpdated();
+
+        loadLatestUpdated.should.be.an('array');
+        loadLatestUpdated.should.have.lengthOf(1);
+    });
+
+    it('deleteTodoItem() | Should return a number, with the value of 1 to indicate success in deleting a todo item', async function() {
         let createTodoItem = await todosModel.deleteTodoItem(createTodoItemId);
+
         createTodoItem.should.be.an('number');
         createTodoItem.should.equal(1);
+    });
+
+    it('countTodosItem() | Should return a number, with the value of 1.', async function() {
+        let numOfItemscount = await todosModel.countTodosItems();
+
+        numOfItemscount.should.be.an('number');
+        numOfItemscount.should.equal(1);
+    });
+
+    it('clearDatabase() | Should clear the entire database of posts', async function() {
+        let clearDatabase = await todosModel.clearDatabase();
+        clearDatabase.should.be.an('number');
     });
 });
