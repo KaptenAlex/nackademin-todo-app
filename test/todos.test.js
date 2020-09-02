@@ -1,8 +1,15 @@
 const todosModel = require('../models/todos.js');
-const todos = require('../models/todos.js');
 const chai = require('chai').should();
 
 let createTodoItemId = '';
+
+/*
+describe('hooks', function () {
+    before( function() {
+        
+    })
+})
+*/
 
 describe('createTodoItem function', function() {
     it('Should return an object with the newly created todo item', async function() {
@@ -36,7 +43,7 @@ describe('loadAllTodoItemsForUser function', function() {
 describe('countTodoItems function', function() {
     it('Should return a number representing how many pages are available', async function() {
         let loadAllTodoItemsForUser = await todosModel.countTodoItems();
-        loadAllTodoItemsForUser.should.be.an('number'); 
+        loadAllTodoItemsForUser.should.be.an('number');
     });
 });
 
