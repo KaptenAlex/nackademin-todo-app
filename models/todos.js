@@ -3,7 +3,7 @@ const {postsDatabase} = require('./databaseConnection.js');
 module.exports = {
     async createTodoItem(todoItem) {
         return new Promise( (resolve, reject) => {
-            if(todoItem.title.length < 5 || todoItem.title.length > 50 ) { reject({error: "Title has to be between 5-50 characters long"})}
+            if(todoItem.title.length < 5 || todoItem.title.length > 50 ) { reject(new Error('The title must be between 5-50 characters long')) }
             postsDatabase.insert(todoItem, (err, newTodoItem) => {
                     if(err) {
                         reject(err);

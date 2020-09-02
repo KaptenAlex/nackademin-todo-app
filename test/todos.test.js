@@ -1,5 +1,10 @@
 const todosModel = require('../models/todos.js');
-const chai = require('chai').should();
+const chai = require('chai');
+var chaiAsPromised = require("chai-as-promised");
+
+const { expect, assert } = require('chai');
+chai.should();
+chai.use(chaiAsPromised);
 
 let createTodoItemId;
 
@@ -17,17 +22,30 @@ describe('Todo model', function() {
         let createdTodoItem = await todosModel.createTodoItem(todoItem);
         createTodoItemId = createdTodoItem._id;
     });
-    
-    it('createTodoItem() | Should create a todo item, then return the same todo item and save its id', async function() {
-        let createTodoItem = await todosModel.createTodoItem(todoItem);
-        createTodoItemId = createTodoItem._id;
-        createTodoItem.should.be.an('object');
-        createTodoItemId.should.be.equal(createTodoItem._id);
 
-        let findTodoItem = await todosModel.findOneTodoItem(createTodoItemId);
-        findTodoItem.should.be.an('object');
-        findTodoItem._id.should.be.equal(createTodoItem._id);
-    });
+    describe('createTodoItem()', function() {
+        it('Should create a todo item, then return the same todo item and save its id', async function() {
+            let createTodoItem = await todosModel.createTodoItem(todoItem);
+            createTodoItemId = createTodoItem._id;
+            createTodoItem.should.be.an('object');
+            createTodoItemId.should.be.equal(createTodoItem._id);
+    
+            let findTodoItem = await todosModel.findOneTodoItem(createTodoItemId);
+            findTodoItem.should.be.an('object');
+            findTodoItem._id.should.be.equal(createTodoItem._id);
+        });
+        it('Should return an error because the length of the title is restricted to 5-50 characters long', function(done) {
+            todoItem = {
+                title: "Chai",
+                completed: false,
+                created: Date.now(),
+                updated: Date.now(),
+                userId: 'testing_with_chai'
+            }
+            let createTodoItem = todosModel.createTodoItem(todoItem);
+            createTodoItem.should.be.rejected.and.notify(done);
+        });
+    })
 
     it('loadAllTodoItems() | Should return a array with one todo item from todo db', async function() {
         let loadAllTodoItems = await todosModel.loadAllTodoItems(0);
