@@ -32,7 +32,8 @@ module.exports = {
                 content: req.body.content,
                 completed: false,
                 created: Date.now(),
-                updated: Date.now()
+                updated: Date.now(),
+                todoListId: req.body.todoListId
             };
             res.json(await todoModel.createTodoItem(todoItem));
         } catch (error) {

@@ -1,21 +1,25 @@
 require('dotenv').config();
 const nedb = require('nedb');
 
-let postsDatabase, usersDatabase;
+let todoItemDatabase, usersDatabase, todoListDatabase;
 switch (process.env.ENVIROMENT) {
     case 'development':
-        postsDatabase = new nedb({ filename: './models/database.db', autoload: true });
+        todoItemDatabase = new nedb({ filename: './models/todoItems.db', autoload: true });
         usersDatabase = new nedb({ filename: './models/users.db', autoload: true });
+        todoListDatabase = new nedb({ filename: './models/todoList.db', autoload: true });
         break;
     case 'test':
-        postsDatabase = new nedb({ filename: './test/todosTest.db', autoload: true });
+        todoItemDatabase = new nedb({ filename: './test/todosTest.db', autoload: true });
         usersDatabase = new nedb({ filename: './test/usersTest.db', autoload: true });
-        postsDatabase.remove({}, {multi: true});
+        todoListDatabase = new nedb({ filename: './test/todoListTest.db', autoload: true });
+        todoItemDatabase.remove({}, {multi: true});
         usersDatabase.remove({}, {multi: true});
+        todoListDatabase.remove({}, {multi: true});
         break;
 }
 
 module.exports = {
-    postsDatabase,
-    usersDatabase
+    todoItemDatabase,
+    usersDatabase,
+    todoListDatabase
 };
