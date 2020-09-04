@@ -12,6 +12,7 @@ switch (process.env.ENVIROMENT) {
         todoItemDatabase = new nedb({ filename: './test/todosTest.db', autoload: true });
         usersDatabase = new nedb({ filename: './test/usersTest.db', autoload: true });
         todoListDatabase = new nedb({ filename: './test/todoListTest.db', autoload: true });
+        
         todoItemDatabase.remove({}, {multi: true});
         usersDatabase.remove({}, {multi: true});
         todoListDatabase.remove({}, {multi: true});
