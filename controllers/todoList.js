@@ -20,8 +20,9 @@ module.exports = {
     createTodoList: async(req, res) => {
         try {
             let todoList = {
-                title: req.body.title
-            }
+                title: req.body.title,
+                ownerId: req.body.ownerId
+            };
             let getTodoList = await todoListModel.createTodoList(todoList);
             res.json(getTodoList)
         } catch (error) {

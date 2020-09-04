@@ -11,14 +11,16 @@ describe('Todo list model', () => {
         await todoListModel.clearTodoListDatabase();
         for (let i = 0; i < 3; i++) {
             await todoListModel.createTodoList({
-                title: `Todolist: ${i}`
+                title: `Todolist: ${i}`,
+                ownerId: 'Alex'
             });
         }
     });
 
     it('createTodoList() & getTodoList() | Should create a todolist and find it', async() => {
         let createdTodoList = await todoListModel.createTodoList({
-            title: 'TodoList with Mocha and Chai'
+            title: 'TodoList with Mocha and Chai',
+            ownerId: 'Testare'
         });
         let findTodoList = await todoListModel.getTodoList(createdTodoList._id);
         
@@ -26,6 +28,7 @@ describe('Todo list model', () => {
         findTodoList.should.be.an('object');
         (createdTodoList._id).should.be.equal(findTodoList._id);
         (createdTodoList.title).should.be.equal(findTodoList.title);
+        (createdTodoList.ownerId).should.be.equal(findTodoList.ownerId);
     });
 
     it('Should retrive an array with three todolists with the type object', async() => {
@@ -35,7 +38,8 @@ describe('Todo list model', () => {
 
     it('createTodoList(), getTodoList() & updateTodoList() | Should create a todoList, find it and then update it, and finally find it again.', async() => {
         let createTodoList = await todoListModel.createTodoList({
-            title: 'update this title, please I beg of you'
+            title: 'update this title, please I beg of you',
+            ownerId: 'Fredde'
         });
         let findCreatedTodoList = await todoListModel.getTodoList(createTodoList._id);
         let updateCreatedTodoList = await todoListModel.updateTodoList({
@@ -45,6 +49,7 @@ describe('Todo list model', () => {
 
         createTodoList.should.be.an('object');
         (createTodoList.title).should.equal('update this title, please I beg of you');
+        (createTodoList.ownerId).should.equal('Fredde');
 
         findCreatedTodoList.should.be.an('object');
         (findCreatedTodoList._id).should.equal(createTodoList._id);
@@ -55,6 +60,7 @@ describe('Todo list model', () => {
         (findUpdatedTodoList._id).should.equal(createTodoList._id);
         (findUpdatedTodoList._id).should.equal(findCreatedTodoList._id);
         (findUpdatedTodoList.title).should.equal('Ah, much better title now');
+        (findUpdatedTodoList.ownerId).should.equal('Fredde');
     });
 
     it('countTodoLists() & clearTodoListDatabase() | Should count three objects in database, clear database and then count zero objects in database', async() => {
@@ -75,7 +81,8 @@ describe('Todo list model', () => {
 
     it('createTodoList(), getTodoList() & deleteTodoList() | Should create a todolist, find the created todolist, remove it and then look for it and get no result from DB', async() => {
         let createTodoList = await todoListModel.createTodoList({
-            title: 'I have a bad feeling about this...'
+            title: 'I have a bad feeling about this...',
+            ownerId: 'Foreshadowing'
         });
         let getTodoList = await todoListModel.getTodoList(createTodoList._id);
         let deleteTodoList = await todoListModel.deleteTodoList(getTodoList._id);
@@ -83,9 +90,11 @@ describe('Todo list model', () => {
 
         createTodoList.should.be.an('object');
         (createTodoList.title).should.be.equal('I have a bad feeling about this...');
+        (createTodoList.ownerId).should.be.equal('Foreshadowing');
 
         getTodoList.should.be.an('object');
         (getTodoList.title).should.be.equal(createTodoList.title);
+        (getTodoList.ownerId).should.be.equal(createTodoList.ownerId);
         (getTodoList._id).should.be.equal(createTodoList._id);
 
         deleteTodoList.should.be.an('number');
