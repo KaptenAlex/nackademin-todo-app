@@ -18,7 +18,6 @@ module.exports = {
                 if (err) {
                     reject(err);
                 } else {
-                    //if(todoItem.title.length < 5 || todoItem.title.length > 50 ) { reject(new Error('The title must be between 5-50 characters long')) }
                     if (todoList === null) {
                         reject(new Error(`Todolist doesn't exist with id: ${id}`))
                     } else {
