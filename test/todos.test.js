@@ -1,10 +1,13 @@
 const todosModel = require('../models/todos.js');
 const chai = require('chai');
-var chaiAsPromised = require("chai-as-promised");
+const chaiHttp = require('chai-http');
+let chaiAsPromised = require("chai-as-promised");
+const app = require('../app.js');
 
 const { expect, assert } = require('chai');
 chai.should();
 chai.use(chaiAsPromised);
+chai.use(chaiHttp);
 
 let createTodoItemId;
 

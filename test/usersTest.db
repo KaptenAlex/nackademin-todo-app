@@ -1,0 +1,6 @@
+{"username":"kalle","password":"$2a$10$Jof9lbfLHcAnoh30WpE3Xu/IYl/rub3Du6i7SoLP8gQzmW05zfgOy","role":"user","_id":"rMxUu0Iycr6CSJjX"}
+{"username":"alex","password":"$2a$10$DOMXQHW0pQTnrJVpR7JDPutqmaDoTL/.R4m6YYn/uqfY8svUgpcmK","role":"admin","_id":"svnXf1KP74MmqYL3"}
+{"$$deleted":true,"_id":"rMxUu0Iycr6CSJjX"}
+{"$$deleted":true,"_id":"svnXf1KP74MmqYL3"}
+{"username":"kalle","password":"$2a$10$TH/ne8k2Y2Fq.bTrh6q5levN5bhJn181WKVTlqmet3CpNZh7gZR.C","role":"user","_id":"QgRQqIYozvVZNrEP"}
+{"username":"alex","password":"$2a$10$JPslnebJuuI2xXpMMfpWtOA6knyz5thkb6MCaDUKMvn60sqqD8FEa","role":"admin","_id":"tvhohh2FDUGeTegK"}

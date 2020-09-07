@@ -42,6 +42,17 @@ module.exports = {
             })
         })
     },
+    async getUser(username) {
+        return new Promise( (resolve, reject) => {
+            usersDatabase.find({username: username}, (err, usersObject) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(usersObject);
+                }
+            })
+        })
+    },
     async removeUser(id) {
         return new Promise( (resolve, reject) => {
             usersDatabase.remove({_id: id}, (err, result) => {
@@ -49,6 +60,17 @@ module.exports = {
                     reject(err)
                 } else {
                     resolve(result)
+                }
+            });
+        })
+    },
+    async clearDatabase() {
+        return new Promise( (resolve, reject) => {
+            usersDatabase.remove({}, {multi: true}, (err, results) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(results);
                 }
             });
         })
