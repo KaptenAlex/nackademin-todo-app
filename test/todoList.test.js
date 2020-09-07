@@ -1,8 +1,7 @@
 const todoListModel = require('../models/todoList.js');
 const chai = require('chai');
 var chaiAsPromised = require("chai-as-promised");
-const { expect, assert } = require('chai');
-const { createTodoItem } = require('../models/todos.js');
+const { expect } = require('chai');
 
 chai.should();
 chai.use(chaiAsPromised);

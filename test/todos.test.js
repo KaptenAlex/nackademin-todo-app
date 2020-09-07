@@ -1,15 +1,8 @@
 const todosModel = require('../models/todos.js');
 const chai = require('chai');
-const chaiHttp = require('chai-http');
 let chaiAsPromised = require("chai-as-promised");
-const app = require('../app.js');
-
-const { expect, assert } = require('chai');
 chai.should();
 chai.use(chaiAsPromised);
-chai.use(chaiHttp);
-
-let createTodoItemId;
 
 let todoItem = {
     title: "Mocha/Chai test title",
@@ -19,23 +12,25 @@ let todoItem = {
     userId: 'testing_with_chai'
 };
 
-describe('Todo model', function() {
+describe('Todo model', async function() {
     beforeEach('Clear todo database and create one todo item before the next it clause', async function() {
         await todosModel.clearDatabase();
         let createdTodoItem = await todosModel.createTodoItem(todoItem);
-        createTodoItemId = createdTodoItem._id;
+        this.currentTest.createTodoItemId = createdTodoItem._id;
     });
 
     describe('createTodoItem()', function() {
         it('Should create a todo item, then return the same todo item and save its id', async function() {
             let createTodoItem = await todosModel.createTodoItem(todoItem);
-            createTodoItemId = createTodoItem._id;
             createTodoItem.should.be.an('object');
-            createTodoItemId.should.be.equal(createTodoItem._id);
-    
-            let findTodoItem = await todosModel.findOneTodoItem(createTodoItemId);
-            findTodoItem.should.be.an('object');
-            findTodoItem._id.should.be.equal(createTodoItem._id);
+            createTodoItem.should.deep.equal({
+                title: todoItem.title,
+                completed: todoItem.completed,
+                created: todoItem.created,
+                updated: todoItem.updated,
+                userId: todoItem.userId,
+                _id: createTodoItem._id
+            });
         });
         it('Should return an error because the length of the title is restricted to 5-50 characters long', function(done) {
             todoItem = {
@@ -79,7 +74,7 @@ describe('Todo model', function() {
             updated: Date.now()
         };
 
-        let loadAllTodoItemsForUser = await todosModel.updateTodoItem(updateTodoItem, createTodoItemId);
+        let loadAllTodoItemsForUser = await todosModel.updateTodoItem(updateTodoItem, this.test.createTodoItemId);
 
         loadAllTodoItemsForUser.should.be.an('number');
         loadAllTodoItemsForUser.should.equal(1);
@@ -100,7 +95,7 @@ describe('Todo model', function() {
     });
 
     it('deleteTodoItem() | Should return a number, with the value of 1 to indicate success in deleting a todo item', async function() {
-        let createTodoItem = await todosModel.deleteTodoItem(createTodoItemId);
+        let createTodoItem = await todosModel.deleteTodoItem(this.test.createTodoItemId);
 
         createTodoItem.should.be.an('number');
         createTodoItem.should.equal(1);
