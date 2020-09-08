@@ -32,7 +32,12 @@ describe('Todoitems HTTP requests', function() {
         todoItem.todoListId = 2;
         for (let i = 0; i < 5; i++) {
             todoItem.title + i;
-            await todosModel.createTodoItem(todoItem);    
+            if (i != 4) {
+                await todosModel.createTodoItem(todoItem);
+            } else {
+                let createdTodoItem = await todosModel.createTodoItem(todoItem);
+                this.currentTest.todoItemID = createdTodoItem._id; 
+            }
         }
 
         let newUser = {
@@ -91,11 +96,23 @@ describe('Todoitems HTTP requests', function() {
             title: 'Newly created todo item: ',
             todoListId: 3
         });
-        console.log(resp.body);
         expect(resp).to.have.status(201);
         expect(resp).to.be.json;
         expect(resp.body).to.be.an('object');
         expect(resp.body).to.have.all.keys(['_id', 'title', 'completed', 'userId', 'todoListId', 'created', 'updated']);
-        //(resp.body).forEach(todoItem => expect(todoItem).to.have.all.keys(['_id', 'title', 'completed', 'userId', 'created', 'updated']));
+    });
+
+    it('Should update a existing todo item with status code 201 and return a number with the value of one', async function() {
+        const resp = await chai.request(app)
+        .patch(`/todos/${this.test.todoItemID}`)
+        .set('Authorization', `Bearer ${this.test.token}`)
+        .set('Content-Type', 'application/json')
+        .send({
+            title: 'Updated todo item: ',
+            completed: false
+        });
+        expect(resp).to.have.status(201);
+        expect(resp).to.be.json;
+        expect(resp.body).to.be.an('number').equal(1);
     });
 });
