@@ -1,6 +1,6 @@
-{"username":"alex","password":"$2a$10$YdLEVL2O2NKGh1TTT5ul8OlmiF7JCPm9Kf85Y3QlRvg9ZVhRfsehG","role":"admin","_id":"J0jwJzUMNe5zMp1X"}
-{"username":"kalle","password":"$2a$10$wPnu1AEl4Xv2voOvWXPNBemVnEdnr7Zaym/Tqss6g5aK5lmMuosP.","role":"user","_id":"x9Ehk7Kl02fu6aP5"}
-{"$$deleted":true,"_id":"J0jwJzUMNe5zMp1X"}
-{"$$deleted":true,"_id":"x9Ehk7Kl02fu6aP5"}
-{"username":"kalle","password":"$2a$10$HR.G9HYN0FAUHR8WtxHyleHoFqqBKSmh3WyxerR3BIshRnNbUcHzu","role":"user","_id":"SqiCG1mM4bQzan8U"}
-{"username":"alex","password":"$2a$10$U5PUxAZALc8O/IsDc9TTZeWj6On2Wn1UFh5H8k0GIJjI2phlNywDy","role":"admin","_id":"uKHhx94qXUI64dry"}
+{"username":"kalle","password":"$2a$10$VXqMOX/fyNc.OMT8T5P3vOmi3u9AMuAAD2lZSm6DbpBR.rLCjpcH2","role":"user","_id":"bzwbbgu7CdHfMsc2"}
+{"username":"alex","password":"$2a$10$7DChHeJ23Rk/zuhM/zRX6efZIb1csRygyJU4/lv1.EP0UCPqn126y","role":"admin","_id":"kVVICgZX1ZzBGoOW"}
+{"$$deleted":true,"_id":"bzwbbgu7CdHfMsc2"}
+{"$$deleted":true,"_id":"kVVICgZX1ZzBGoOW"}
+{"username":"kalle","password":"$2a$10$NZ7AiFv11Nj5dMnVqrfJLOK9L5vfzbTqZTLS8lmX/OdS5Vk/J06BK","role":"user","_id":"xNAKYfafnNxmDVqZ"}
+{"username":"alex","password":"$2a$10$ksh0dwOnrnoMMl1zw5Rml.8CKGAvgCtUksaqF571zsUtQD0mOJohK","role":"admin","_id":"jXVrpnQGcHffDvxZ"}

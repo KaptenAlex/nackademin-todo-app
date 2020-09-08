@@ -1,18 +1,19 @@
+const app = require('../app.js');
 const todosModel = require('../models/todos.js');
 const usersModel = require('../models/users.js');
-const authorizationController = require('../controllers/authorization.js')
+const authorizationMiddleWare = require('../controllers/authorization.js');
+
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 let chaiAsPromised = require("chai-as-promised");
-const app = require('../app.js');
+const { expect } = require('chai');
 
-const { expect, assert } = require('chai');
 chai.should();
 chai.use(chaiAsPromised);
 chai.use(chaiHttp);
 
-describe('Todos http requests', function() {
-    beforeEach('Clear test DB and create some todo items', async() => {
+describe('Todoitems HTTP requests', function() {
+    beforeEach('Clear test DB and create some todo items', async function() {
         await todosModel.clearDatabase();
         await usersModel.clearDatabase();
         let todoItem = {
@@ -31,21 +32,30 @@ describe('Todos http requests', function() {
             todoItem.title + i;
             await todosModel.createTodoItem(todoItem);    
         }
+
         let newUser = {
             username: "kalle",
             password: '123',
             role: 'user'
         };
-        await usersModel.createAccount(newUser.username, newUser.password, newUser.role);
+        this.currentTest.user = await usersModel.createAccount(newUser.username, newUser.password, newUser.role);
+
         newUser.username = 'alex';
         newUser.role = 'admin';
-        await usersModel.createAccount(newUser.username, newUser.password, newUser.role);
-        let getAdminAccount = await usersModel.getUser('alex');
-        console.log(getAdminAccount);
 
+        this.currentTest.admin = await usersModel.createAccount(newUser.username, newUser.password, newUser.role);
+        this.currentTest.token = await usersModel.loginUser('alex', '123');
     });
 
-    it('Should get an 200 response with a todo item', async() => {
-
+    it('Should get a 200 response with a todo item', async function() {
+        chai.request(app)
+        .get('/todos/todos/')
+        .set('Authorization', `Bearer ${this.test.token}`)
+        .set('Content-Type', 'application/json')
+        .end( (error, results) => {
+            expect(results).to.have.status(201);
+            expect(results).to.be.json
+            console.log(results)
+        });
     });
 })
