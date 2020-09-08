@@ -115,4 +115,14 @@ describe('Todoitems HTTP requests', function() {
         expect(resp).to.be.json;
         expect(resp.body).to.be.an('number').equal(1);
     });
+
+    it('Should delete a existing todo item with status code 201 and return a number with the value of one', async function() {
+        const resp = await chai.request(app)
+        .delete(`/todos/${this.test.todoItemID}`)
+        .set('Authorization', `Bearer ${this.test.token}`)
+        .send();
+        expect(resp).to.have.status(201);
+        expect(resp).to.be.json;
+        expect(resp.body).to.be.an('number').equal(1);
+    });
 });
