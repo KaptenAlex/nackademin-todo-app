@@ -1,38 +1,51 @@
 const todosModel = require('../models/todos.js');
 const chai = require('chai');
 let chaiAsPromised = require("chai-as-promised");
+const { expect } = require('chai');
 chai.should();
 chai.use(chaiAsPromised);
-
-let todoItem = {
-    title: "Mocha/Chai test title",
-    completed: false,
-    created: Date.now(),
-    updated: Date.now(),
-    userId: 'testing_with_chai'
-};
 
 describe('Todo model', async function() {
     beforeEach('Clear todo database and create one todo item before the next it clause', async function() {
         await todosModel.clearDatabase();
+        
+        let todoItem = {
+            title: "Mocha/Chai test title",
+            completed: false,
+            created: Date.now(),
+            updated: Date.now(),
+            userId: 'testing_with_chai'
+        };
         let createdTodoItem = await todosModel.createTodoItem(todoItem);
         this.currentTest.createTodoItemId = createdTodoItem._id;
     });
 
     describe('createTodoItem()', function() {
         it('Should create a todo item, then return the same todo item and save its id', async function() {
-            let createTodoItem = await todosModel.createTodoItem(todoItem);
+            // Arrange
+            let newTodo = {
+                title: "Mocha/Chai test title",
+                completed: false,
+                created: Date.now(),
+                updated: Date.now(),
+                userId: 'testing_with_chai'
+            };
+            // Act
+            let createTodoItem = await todosModel.createTodoItem(newTodo);
+
+            // Assert
             createTodoItem.should.be.an('object');
             createTodoItem.should.deep.equal({
-                title: todoItem.title,
-                completed: todoItem.completed,
-                created: todoItem.created,
-                updated: todoItem.updated,
-                userId: todoItem.userId,
+                title: newTodo.title,
+                completed: newTodo.completed,
+                created: newTodo.created,
+                updated: newTodo.updated,
+                userId: newTodo.userId,
                 _id: createTodoItem._id
             });
         });
         it('Should return an error because the length of the title is restricted to 5-50 characters long', function(done) {
+            // Arrange
             todoItem = {
                 title: "Chai",
                 completed: false,
@@ -40,76 +53,185 @@ describe('Todo model', async function() {
                 updated: Date.now(),
                 userId: 'testing_with_chai'
             }
+            // Act
             let createTodoItem = todosModel.createTodoItem(todoItem);
+
+            // Assert
             createTodoItem.should.be.rejected.and.notify(done);
         });
     })
 
-    it('loadAllTodoItems() | Should return a array with one todo item from todo db', async function() {
-        let loadAllTodoItems = await todosModel.loadAllTodoItems(0);
+    it('loadAllTodoItems() | Should return a array with twi todo items from todo db', async function() {
+         // Arrange
+         let newTodo = {
+            title: "Mocha/Chai test title",
+            completed: false,
+            created: Date.now(),
+            updated: Date.now(),
+            userId: 'testing_with_chai'
+        };
+        await todosModel.createTodoItem(newTodo);
+         // Act
+         let loadAllTodoItems = await todosModel.loadAllTodoItems(0);
 
+         // Assert
         loadAllTodoItems.should.be.an('array');
-        loadAllTodoItems.should.have.lengthOf(1);
+        loadAllTodoItems.should.have.lengthOf(2);
     });
 
     it('loadAllTodoItemsForUser() | Should return an array with todoitems for specific user', async function() {
+        // Arrange
+        let newTodo = {
+            title: "Mocha/Chai test title",
+            completed: false,
+            created: Date.now(),
+            updated: Date.now(),
+            userId: 'testing_with_chai'
+        };
+        await todosModel.createTodoItem(newTodo);
+        // Act
         let loadAllTodoItemsForUser = await todosModel.loadAllTodoItemsForUser(0, 'testing_with_chai');
-
+        
+        // Assert
         loadAllTodoItemsForUser.should.be.an('array');
-        loadAllTodoItemsForUser[0].should.have.property('userId').with.equal('testing_with_chai')
-        loadAllTodoItemsForUser.should.have.lengthOf(1);
+        loadAllTodoItemsForUser.forEach(todoItem => expect(todoItem.userId).to.equal('testing_with_chai'));
+        loadAllTodoItemsForUser.should.have.lengthOf(2);
+        
+        //loadAllTodoItemsForUser[0].should.have.property('userId').with.equal('testing_with_chai')
     });
 
     it('countTodoItemsPages() | Should return a number representing how many pages should be created for the available todo items', async function() {
+        // Arrange
+        let newTodo = {
+            title: "Mocha/Chai test title",
+            completed: false,
+            created: Date.now(),
+            updated: Date.now(),
+            userId: 'testing_with_chai'
+        };
+        await todosModel.createTodoItem(newTodo);
+        // Act
         let countTodoItems = await todosModel.countTodoItemsPages();
-
+        
+        // Assert
         countTodoItems.should.be.an('number');
         countTodoItems.should.equal(1);
     });
 
     it('updateTodoItem() | Should return a value with 1 with how many fields that have been updated in targeted todo item', async function() {
+        // Arrange
+        let newTodo = {
+            title: "Mocha/Chai test title",
+            completed: false,
+            created: Date.now(),
+            updated: Date.now(),
+            userId: 'testing_with_chai'
+        };
+        let newTodoItem = await todosModel.createTodoItem(newTodo);
+
+        // Act
         let updateTodoItem = {
             title: "Mocha/Chai test update title",
             completed: true,
             updated: Date.now()
         };
-
-        let loadAllTodoItemsForUser = await todosModel.updateTodoItem(updateTodoItem, this.test.createTodoItemId);
-
+        let loadAllTodoItemsForUser = await todosModel.updateTodoItem(updateTodoItem, newTodoItem._id);
+        
+        // Assert
         loadAllTodoItemsForUser.should.be.an('number');
         loadAllTodoItemsForUser.should.equal(1);
     });
 
     it('loadLatestCreated() | Should return an array with objects', async function() {
-        let loadLatestCreated = await todosModel.loadLatestCreated();
+        // Arrange
+        let newTodo = {
+            title: "Mocha/Chai test title",
+            completed: false,
+            created: Date.now(),
+            updated: Date.now(),
+            userId: 'testing_with_chai'
+        };
+        await todosModel.createTodoItem(newTodo);
 
+        // Act
+        let loadLatestCreated = await todosModel.loadLatestCreated();
+        
+        // Assert        
         loadLatestCreated.should.be.an('array');
-        loadLatestCreated.should.have.lengthOf(1);
+        loadLatestCreated.should.have.lengthOf(2);
     });
 
     it('loadLatestUpdated() | Should return an array with objects', async function() {
-        let loadLatestUpdated = await todosModel.loadLatestUpdated();
+        // Arrange
+        let newTodo = {
+            title: "Mocha/Chai test title",
+            completed: false,
+            created: Date.now(),
+            updated: Date.now(),
+            userId: 'testing_with_chai'
+        };
+        await todosModel.createTodoItem(newTodo);
 
+        // Act
+        let loadLatestUpdated = await todosModel.loadLatestUpdated();
+        
+        // Assert
         loadLatestUpdated.should.be.an('array');
-        loadLatestUpdated.should.have.lengthOf(1);
+        loadLatestUpdated.should.have.lengthOf(2);
     });
 
     it('deleteTodoItem() | Should return a number, with the value of 1 to indicate success in deleting a todo item', async function() {
-        let createTodoItem = await todosModel.deleteTodoItem(this.test.createTodoItemId);
-
+        // Arrange
+        let newTodo = {
+            title: "Mocha/Chai test title",
+            completed: false,
+            created: Date.now(),
+            updated: Date.now(),
+            userId: 'testing_with_chai'
+        };
+        let newTodoItem = await todosModel.createTodoItem(newTodo);
+        // Act
+        let createTodoItem = await todosModel.deleteTodoItem(newTodoItem._id);
+        
+        // Assert
         createTodoItem.should.be.an('number');
         createTodoItem.should.equal(1);
     });
 
     it('countTodosItem() | Should return a number, with the value of 1.', async function() {
-        let numOfItemscount = await todosModel.countTodosItems();
+        // Arrange
+        let newTodo = {
+            title: "Mocha/Chai test title",
+            completed: false,
+            created: Date.now(),
+            updated: Date.now(),
+            userId: 'testing_with_chai'
+        };
+        await todosModel.createTodoItem(newTodo);
 
+        // Act
+        let numOfItemscount = await todosModel.countTodosItems();
+        
+        // Assert
         numOfItemscount.should.be.an('number');
-        numOfItemscount.should.equal(1);
+        numOfItemscount.should.equal(2);
     });
 
     it('clearDatabase() | Should clear the entire database of posts', async function() {
+        // Arrange
+        let newTodo = {
+            title: "Mocha/Chai test title",
+            completed: false,
+            created: Date.now(),
+            updated: Date.now(),
+            userId: 'testing_with_chai'
+        };
+        await todosModel.createTodoItem(newTodo);
+
+        // Act
         let clearDatabase = await todosModel.clearDatabase();
+        
+        // Assert
         clearDatabase.should.be.an('number');
     });
 });
