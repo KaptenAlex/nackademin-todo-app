@@ -1,5 +1,7 @@
 const {usersDatabase} = require('./databaseConnection.js');
 const bcryptjs = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const secret = "f8a466e19a3140ae4545a9e3d8684368";
 
 module.exports = {
     async createAccount(username, oldPassword, role) {
@@ -23,7 +25,8 @@ module.exports = {
                 } else {
                     const passwordComparison = bcryptjs.compareSync(password, userObject.password)
                     if (passwordComparison) {
-                        resolve(userObject);
+                        const token = jwt.sign({username: userObject.username, role: userObject.role, id: userObject._id}, secret, {expiresIn: "7d"})
+                        resolve(token);
                     } else {
                         reject({error: err, message: "Incorrect password"});
                     }

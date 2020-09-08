@@ -9,13 +9,13 @@ module.exports = {
             let page = req.query.page;
             if (req.user.role == "admin") {
                 let allTodoItems = await todoModel.loadAllTodoItems(page);
-                res.json(allTodoItems);
+                res.status(201).json(allTodoItems);
             } else {
                 let allTodoItems = await todoModel.loadAllTodoItemsForUser(page, req.user.id);
-                res.json(allTodoItems);
+                res.status(201).json(allTodoItems);
             }
         } catch (error) {
-            res.json(error);
+            res.status(500).json(error);
         }
     },
     countTodoItemsPages: async(req, res) => {

@@ -13,7 +13,7 @@ router.delete('/', authorizationController.authorize, usersController.removeUser
 // Admin/Users routers
 
 // Anonymous routers
-router.post("/signin", authorizationController.login);
+router.post("/signin", usersController.loginUser);
 router.get("/authorize", authorizationController.authorize, usersController.userIsAuthorized);
 
 module.exports = router;

@@ -52,5 +52,13 @@ module.exports = {
         } catch (error) {
             res.json(error)
         }
+    },
+    loginUser: async(req, res) => {
+        try {
+            const user = await usersModel.loginUser(req.body.username, req.body.password);
+            res.json(user);
+        } catch(err) {
+            res.sendStatus(401)
+        }
     }
 }
