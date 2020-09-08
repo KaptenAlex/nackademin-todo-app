@@ -19,12 +19,16 @@ module.exports = {
         }
     },
     userIsAuthorized: (req, res) => {
-        let user = {
-            username: req.user.username,
-            role: req.user.role,
-            id: req.user.id
+        try {
+            let user = {
+                username: req.user.username,
+                role: req.user.role,
+                id: req.user.id
+            };
+            res.status(200).json(user);
+        } catch (error) {
+            res.status(401).json(error);
         }
-        res.json(user);
     },
     getAllUsers: async(req, res) => {
         try {
@@ -56,9 +60,9 @@ module.exports = {
     loginUser: async(req, res) => {
         try {
             const user = await usersModel.loginUser(req.body.username, req.body.password);
-            res.json(user);
+            res.status(200).json(user);
         } catch(err) {
-            res.sendStatus(401)
+            res.status(400).json(err);
         }
     }
 }

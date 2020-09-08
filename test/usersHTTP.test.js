@@ -70,4 +70,25 @@ describe('Users integration tests', function() {
         expect(resp.body).to.be.an('string').equal('User has been deleted');
     });
 
+    it('Should sign in a account with user role with the help of username and password', async function() {
+        const resp = await chai.request(app)
+        .post('/users/signin')
+        .send({
+            username: 'kalle',
+            password: '123'
+        });
+        expect(resp).to.have.status(200);
+        expect(resp).to.be.json;
+        expect(resp.body).to.be.an('string');
+    });
+
+    it('Should return a user object with username, role and id', async function() {
+        const resp = await chai.request(app)
+        .get('/users/authorize')
+        .set('Authorization', `Bearer ${this.test.token}`)
+        .send();
+        expect(resp).to.have.status(200);
+        expect(resp).to.be.json;
+        expect(resp.body).to.have.all.keys(['id', 'username', 'role']);
+    });
 });
