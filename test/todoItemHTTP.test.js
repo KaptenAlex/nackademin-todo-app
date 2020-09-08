@@ -125,4 +125,14 @@ describe('Todoitems HTTP requests', function() {
         expect(resp).to.be.json;
         expect(resp.body).to.be.an('number').equal(1);
     });
+
+    it('Should count the amount of pages needed for paginating all todo items in sets of eight', async function() {
+        const resp = await chai.request(app)
+        .get('/todos/countTodoItems')
+        .set('Authorization', `Bearer ${this.test.token}`)
+        .send();
+        expect(resp).to.have.status(201);
+        expect(resp).to.be.json;
+        expect(resp.body).to.be.an('number').equal(2);
+    });
 });

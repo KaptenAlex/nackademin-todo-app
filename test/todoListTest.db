@@ -1,40 +1,40 @@
-{"title":"Todolist: 2","ownerId":"Alex","_id":"5IrYCXR1ErtXVOMk"}
-{"title":"Todolist: 0","ownerId":"Alex","_id":"6fVTv2Sd0JkOZaWb"}
-{"title":"Todolist: 1","ownerId":"Alex","_id":"S3BpMU9X4vvZXNtJ"}
-{"$$deleted":true,"_id":"5IrYCXR1ErtXVOMk"}
-{"$$deleted":true,"_id":"6fVTv2Sd0JkOZaWb"}
-{"$$deleted":true,"_id":"S3BpMU9X4vvZXNtJ"}
-{"title":"Todolist: 0","ownerId":"Alex","_id":"NrV0dAorjK0sYIyg"}
-{"title":"Todolist: 1","ownerId":"Alex","_id":"sZlnuv3DuQQg6Xef"}
-{"title":"Todolist: 2","ownerId":"Alex","_id":"dtrxWw40Q2E3yJb8"}
-{"title":"TodoList with Mocha and Chai","ownerId":"Testare","_id":"JsbYJSjm1oooh887"}
-{"$$deleted":true,"_id":"JsbYJSjm1oooh887"}
-{"$$deleted":true,"_id":"NrV0dAorjK0sYIyg"}
-{"$$deleted":true,"_id":"dtrxWw40Q2E3yJb8"}
-{"$$deleted":true,"_id":"sZlnuv3DuQQg6Xef"}
-{"title":"Todolist: 0","ownerId":"Alex","_id":"DxxDWfoFnw1F3gG7"}
-{"title":"Todolist: 1","ownerId":"Alex","_id":"AmUXsDjuNpLq147a"}
-{"title":"Todolist: 2","ownerId":"Alex","_id":"bBKDx3LBvmb09BJl"}
-{"$$deleted":true,"_id":"AmUXsDjuNpLq147a"}
-{"$$deleted":true,"_id":"DxxDWfoFnw1F3gG7"}
-{"$$deleted":true,"_id":"bBKDx3LBvmb09BJl"}
-{"title":"Todolist: 0","ownerId":"Alex","_id":"HlcushX9hZJrRLkS"}
-{"title":"Todolist: 1","ownerId":"Alex","_id":"MfnjEQnDKcn1sJyi"}
-{"title":"Todolist: 2","ownerId":"Alex","_id":"S6wvZ0lkp0HwPmEs"}
-{"title":"update this title, please I beg of you","ownerId":"Fredde","_id":"46yUrNEaVSjo8LV5"}
-{"title":"Ah, much better title now","ownerId":"Fredde","_id":"46yUrNEaVSjo8LV5"}
-{"$$deleted":true,"_id":"46yUrNEaVSjo8LV5"}
-{"$$deleted":true,"_id":"HlcushX9hZJrRLkS"}
-{"$$deleted":true,"_id":"MfnjEQnDKcn1sJyi"}
-{"$$deleted":true,"_id":"S6wvZ0lkp0HwPmEs"}
-{"title":"Todolist: 0","ownerId":"Alex","_id":"nthq78rFw7kligNz"}
-{"title":"Todolist: 1","ownerId":"Alex","_id":"a6hSCOvlyRUlPAK7"}
-{"title":"Todolist: 2","ownerId":"Alex","_id":"kjXnMShqaUNj1nib"}
-{"$$deleted":true,"_id":"a6hSCOvlyRUlPAK7"}
-{"$$deleted":true,"_id":"kjXnMShqaUNj1nib"}
-{"$$deleted":true,"_id":"nthq78rFw7kligNz"}
 {"title":"Todolist: 0","ownerId":"Alex","_id":"AgxbMnWi1kD1BeID"}
-{"title":"Todolist: 1","ownerId":"Alex","_id":"iJTg8gt29rMy6kQk"}
 {"title":"Todolist: 2","ownerId":"Alex","_id":"U14dwqC1qxhD9qww"}
-{"title":"I have a bad feeling about this...","ownerId":"Foreshadowing","_id":"BeaccfR2HYlFOOEm"}
-{"$$deleted":true,"_id":"BeaccfR2HYlFOOEm"}
+{"title":"Todolist: 1","ownerId":"Alex","_id":"iJTg8gt29rMy6kQk"}
+{"$$deleted":true,"_id":"AgxbMnWi1kD1BeID"}
+{"$$deleted":true,"_id":"U14dwqC1qxhD9qww"}
+{"$$deleted":true,"_id":"iJTg8gt29rMy6kQk"}
+{"title":"Todolist: 0","ownerId":"Alex","_id":"pHBiUuRlBXBaQdoi"}
+{"title":"Todolist: 1","ownerId":"Alex","_id":"456By9s6jwodNgaL"}
+{"title":"Todolist: 2","ownerId":"Alex","_id":"3cG2XAstXxLDOpqa"}
+{"title":"TodoList with Mocha and Chai","ownerId":"Testare","_id":"Wfx7S48QJNLldUTR"}
+{"$$deleted":true,"_id":"3cG2XAstXxLDOpqa"}
+{"$$deleted":true,"_id":"456By9s6jwodNgaL"}
+{"$$deleted":true,"_id":"Wfx7S48QJNLldUTR"}
+{"$$deleted":true,"_id":"pHBiUuRlBXBaQdoi"}
+{"title":"Todolist: 0","ownerId":"Alex","_id":"KIQIp8F9wdQSvlCj"}
+{"title":"Todolist: 1","ownerId":"Alex","_id":"MniZZ9Af3t5z9oL6"}
+{"title":"Todolist: 2","ownerId":"Alex","_id":"pmZ9Pef9my8Izz9n"}
+{"$$deleted":true,"_id":"KIQIp8F9wdQSvlCj"}
+{"$$deleted":true,"_id":"MniZZ9Af3t5z9oL6"}
+{"$$deleted":true,"_id":"pmZ9Pef9my8Izz9n"}
+{"title":"Todolist: 0","ownerId":"Alex","_id":"cwcrMsT68N8jDEzc"}
+{"title":"Todolist: 1","ownerId":"Alex","_id":"npvjxMCWCK8Uhfj9"}
+{"title":"Todolist: 2","ownerId":"Alex","_id":"hWeiDz8HFrsOxIZQ"}
+{"title":"update this title, please I beg of you","ownerId":"Fredde","_id":"3SocLUM1CJH30T2W"}
+{"title":"Ah, much better title now","ownerId":"Fredde","_id":"3SocLUM1CJH30T2W"}
+{"$$deleted":true,"_id":"3SocLUM1CJH30T2W"}
+{"$$deleted":true,"_id":"cwcrMsT68N8jDEzc"}
+{"$$deleted":true,"_id":"hWeiDz8HFrsOxIZQ"}
+{"$$deleted":true,"_id":"npvjxMCWCK8Uhfj9"}
+{"title":"Todolist: 0","ownerId":"Alex","_id":"O08bLZNwBwdzc0tX"}
+{"title":"Todolist: 1","ownerId":"Alex","_id":"QmRHoj2v02KFOOMD"}
+{"title":"Todolist: 2","ownerId":"Alex","_id":"Mok4tjrwft6obtV8"}
+{"$$deleted":true,"_id":"Mok4tjrwft6obtV8"}
+{"$$deleted":true,"_id":"O08bLZNwBwdzc0tX"}
+{"$$deleted":true,"_id":"QmRHoj2v02KFOOMD"}
+{"title":"Todolist: 0","ownerId":"Alex","_id":"dlujk6rYHA6aiE1a"}
+{"title":"Todolist: 1","ownerId":"Alex","_id":"h05XECoESqmeonPb"}
+{"title":"Todolist: 2","ownerId":"Alex","_id":"5KlPpIUElWXW0VOJ"}
+{"title":"I have a bad feeling about this...","ownerId":"Foreshadowing","_id":"6npM2IzkbsJFvq9s"}
+{"$$deleted":true,"_id":"6npM2IzkbsJFvq9s"}
