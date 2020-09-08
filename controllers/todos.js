@@ -6,7 +6,7 @@ module.exports = {
     },
     loadAllTodoItems: async(req, res) => {
         try {
-            let page = req.query.page;
+            let page = req.query.page || 0;
             if (req.user.role == "admin") {
                 let allTodoItems = await todoModel.loadAllTodoItems(page);
                 res.status(201).json(allTodoItems);

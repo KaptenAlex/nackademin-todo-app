@@ -47,15 +47,15 @@ describe('Todoitems HTTP requests', function() {
         this.currentTest.token = await usersModel.loginUser('alex', '123');
     });
 
-    it('Should get a 200 response with a todo item', async function() {
-        chai.request(app)
+    it('Should get a 201 response with an array of five todo items', async function() {
+        const resp = await chai.request(app)
         .get('/todos/todos/')
         .set('Authorization', `Bearer ${this.test.token}`)
         .set('Content-Type', 'application/json')
-        .end( (error, results) => {
-            expect(results).to.have.status(201);
-            expect(results).to.be.json
-            console.log(results)
-        });
+        .send()
+        expect(resp).to.have.status(201);
+        expect(resp).to.be.json;
+        expect(resp.body).to.be.an('array').with.length(7);
+        (resp.body).forEach(todoItem => expect(todoItem).to.have.all.keys(['_id', 'title', 'completed', 'userId', 'created', 'updated']))         
     });
-})
+});
