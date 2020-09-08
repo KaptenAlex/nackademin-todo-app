@@ -148,17 +148,12 @@ async function createAccount() {
 
 async function deleteUser() {
     let usersSelectBox = document.getElementById('delete-user-select');
-    let selectedUser = {
-        id: usersSelectBox.value
-    };
 
-    await fetch('http://localhost:8080/users/', {
+    await fetch('http://localhost:8080/users/' + usersSelectBox.value, {
         method: 'DELETE',
         headers: {
-            'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + window.sessionStorage.getItem('token')
-        },
-        body: JSON.stringify(selectedUser)
+        }
     })
     .then(response => response.json() )
     .then(data => {

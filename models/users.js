@@ -47,7 +47,7 @@ module.exports = {
     },
     async getUser(username) {
         return new Promise( (resolve, reject) => {
-            usersDatabase.find({username: username}, (err, usersObject) => {
+            usersDatabase.findOne({username: username}, (err, usersObject) => {
                 if (err) {
                     reject(err);
                 } else {

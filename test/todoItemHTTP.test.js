@@ -45,7 +45,7 @@ describe('Todoitems HTTP requests', function() {
             password: '123',
             role: 'user'
         };
-        this.currentTest.user = await usersModel.createAccount(newUser.username, newUser.password, newUser.role);
+        await usersModel.createAccount(newUser.username, newUser.password, newUser.role);
 
         newUser.username = 'alex';
         newUser.role = 'admin';
@@ -135,8 +135,7 @@ describe('Todoitems HTTP requests', function() {
         expect(resp).to.be.json;
         expect(resp.body).to.be.an('number').equal(2);
     });
-    // router.get('/', todoController.loadIndex);
-
+    
     it('Should count the amount of pages needed for paginating all todo items in sets of eight', async function() {
         const resp = await chai.request(app)
         .get('/todos/')

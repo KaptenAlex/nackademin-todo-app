@@ -4,14 +4,14 @@ module.exports = {
     createUserAccount: async(req, res) => {
         try {
             if (req.user.role != "admin") {
-                res.json({error: "User needs to be an admin to create new account"}).status(401);
+                res.status(401).json({error: "User needs to be an admin to create new account"});
             } else {
                 let createAccountResults = await usersModel.createAccount(req.body.username, req.body.password, req.body.role);
 
                 if (createAccountResults.status) {
-                    res.json(createAccountResults.message).status(201);
+                    res.status(201).json(createAccountResults.message);
                 } else {
-                    res.json(createAccountResults.message).status(500);
+                    res.status(400).json(createAccountResults.message);
                 }
             }
         } catch (error) {
@@ -29,25 +29,25 @@ module.exports = {
     getAllUsers: async(req, res) => {
         try {
             if (req.user.role == "admin") {
-                res.json(await usersModel.getUsers());
+                res.status(200).json(await usersModel.getUsers());
             } else {
-                res.json({message: "User lacks privileges for this function"});
+                res.status(401).json({message: "User lacks privileges for this function"});
             }   
         } catch (error) {
-            res.json(error)
+            res.status(400).json(error)
         }
     },
     removeUserAccount: async(req, res) => {
         try {
             if(req.user.role == "admin") {
-                let deleteResults = await usersModel.removeUser(req.body.id);
+                let deleteResults = await usersModel.removeUser(req.params.id);
                 if (deleteResults == 1) {
-                    res.json('User has been deleted');
+                    res.status(200).json('User has been deleted');
                 } else {
-                    res.json('User has not been deleted');
+                    res.status(400).json('User has not been deleted');
                 }
             } else {
-                res.json({message: "User lacks privileges for this function"});
+                res.status(401).json({message: "User lacks privileges for this function"});
             }
         } catch (error) {
             res.json(error)
