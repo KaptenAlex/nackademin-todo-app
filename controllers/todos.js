@@ -33,6 +33,7 @@ module.exports = {
                 completed: false,
                 created: Date.now(),
                 updated: Date.now(),
+                userId: req.user.id,
                 todoListId: req.body.todoListId
             };
             res.status(201).json(await todoModel.createTodoItem(todoItem));
