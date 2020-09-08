@@ -6,7 +6,7 @@ const { expect } = require('chai');
 chai.should();
 chai.use(chaiAsPromised);
 
-describe('Todo list model', () => {
+describe('Todo list model', async function() {
     beforeEach('Clear DB and create three lists', async function() {
         await todoListModel.clearTodoListDatabase();
         for (let i = 0; i < 3; i++) {
