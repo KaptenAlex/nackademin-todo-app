@@ -135,4 +135,14 @@ describe('Todoitems HTTP requests', function() {
         expect(resp).to.be.json;
         expect(resp.body).to.be.an('number').equal(2);
     });
+    // router.get('/', todoController.loadIndex);
+
+    it('Should count the amount of pages needed for paginating all todo items in sets of eight', async function() {
+        const resp = await chai.request(app)
+        .get('/todos/')
+        .redirects(0)
+        .send();
+        expect(resp).to.have.status(302);
+        expect(resp.res.text).to.be.equal('Found. Redirecting to index.html');
+    });
 });

@@ -2,7 +2,7 @@ const todoModel = require('../models/todos.js');
 
 module.exports = {
     loadIndex: (req, res) => {
-        res.status(200).redirect('index.html');
+        res.status(302).redirect('index.html');
     },
     loadAllTodoItems: async(req, res) => {
         try {
