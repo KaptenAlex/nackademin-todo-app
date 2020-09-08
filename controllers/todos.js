@@ -2,7 +2,7 @@ const todoModel = require('../models/todos.js');
 
 module.exports = {
     loadIndex: (req, res) => {
-        res.redirect('index.html');
+        res.status(200).redirect('index.html');
     },
     loadAllTodoItems: async(req, res) => {
         try {
@@ -15,14 +15,14 @@ module.exports = {
                 res.status(201).json(allTodoItems);
             }
         } catch (error) {
-            res.status(500).json(error);
+            res.status(400).json(error);
         }
     },
     countTodoItemsPages: async(req, res) => {
         try {
-            res.json(await todoModel.countTodoItemsPages());
+            res.status(201).json(await todoModel.countTodoItemsPages());
         } catch (error) {
-            res.json(error);
+            res.status(400).json(error);
         }
     },
     createTodoItem: async(req, res) => {
@@ -35,9 +35,9 @@ module.exports = {
                 updated: Date.now(),
                 todoListId: req.body.todoListId
             };
-            res.json(await todoModel.createTodoItem(todoItem));
+            res.status(201).json(await todoModel.createTodoItem(todoItem));
         } catch (error) {
-            res.json(error);
+            res.status(400).json(error);
         }
     },
     updateTodoItem: async(req, res) => {
@@ -48,31 +48,31 @@ module.exports = {
                 completed: req.body.completed,   
                 updated: Date.now(),
             };
-            res.json(await todoModel.updateTodoItem(todoItem, todoItemID));
+            res.status(201).json(await todoModel.updateTodoItem(todoItem, todoItemID));
         } catch (error) {
-            res.json(error);
+            res.status(400).json(error);
         }
     },
     deleteTodoItem: async(req, res) => {
         try {
             let todoItemID = req.params.id;
-            res.json(await todoModel.deleteTodoItem(todoItemID));
+            res.status(201).json(await todoModel.deleteTodoItem(todoItemID));
         } catch (error) {
-            res.json(error);
+            res.status(400).json(error);
         }
     },
     loadLatestCreated: async(req, res) => {
         try {
-            res.json(await todoModel.loadLatestCreated());
+            res.status(201).json(await todoModel.loadLatestCreated());
         } catch (error) {
-            res.json(error);
+            res.status(400).json(error);
         }
     },
     loadLatestUpdated: async(req, res) => {
         try {
-            res.json(await todoModel.loadLatestUpdated());
+            res.status(201).json(await todoModel.loadLatestUpdated());
         } catch (error) {
-            res.json(error);
+            res.status(400).json(error);
         }
     }
 };

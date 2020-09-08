@@ -23,7 +23,7 @@ describe('Todoitems HTTP requests', function() {
             updated: Date.now(),
             userId: 'Fredde'
         };
-        for (let i = 0; i < 2; i++) {
+        for (let i = 0; i < 4; i++) {
             todoItem.title + i;
             await todosModel.createTodoItem(todoItem);
         }
@@ -46,16 +46,37 @@ describe('Todoitems HTTP requests', function() {
         this.currentTest.admin = await usersModel.createAccount(newUser.username, newUser.password, newUser.role);
         this.currentTest.token = await usersModel.loginUser('alex', '123');
     });
-
-    it('Should get a 201 response with an array of five todo items', async function() {
+    //TODO: Add test where user has the role user
+    it('Should get a 201 response with an array of eight of nine todo items', async function() {
         const resp = await chai.request(app)
         .get('/todos/todos/')
         .set('Authorization', `Bearer ${this.test.token}`)
-        .set('Content-Type', 'application/json')
-        .send()
+        .send();
         expect(resp).to.have.status(201);
         expect(resp).to.be.json;
-        expect(resp.body).to.be.an('array').with.length(7);
-        (resp.body).forEach(todoItem => expect(todoItem).to.have.all.keys(['_id', 'title', 'completed', 'userId', 'created', 'updated']))         
+        expect(resp.body).to.be.an('array').with.length(8);
+        (resp.body).forEach(todoItem => expect(todoItem).to.have.all.keys(['_id', 'title', 'completed', 'userId', 'created', 'updated']));
+    });
+
+    it('Should get a 201 with an array with eight of the latest created todo items', async function() {
+        const resp = await chai.request(app)
+        .get('/todos/sort/created')
+        .set('Authorization', `Bearer ${this.test.token}`)
+        .send();
+        expect(resp).to.have.status(201);
+        expect(resp).to.be.json;
+        expect(resp.body).to.be.an('array').with.length(8);
+        (resp.body).forEach(todoItem => expect(todoItem).to.have.all.keys(['_id', 'title', 'completed', 'userId', 'created', 'updated']));
+    });
+
+    it('Should get a 201 with an array of eight of the latest updated todo items', async function() {
+        const resp = await chai.request(app)
+        .get('/todos/sort/updated')
+        .set('Authorization', `Bearer ${this.test.token}`)
+        .send();
+        expect(resp).to.have.status(201);
+        expect(resp).to.be.json;
+        expect(resp.body).to.be.an('array').with.length(8);
+        (resp.body).forEach(todoItem => expect(todoItem).to.have.all.keys(['_id', 'title', 'completed', 'userId', 'created', 'updated']));
     });
 });
