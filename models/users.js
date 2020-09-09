@@ -6,15 +6,25 @@ const secret = "f8a466e19a3140ae4545a9e3d8684368";
 module.exports = {
     async createAccount(username, oldPassword, role) {
         return new Promise ( (resolve, reject) => {
-            let salt = bcryptjs.genSaltSync(10);
-            let password = bcryptjs.hashSync(oldPassword, salt);
-                usersDatabase.insert({username, password, role}, (err, newUser) => {
-                    if (err) {
-                        reject({ error: err, message: "User was not created, try again", status: false })
+            usersDatabase.findOne({username: username}, (err, userObject) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    if(userObject === null) {
+                        let salt = bcryptjs.genSaltSync(10);
+                        let password = bcryptjs.hashSync(oldPassword, salt);
+                        usersDatabase.insert({username, password, role}, (err, newUser) => {
+                            if (err) {
+                                reject({ error: err, message: "User was not created, try again", status: false })
+                            } else {
+                                resolve({ message: "User has been created", status: true })
+                            }
+                        })
                     } else {
-                        resolve({ message: "User has been created", status: true })
+                        resolve({ message: "Username already exists", status: false })
                     }
-                })
+                }
+            })
         });
     },
     async loginUser(username, password) {

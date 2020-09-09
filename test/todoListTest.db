@@ -1,61 +1,57 @@
-{"title":"Todolist 2 Test","ownerId":"cJQ2sYG4rvrSu5Hx","_id":"36CnOBmI0bqdTkXG"}
-{"title":"Todolist Test","ownerId":"cJQ2sYG4rvrSu5Hx","_id":"7D39KOAGLbyx4oDi"}
-{"$$deleted":true,"_id":"36CnOBmI0bqdTkXG"}
-{"$$deleted":true,"_id":"7D39KOAGLbyx4oDi"}
-{"title":"Todolist: 0","ownerId":"Alex","_id":"IDPPfis8HohYpD7M"}
-{"title":"Todolist: 1","ownerId":"Alex","_id":"eo16iwZOa2N7V5n6"}
-{"title":"Todolist: 2","ownerId":"Alex","_id":"7OIGWAE6dZzow28O"}
-{"title":"TodoList with Mocha and Chai","ownerId":"Testare","_id":"GIOk52HRa4GAlTS6"}
-{"$$deleted":true,"_id":"7OIGWAE6dZzow28O"}
-{"$$deleted":true,"_id":"GIOk52HRa4GAlTS6"}
-{"$$deleted":true,"_id":"IDPPfis8HohYpD7M"}
-{"$$deleted":true,"_id":"eo16iwZOa2N7V5n6"}
-{"title":"Todolist: 0","ownerId":"Alex","_id":"3bYrD1oX56MQU73c"}
-{"title":"Todolist: 1","ownerId":"Alex","_id":"wVIhPjPuxYchFNB8"}
-{"title":"Todolist: 2","ownerId":"Alex","_id":"2jZoyXghihUDBtG0"}
-{"title":"TodoList with Mocha and Chai","ownerId":"Testare","_id":"w2yJJxNgybi0HBxW"}
-{"$$deleted":true,"_id":"2jZoyXghihUDBtG0"}
-{"$$deleted":true,"_id":"3bYrD1oX56MQU73c"}
-{"$$deleted":true,"_id":"w2yJJxNgybi0HBxW"}
-{"$$deleted":true,"_id":"wVIhPjPuxYchFNB8"}
-{"title":"Todolist: 0","ownerId":"Alex","_id":"xL9G9CnRU72Hu4wD"}
-{"title":"Todolist: 1","ownerId":"Alex","_id":"Z9ECMBFgLIgfMm5T"}
-{"title":"Todolist: 2","ownerId":"Alex","_id":"z05nvyUTWgdumpEY"}
-{"title":"TodoList with Mocha and Chai","ownerId":"Testare","_id":"ERoJLs6ZMCzsnYgJ"}
-{"title":"Ah, much better title now","ownerId":"Testare","_id":"ERoJLs6ZMCzsnYgJ"}
-{"$$deleted":true,"_id":"ERoJLs6ZMCzsnYgJ"}
-{"$$deleted":true,"_id":"Z9ECMBFgLIgfMm5T"}
-{"$$deleted":true,"_id":"xL9G9CnRU72Hu4wD"}
-{"$$deleted":true,"_id":"z05nvyUTWgdumpEY"}
-{"title":"Todolist: 0","ownerId":"Alex","_id":"az4ss1gtidEexF4X"}
-{"title":"Todolist: 1","ownerId":"Alex","_id":"hFU4DyP8IRvjDIlZ"}
-{"title":"Todolist: 2","ownerId":"Alex","_id":"YsrYpkgSEdnQF2qb"}
-{"title":"TodoList with Mocha and Chai","ownerId":"Testare","_id":"aCSTzAOHGIrXc1Oj"}
-{"$$deleted":true,"_id":"YsrYpkgSEdnQF2qb"}
-{"$$deleted":true,"_id":"aCSTzAOHGIrXc1Oj"}
-{"$$deleted":true,"_id":"az4ss1gtidEexF4X"}
-{"$$deleted":true,"_id":"hFU4DyP8IRvjDIlZ"}
-{"title":"Todolist: 0","ownerId":"Alex","_id":"2cuCj41jyVBSl8l7"}
-{"title":"Todolist: 1","ownerId":"Alex","_id":"zQENFpbJFyqLOm00"}
-{"title":"Todolist: 2","ownerId":"Alex","_id":"BcJ6TaPj1urlKsB8"}
-{"title":"I have a bad feeling about this...","ownerId":"Foreshadowing","_id":"G6LDIPnuGrVowheV"}
-{"$$deleted":true,"_id":"G6LDIPnuGrVowheV"}
-{"$$deleted":true,"_id":"2cuCj41jyVBSl8l7"}
-{"$$deleted":true,"_id":"BcJ6TaPj1urlKsB8"}
-{"$$deleted":true,"_id":"zQENFpbJFyqLOm00"}
-{"title":"Todolist Test","ownerId":"IxDje6yKIk4EwYGu","_id":"N5bz9apGU3pvotm9"}
-{"title":"Todolist 2 Test","ownerId":"IxDje6yKIk4EwYGu","_id":"VbkCwipFkqTWixU4"}
-{"$$deleted":true,"_id":"N5bz9apGU3pvotm9"}
-{"$$deleted":true,"_id":"VbkCwipFkqTWixU4"}
-{"title":"Todolist Test","ownerId":"2ByFgccCGAKnejuU","_id":"lSJhn1SLyKCUAn79"}
-{"title":"Todolist 2 Test","ownerId":"2ByFgccCGAKnejuU","_id":"tgtWSZ96ZKg8optW"}
-{"$$deleted":true,"_id":"lSJhn1SLyKCUAn79"}
-{"$$deleted":true,"_id":"tgtWSZ96ZKg8optW"}
-{"title":"Todolist Test","ownerId":"mEcU1DxmUcs8AefY","_id":"6Ev8k0gb2SqSHvgL"}
-{"title":"Todolist 2 Test","ownerId":"mEcU1DxmUcs8AefY","_id":"BOLVRvIBa0tdlrfb"}
-{"title":"Updated todolist title","ownerId":"mEcU1DxmUcs8AefY","_id":"BOLVRvIBa0tdlrfb"}
-{"$$deleted":true,"_id":"6Ev8k0gb2SqSHvgL"}
-{"$$deleted":true,"_id":"BOLVRvIBa0tdlrfb"}
-{"title":"Todolist Test","ownerId":"YdCLid2mwIpR7Kok","_id":"NmI3pfh2pvf1gbTk"}
-{"title":"Todolist 2 Test","ownerId":"YdCLid2mwIpR7Kok","_id":"CjgxZDhdVcjZDJCY"}
-{"$$deleted":true,"_id":"CjgxZDhdVcjZDJCY"}
+{"title":"Todolist: 0","ownerId":"Alex","_id":"a3b4piqVLm1H7vWB"}
+{"title":"Todolist: 1","ownerId":"Alex","_id":"4o6GtiENlTQbVKZy"}
+{"title":"Todolist: 2","ownerId":"Alex","_id":"Lu21dGOBEoxh3aiL"}
+{"title":"TodoList with Mocha and Chai","ownerId":"Testare","_id":"bmJoLxlmfSooBMZs"}
+{"$$deleted":true,"_id":"4o6GtiENlTQbVKZy"}
+{"$$deleted":true,"_id":"Lu21dGOBEoxh3aiL"}
+{"$$deleted":true,"_id":"a3b4piqVLm1H7vWB"}
+{"$$deleted":true,"_id":"bmJoLxlmfSooBMZs"}
+{"title":"Todolist: 0","ownerId":"Alex","_id":"BqnaDVqSyQkNvrj9"}
+{"title":"Todolist: 1","ownerId":"Alex","_id":"Nsm261OBoEobkrIe"}
+{"title":"Todolist: 2","ownerId":"Alex","_id":"AeArz8d9ONPQFOif"}
+{"title":"TodoList with Mocha and Chai","ownerId":"Testare","_id":"smk6lZaeuMg89VJ9"}
+{"$$deleted":true,"_id":"AeArz8d9ONPQFOif"}
+{"$$deleted":true,"_id":"BqnaDVqSyQkNvrj9"}
+{"$$deleted":true,"_id":"Nsm261OBoEobkrIe"}
+{"$$deleted":true,"_id":"smk6lZaeuMg89VJ9"}
+{"title":"Todolist: 0","ownerId":"Alex","_id":"50lMYZyu5tb4sLDH"}
+{"title":"Todolist: 1","ownerId":"Alex","_id":"WXcBoF1WjNNyZnsD"}
+{"title":"Todolist: 2","ownerId":"Alex","_id":"jAgYmyOr9Ge8WQZg"}
+{"title":"TodoList with Mocha and Chai","ownerId":"Testare","_id":"fT8iV3Z0ZKekcfRh"}
+{"title":"Ah, much better title now","ownerId":"Testare","_id":"fT8iV3Z0ZKekcfRh"}
+{"$$deleted":true,"_id":"50lMYZyu5tb4sLDH"}
+{"$$deleted":true,"_id":"WXcBoF1WjNNyZnsD"}
+{"$$deleted":true,"_id":"fT8iV3Z0ZKekcfRh"}
+{"$$deleted":true,"_id":"jAgYmyOr9Ge8WQZg"}
+{"title":"Todolist: 0","ownerId":"Alex","_id":"n7nFXcNULf3onqCH"}
+{"title":"Todolist: 1","ownerId":"Alex","_id":"gQJ7sO3WWLH0EASP"}
+{"title":"Todolist: 2","ownerId":"Alex","_id":"QgBE5lfa5cNkSoKI"}
+{"title":"TodoList with Mocha and Chai","ownerId":"Testare","_id":"ywaShr4sf3XmZzZu"}
+{"$$deleted":true,"_id":"QgBE5lfa5cNkSoKI"}
+{"$$deleted":true,"_id":"gQJ7sO3WWLH0EASP"}
+{"$$deleted":true,"_id":"n7nFXcNULf3onqCH"}
+{"$$deleted":true,"_id":"ywaShr4sf3XmZzZu"}
+{"title":"Todolist: 0","ownerId":"Alex","_id":"Xwal9dICtnukFSAh"}
+{"title":"Todolist: 1","ownerId":"Alex","_id":"Oq7E0XZJTfzzuytL"}
+{"title":"Todolist: 2","ownerId":"Alex","_id":"YYhqkoftnosf9YmV"}
+{"title":"I have a bad feeling about this...","ownerId":"Foreshadowing","_id":"UTZtJlDBHlhonnQV"}
+{"$$deleted":true,"_id":"UTZtJlDBHlhonnQV"}
+{"$$deleted":true,"_id":"Oq7E0XZJTfzzuytL"}
+{"$$deleted":true,"_id":"Xwal9dICtnukFSAh"}
+{"$$deleted":true,"_id":"YYhqkoftnosf9YmV"}
+{"title":"Todolist Test","ownerId":"Uezb4PC9WCJIIxfS","_id":"GPAMit09inMsfXos"}
+{"title":"Todolist 2 Test","ownerId":"Uezb4PC9WCJIIxfS","_id":"viXwRqXSXtz7HQgO"}
+{"$$deleted":true,"_id":"GPAMit09inMsfXos"}
+{"$$deleted":true,"_id":"viXwRqXSXtz7HQgO"}
+{"title":"Todolist Test","ownerId":"PUE7M1RHNxxWddUc","_id":"JKhjG8x2hUJWCUPj"}
+{"title":"Todolist 2 Test","ownerId":"PUE7M1RHNxxWddUc","_id":"gmthhgqnlvloND9t"}
+{"$$deleted":true,"_id":"JKhjG8x2hUJWCUPj"}
+{"$$deleted":true,"_id":"gmthhgqnlvloND9t"}
+{"title":"Todolist Test","ownerId":"SyzndU0gq9HGcENT","_id":"zTRgVrSzHh7e5skG"}
+{"title":"Todolist 2 Test","ownerId":"SyzndU0gq9HGcENT","_id":"mEU0UzSolCAE5Kw8"}
+{"title":"Updated todolist title","ownerId":"SyzndU0gq9HGcENT","_id":"mEU0UzSolCAE5Kw8"}
+{"$$deleted":true,"_id":"mEU0UzSolCAE5Kw8"}
+{"$$deleted":true,"_id":"zTRgVrSzHh7e5skG"}
+{"title":"Todolist Test","ownerId":"L0sDOU1fQRCxsDyi","_id":"3zRM7S2OcIo5eLku"}
+{"title":"Todolist 2 Test","ownerId":"L0sDOU1fQRCxsDyi","_id":"XhjRh1II0B0JeC2d"}
+{"$$deleted":true,"_id":"XhjRh1II0B0JeC2d"}
