@@ -1,6 +1,5 @@
 const app = require('../app.js');
 const usersModel = require('../models/users.js');
-const authorizationMiddleWare = require('../controllers/authorization.js');
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -26,8 +25,8 @@ describe('Users integration tests', function() {
 
         newUser.username = 'alex';
         newUser.role = 'admin';
-
-        this.currentTest.admin = await usersModel.createAccount(newUser.username, newUser.password, newUser.role);
+        await usersModel.createAccount(newUser.username, newUser.password, newUser.role);
+        
         this.currentTest.token = await usersModel.loginUser(newUser.username, newUser.password);
     });
 

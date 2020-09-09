@@ -1,7 +1,6 @@
 const app = require('../app.js');
 const todosModel = require('../models/todos.js');
 const usersModel = require('../models/users.js');
-const authorizationMiddleWare = require('../controllers/authorization.js');
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -49,8 +48,8 @@ describe('Todoitems HTTP requests', function() {
 
         newUser.username = 'alex';
         newUser.role = 'admin';
-
-        this.currentTest.admin = await usersModel.createAccount(newUser.username, newUser.password, newUser.role);
+        await usersModel.createAccount(newUser.username, newUser.password, newUser.role);
+        
         this.currentTest.token = await usersModel.loginUser(newUser.username, newUser.password);
     });
     //TODO: Add test where user has the role user

@@ -4,9 +4,9 @@ module.exports = {
     getTodoLists: async(req, res) => {
         try {
             let todoLists = await todoListModel.getTodoLists();
-            res.json(todoLists);
+            res.status(200).json(todoLists);
         } catch (error) {
-            res.json(error);
+            res.status(400).json(error);
         }
     },
     getTodoList: async(req, res) => {
@@ -24,29 +24,29 @@ module.exports = {
                 ownerId: req.body.ownerId
             };
             let getTodoList = await todoListModel.createTodoList(todoList);
-            res.json(getTodoList)
+            res.status(201).json(getTodoList)
         } catch (error) {
-            res.json(error);
+            res.status(400).json(error);
         }
     },
     updateTodoList: async(req, res) => {
         try {
             let updatedTodoList = {
-                title: req.body.title
+                title: req.body.title,
+                ownerId: req.body.ownerId
             }
             let updateTodoList = await todoListModel.updateTodoList(updatedTodoList, req.params.id);
-            res.json(updateTodoList);
+            res.status(201).json(updateTodoList);
         } catch (error) {
-            res.json(error);
+            res.status(400).json(error);
         }
     },
     deleteTodoList: async(req, res) => {
         try {
             let updateTodoList = await todoListModel.deleteTodoList(req.params.id);
-            res.json(updateTodoList);
+            res.status(200).json(updateTodoList);
         } catch (error) {
-            res.json(error);
-
+            res.status(400).json(error);
         }
     }
 }
