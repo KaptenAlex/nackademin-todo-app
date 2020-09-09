@@ -1,4 +1,5 @@
 import { loadAllTodoItems } from './read.mjs';
+import { loadAllTodoLists } from './todoLists.mjs';
 
 let signInBtn = document.getElementById('sign-in');
 let signOutBtn = document.getElementById('sign-out');
@@ -55,6 +56,7 @@ async function signIn() {
         getAllUsers();
      }
     loadAllTodoItems();
+    loadAllTodoLists();
 }
 
 async function getAllUsers() {

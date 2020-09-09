@@ -12,6 +12,17 @@ module.exports = {
             });
         });
     },
+    async getTodoListsForUser(userId) {
+        return new Promise((resolve, reject) => {
+            todoListDatabase.find({ownerId: userId}, (err, todoLists) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(todoLists);
+                }
+            });
+        });
+    },
     async getTodoList(id) {
         return new Promise((resolve, reject) => {
             todoListDatabase.findOne({_id: id}, (err, todoList) => {

@@ -3,8 +3,13 @@ const todoListModel = require('../models/todoList.js');
 module.exports = {
     getTodoLists: async(req, res) => {
         try {
-            let todoLists = await todoListModel.getTodoLists();
-            res.status(200).json(todoLists);
+            if (req.user.role == 'admin') {
+                let todoLists = await todoListModel.getTodoLists();
+                res.status(200).json(todoLists);
+            } else {
+                let todoLists = await todoListModel.getTodoListsForUser(req.user._id);
+                res.status(200).json(todoLists);
+            }
         } catch (error) {
             res.status(400).json(error);
         }

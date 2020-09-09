@@ -10,11 +10,11 @@ async function loadAllTodoItems(pageNumber = 0) {
     })
     .then(response => response.json())
     .then(data => {
-        let todoListElement = document.getElementById('todoList');
-        todoListElement.innerHTML = '';
+        let todo_item_listElement = document.getElementById('todo-items-list');
+        todo_item_listElement.innerHTML = '';
         data.forEach(todoItem => {
             // Todolist
-            let todoListElement = document.getElementById('todoList');
+            let todo_item_listElement = document.getElementById('todo-items-list');
     
             //Todo item
             let todoItemElement = document.createElement('div');
@@ -51,7 +51,7 @@ async function loadAllTodoItems(pageNumber = 0) {
             deleteButton.addEventListener('click', () => deleteTodoItem(todoItem._id));
             
             //Append todoitem to todolist.
-            todoListElement.appendChild(todoItemElement);
+            todo_item_listElement.appendChild(todoItemElement);
             todoItemElement.appendChild(todoItemCompletedInput);
             todoItemElement.appendChild(todoItemTitleInputElement);
 

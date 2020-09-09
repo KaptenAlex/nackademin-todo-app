@@ -12,7 +12,17 @@ body {
     grid-column: 2/4;
     justify-content: center;
 }
-.todoList {
+.todoLists {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.todoLists-item {
+    background-color: brown;
+    color: azure;
+    margin: 25px;
+}
+.todo-items-list {
     display: grid;
     grid-row-start: 7;
     grid-template-rows: auto;
