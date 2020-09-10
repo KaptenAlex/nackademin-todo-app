@@ -18,8 +18,6 @@ async function incrementIndexPage() {
     })
     .then(response => response.json() )
     .then(numOfPages => {
-        console.log(numOfPages);
-        console.log(page);
         if (page == numOfPages || page > numOfPages) {
             pageNumber.innerHTML = '<h1>No more pages are available</h1>'
         } else {
