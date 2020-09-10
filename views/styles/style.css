@@ -76,7 +76,7 @@ body {
 .sort-by {
     display: grid;
     grid-template-rows: 1fr;
-    grid-template-columns: 12.5% 12.5% 75%;
+    grid-template-columns: 15% 15% 70%;
     grid-row: 4;
     margin: 25px;
 }

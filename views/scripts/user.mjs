@@ -1,4 +1,3 @@
-import { loadAllTodoItems } from './read.mjs';
 import { loadAllTodoLists } from './todoLists.mjs';
 
 let signInBtn = document.getElementById('sign-in');
@@ -66,7 +65,6 @@ async function authorizeUser() {
     if(window.sessionStorage.getItem('role') == 'admin') { 
         getAllUsers();
     }
-    loadAllTodoItems();
     loadAllTodoLists();
 }
 

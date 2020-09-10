@@ -8,10 +8,10 @@ module.exports = {
         try {
             let page = req.query.page || 0;
             if (req.user.role == "admin") {
-                let allTodoItems = await todoModel.loadAllTodoItems(page);
+                let allTodoItems = await todoModel.loadAllTodoItems(page, req.query.todoListId);
                 res.status(201).json(allTodoItems);
             } else {
-                let allTodoItems = await todoModel.loadAllTodoItemsForUser(page, req.user.id);
+                let allTodoItems = await todoModel.loadAllTodoItemsForUser(page, /*req.user.id, */req.query.todoListId);
                 res.status(201).json(allTodoItems);
             }
         } catch (error) {

@@ -24,9 +24,9 @@ module.exports = {
             });
         });
     },
-    async loadAllTodoItems(skipNumber = 5) {
+    async loadAllTodoItems(skipNumber = 5, todoListId) {
         return new Promise( (resolve, reject) => {
-            todoItemDatabase.find({}).sort({ created: -1}).skip(skipNumber * 5).limit(8).exec((err, allTodoItems) => {
+            todoItemDatabase.find({todoListId :todoListId}).sort({ created: -1}).skip(skipNumber * 5).limit(8).exec((err, allTodoItems) => {
                 if (err) {
                     reject(err)
                 } else {
@@ -35,9 +35,9 @@ module.exports = {
             });
         });
     },
-    async loadAllTodoItemsForUser(skipNumber = 5, id) {
+    async loadAllTodoItemsForUser(skipNumber = 5, /*id,*/ todoListId) {
         return new Promise( (resolve, reject) => {
-            todoItemDatabase.find({userId: id}).sort({ created: -1}).skip(skipNumber * 5).limit(8).exec((err, allTodoItems) => {
+            todoItemDatabase.find({/*userId: id, */todoListId :todoListId}).sort({ created: -1}).skip(skipNumber * 5).limit(8).exec((err, allTodoItems) => {
                 if (err) {
                     reject(err)
                 } else {

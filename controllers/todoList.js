@@ -7,7 +7,7 @@ module.exports = {
                 let todoLists = await todoListModel.getTodoLists();
                 res.status(200).json(todoLists);
             } else {
-                let todoLists = await todoListModel.getTodoListsForUser(req.user._id);
+                let todoLists = await todoListModel.getTodoListsForUser(req.user.id);
                 res.status(200).json(todoLists);
             }
         } catch (error) {

@@ -1,3 +1,5 @@
+import {loadAllTodoItems} from './read.mjs';
+
 async function loadAllTodoLists() {
     fetch('http://localhost:8080/todoList/', {
         method: 'GET',
@@ -22,6 +24,8 @@ async function loadAllTodoLists() {
 
             let todoListButton = document.createElement('button');
             todoListButton.id = todoList._id;
+            //Insert todolist & user id?
+            todoListButton.addEventListener('click', () => loadAllTodoItems(0, todoList._id));
             todoListButton.innerText = `Go to ${todoList.title} todolist`;
             todoListButton.classList.add('todo-lists-ownerid');
 
@@ -32,6 +36,5 @@ async function loadAllTodoLists() {
         });
     });
 }
-
 
 export { loadAllTodoLists };
