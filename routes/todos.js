@@ -10,13 +10,13 @@ const authorizationController = require('../controllers/authorization.js')
 
 // Admin/User routes
 router.get('/todos/', authorizationController.authorize, todoController.loadAllTodoItems);
+router.get('/countTodoItems/:todoListId', authorizationController.authorize, todoController.countTodoItemsPages);
 router.get('/sort/created', authorizationController.authorize, todoController.loadLatestCreated);
 router.get('/sort/updated', authorizationController.authorize, todoController.loadLatestUpdated);
 router.post('/', authorizationController.authorize, todoController.createTodoItem);
 router.patch('/:id', authorizationController.authorize, todoController.updateTodoItem);
 router.delete('/:id', authorizationController.authorize, todoController.deleteTodoItem);
 
-router.get('/countTodoItems', authorizationController.authorize, todoController.countTodoItemsPages);
 
 // Anonymous routes
 router.get('/', todoController.loadIndex);

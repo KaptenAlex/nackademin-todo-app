@@ -11,7 +11,7 @@ module.exports = {
                 let allTodoItems = await todoModel.loadAllTodoItems(page, req.query.todoListId);
                 res.status(201).json(allTodoItems);
             } else {
-                let allTodoItems = await todoModel.loadAllTodoItemsForUser(page, /*req.user.id, */req.query.todoListId);
+                let allTodoItems = await todoModel.loadAllTodoItemsForUser(page, req.query.todoListId);
                 res.status(201).json(allTodoItems);
             }
         } catch (error) {
@@ -20,7 +20,7 @@ module.exports = {
     },
     countTodoItemsPages: async(req, res) => {
         try {
-            res.status(201).json(await todoModel.countTodoItemsPages());
+            res.status(201).json(await todoModel.countTodoItemsPages(req.params.todoListId));
         } catch (error) {
             res.status(400).json(error);
         }

@@ -46,9 +46,9 @@ module.exports = {
             });
         });
     },
-    async countTodoItemsPages() {
+    async countTodoItemsPages(todoListId) {
         return new Promise( (resolve, reject) => {
-            todoItemDatabase.count({}, (err, numOfTodoItems) => {
+            todoItemDatabase.count({todoListId: todoListId}, (err, numOfTodoItems) => {
                 if (err) {
                     reject(err);
                 } else {
