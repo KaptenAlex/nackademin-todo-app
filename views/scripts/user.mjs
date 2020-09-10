@@ -6,15 +6,14 @@ let signOutBtn = document.getElementById('sign-out');
 let createAccountBtn = document.getElementById('create-user');
 let createAccountResponse = document.getElementById('create-account-response');
 let userInterface = document.getElementById('signed-in-interface');
+let usernameInput = document.getElementById('username-sign-in');
+let passwordInput = document.getElementById('password-sign-in');
 
 signInBtn.addEventListener('click', () => signIn() );
 signOutBtn.addEventListener('click', () => signOut() );
 createAccountBtn.addEventListener('click', () => createAccount() ) 
 
 async function signIn() {
-    let usernameInput = document.getElementById('username-sign-in');
-    let passwordInput = document.getElementById('password-sign-in');
-
     let userLoginDetails = {
         username: usernameInput.value,
         password: passwordInput.value
@@ -27,9 +26,20 @@ async function signIn() {
         body: JSON.stringify(userLoginDetails)
     }).then(response => response.json() )
     .then(dataFromSignIn => {
-        window.sessionStorage.setItem('token', dataFromSignIn);
+        if (dataFromSignIn.status == false) {
+            let signInResponseElement = document.getElementById('sign-in-response');
+            signInResponseElement.innerText = dataFromSignIn.message;
+            setTimeout( () => {
+                signInResponseElement.innerHTML = '';
+            }, 3500);
+        } else {
+            window.sessionStorage.setItem('token', dataFromSignIn);
+            authorizeUser();
+        }
     });
+}
 
+async function authorizeUser() {
     await fetch('http://localhost:8080/users/authorize', {
         method: 'GET',
         headers: {
@@ -51,10 +61,11 @@ async function signIn() {
 
         let signedOutBtn = document.getElementById('sign-out');
         signedOutBtn.disabled = false;
+        signInBtn.disabled = true;
     });
     if(window.sessionStorage.getItem('role') == 'admin') { 
         getAllUsers();
-     }
+    }
     loadAllTodoItems();
     loadAllTodoLists();
 }
@@ -109,7 +120,11 @@ function signOut() {
 
     createAccountBtn.disabled = true;
     signOutBtn.disabled = true;
+    signInBtn.disabled = false;
+
     signedInUser.innerHTML = '';
+    document.getElementById('todo-items-list').innerHTML = '';
+    document.getElementById('todoLists').innerHTML = '';
 
     if (document.getElementById('delete-users-element')) {
         document.getElementById('delete-users-element').remove();
@@ -159,13 +174,12 @@ async function deleteUser() {
     })
     .then(response => response.json() )
     .then(data => {
-        let deleteUserResponse = document.getElementById('delete-user-response');
-        deleteUserResponse.innerText = data;
-
-        let deleteUsersSelect = document.getElementById('delete-user-select');
-        deleteUsersSelect.innerHTML = '';
+        document.getElementById('delete-users-element').innerHTML = '';
 
         getAllUsers();
+        
+        let deleteUserResponse = document.getElementById('delete-user-response');
+        deleteUserResponse.innerText = data;
 
         //For removing the message from delete user
         setTimeout( () => {

@@ -22,7 +22,7 @@ async function loadAllTodoLists() {
 
             let todoListButton = document.createElement('button');
             todoListButton.id = todoList._id;
-            todoListButton.innerText = `Go to ${todoList.title}`;
+            todoListButton.innerText = `Go to ${todoList.title} todolist`;
             todoListButton.classList.add('todo-lists-ownerid');
 
             todoListDiv.appendChild(todoListItemElement);

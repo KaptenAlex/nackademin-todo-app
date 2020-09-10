@@ -29,16 +29,21 @@ module.exports = {
     },
     async loginUser(username, password) {
         return new Promise( (resolve, reject) => {
+            if(username === null || password === null || username.length == 0 || password.length == 0) {
+                resolve({status: false, message: "Must provide username and password"});
+            }
             usersDatabase.findOne({username: username}, (err, userObject) => {
                 if (err) {
                     reject(err);
+                } else if (userObject === null) {
+                    resolve({status: false, message: "User does not exist"});
                 } else {
                     const passwordComparison = bcryptjs.compareSync(password, userObject.password)
                     if (passwordComparison) {
                         const token = jwt.sign({username: userObject.username, role: userObject.role, id: userObject._id}, secret, {expiresIn: "7d"})
                         resolve(token);
                     } else {
-                        reject({error: err, message: "Incorrect password"});
+                        resolve({status:false, message: "Invalid password"});
                     }
                 }
             })

@@ -60,7 +60,11 @@ module.exports = {
     loginUser: async(req, res) => {
         try {
             const user = await usersModel.loginUser(req.body.username, req.body.password);
-            res.status(200).json(user);
+            if (user.status == false) {
+                res.status(200).json(user);
+            } else {                
+                res.status(200).json(user);
+            }
         } catch(err) {
             res.status(400).json(err);
         }
