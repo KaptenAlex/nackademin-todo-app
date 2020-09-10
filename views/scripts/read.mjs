@@ -1,5 +1,6 @@
 import {editTodoItem} from './update.mjs';
 import {deleteTodoItem} from './delete.mjs';
+let todoListID;
 
 async function loadAllTodoItems(pageNumber = 0, todoListId) {
     fetch('http://localhost:8080/todos/todos/?page=' + pageNumber + '&todoListId=' + todoListId, {
@@ -11,6 +12,9 @@ async function loadAllTodoItems(pageNumber = 0, todoListId) {
     .then(response => response.json())
     .then(data => {
         let todo_item_listElement = document.getElementById('todo-items-list');
+        document.getElementById('create-todo-btn').disabled = false;
+        
+        todoListID = todoListId;
         todo_item_listElement.innerHTML = '';
         data.forEach(todoItem => {
             // Todolist
@@ -63,4 +67,4 @@ async function loadAllTodoItems(pageNumber = 0, todoListId) {
     });
 }
 
-export {loadAllTodoItems}
+export {loadAllTodoItems, todoListID}

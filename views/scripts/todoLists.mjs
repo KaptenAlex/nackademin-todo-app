@@ -23,8 +23,6 @@ async function loadAllTodoLists() {
             ownerIdElement.classList.add('todo-lists-ownerid');
 
             let todoListButton = document.createElement('button');
-            todoListButton.id = todoList._id;
-            //Insert todolist & user id?
             todoListButton.addEventListener('click', () => loadAllTodoItems(0, todoList._id));
             todoListButton.innerText = `Go to ${todoList.title} todolist`;
             todoListButton.classList.add('todo-lists-ownerid');

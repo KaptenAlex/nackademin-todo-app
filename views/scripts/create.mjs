@@ -1,14 +1,15 @@
-import {loadAllTodoItems} from './read.mjs';
+import {loadAllTodoItems, todoListID} from './read.mjs';
 
 let createTodoButton = document.getElementById('create-todo-btn');
 createTodoButton.addEventListener('click', () => createNewTodoItem());
 
 async function createNewTodoItem() {
-    let todoTitle = document.getElementById('newTodo-title');
+    let newTodoTitle = document.getElementById('newTodo-title');
     
     const newTodoItem = {
-        title: todoTitle.value,
-        completed: false
+        title: newTodoTitle.value,
+        completed: false,
+        todoListId: todoListID
     };
     await fetch( 'http://localhost:8080/todos/', {
         method: 'POST',
@@ -23,8 +24,8 @@ async function createNewTodoItem() {
         if (!todoItem) {
             console.log('Something went wrong, shake student to get answers');
         } else {
-            todoTitle.value = '';
-            loadAllTodoItems();
+            newTodoTitle.value = '';
+            loadAllTodoItems(0, todoListID);
         }
     })
     

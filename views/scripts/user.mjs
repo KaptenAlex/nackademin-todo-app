@@ -119,6 +119,7 @@ function signOut() {
     createAccountBtn.disabled = true;
     signOutBtn.disabled = true;
     signInBtn.disabled = false;
+    document.getElementById('create-todo-btn').disabled = true;
 
     signedInUser.innerHTML = '';
     document.getElementById('todo-items-list').innerHTML = '';

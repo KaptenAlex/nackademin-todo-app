@@ -1,4 +1,5 @@
 async function editTodoItem( todoItemID ) {
+    console.log(todoItemID);
     let todoItemElement = document.querySelector('div#' + todoItemID);
     let todoTitle = todoItemElement.querySelector('.todoTitle').value;
     let todoCompleted = todoItemElement.querySelector('.completed-checkbox').checked;
@@ -8,7 +9,7 @@ async function editTodoItem( todoItemID ) {
         completed: todoCompleted
     };
     await fetch( 'http://localhost:8080/todos/' + todoItemID, {
-        method: 'PUT',
+        method: 'PATCH',
         headers: {
             'Content-type': 'application/json',
             'Authorization': 'Bearer ' + window.sessionStorage.getItem('token')
