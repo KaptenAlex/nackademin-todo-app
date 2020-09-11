@@ -126,5 +126,27 @@ module.exports = {
                 }
             });
         });
+    },
+    async deleteUsersTodoItems(userId) {
+        return new Promise( (resolve, reject) => {
+            todoItemDatabase.remove({userId: userId}, {multi: true}, (err, numOfTodoItemRemoved) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(numOfTodoItemRemoved);
+                }
+            });
+        });
+    },
+    async getUsersTodoItems(userId) {
+        return new Promise( (resolve, reject ) => {
+            todoItemDatabase.find({userId: userId}, (err, usersTodoItems) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(usersTodoItems);
+                }
+            });
+        });
     }
 };

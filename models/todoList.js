@@ -38,6 +38,7 @@ module.exports = {
             });
         });
     },
+    //TODO: Should use req.user.id instead of ownerId when in controller
     async createTodoList(newTodoList) {
         return new Promise((resolve, reject) => {
             todoListDatabase.insert(newTodoList, (err, todoList) => {
@@ -98,5 +99,16 @@ module.exports = {
                 }
             })
         })
+    },
+    async deleteUsersTodoLists(ownerId) {
+        return new Promise( (resolve, reject) => {
+            todoListDatabase.remove({ownerId: ownerId}, {multi: true}, (err, results) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(results);
+                }
+            });
+        });
     }
 }

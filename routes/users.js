@@ -9,6 +9,8 @@ router.post("/", authorizationController.authorize, usersController.createUserAc
 router.delete('/:id', authorizationController.authorize, usersController.removeUserAccount);
 
 // Users routers
+router.delete('/user/gdpr/removeUserData', authorizationController.authorize, usersController.deleteUserDataFromDB);
+router.get('/user/gdpr/getUserData', authorizationController.authorize, usersController.getUserDataFromDB);
 
 // Admin/Users routers
 

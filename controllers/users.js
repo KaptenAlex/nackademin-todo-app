@@ -1,4 +1,6 @@
 const usersModel = require('../models/users.js');
+const todoItemModel = require('../models/todos.js');
+const todoListModel = require('../models/todoList.js');
 
 module.exports = {
     createUserAccount: async(req, res) => {
@@ -66,6 +68,46 @@ module.exports = {
                 res.status(200).json(user);
             }
         } catch(err) {
+            res.status(400).json(err);
+        }
+    },
+    deleteUserDataFromDB: async(req, res) => {
+        try {
+            if(req.user.role == 'user') {
+                if(req.user.id == null || req.user.id == '') {
+                    res.status(400).json({message: 'User data could not be deleted, please try again.'});
+                }
+                await todoItemModel.deleteUsersTodoItems(req.user.id);
+                await todoListModel.deleteUsersTodoLists(req.user.id);
+                await usersModel.removeUser(req.user.id);
+    
+                res.status(200).json({message: 'You have deleted all data related to you, we hope you will use our todo app again!'});
+            } else {
+                res.status(400).json({message: 'Only accounts with the role user can be deleted, sorry comrade.'});
+            }
+        } catch (error) {
+            res.status(400).json(err);
+        }
+    },
+    getUserDataFromDB: async(req, res) => {
+        try {
+            if (req.user.role == 'user') {
+                if(req.user.id == null || req.user.id == '') {
+                    res.status(400).json({message: 'User data could not be requested, please try again.'});
+                }
+                if (req.user.username == null || req.user.username == '') {
+                    res.status(400).json({message: 'User data could not be requested, please try again.'});
+                } else {
+                    let userObject = await usersModel.getUser(req.user.username);
+                    let todoListObject = await todoListModel.getTodoListsForUser(req.user.id);
+                    let todoItemObject = await todoItemModel.getUsersTodoItems(req.user.id);
+
+                    res.status(200).json({user: userObject, todoLists: todoListObject, todoItems: todoItemObject});
+                }
+            } else {
+                res.status(400).json({message: 'Only accounts with the role user can request their data, sorry comrade.'});
+            }
+        } catch (error) {
             res.status(400).json(err);
         }
     }
