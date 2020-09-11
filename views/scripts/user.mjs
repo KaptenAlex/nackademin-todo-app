@@ -65,11 +65,20 @@ async function authorizeUser() {
     if(window.sessionStorage.getItem('role') == 'admin') { 
         getAllUsers();
     }
+    if(window.sessionStorage.getItem('role') == 'user') {
+        let gdprBtn = document.createElement('button');
+        gdprBtn.innerText = 'How we follow GDPR';
+        gdprBtn.addEventListener('click', () => createGDPRWindow());
+        let signedInDiv = document.getElementById('signed-in-interface');
+        signedInDiv.appendChild(gdprBtn);
+    }
     loadAllTodoLists();
 }
 
 async function getAllUsers() {
+    //Activate create an account button.
     createAccountBtn.disabled = false;
+
     //For creating elements for deleting users.
     let deleteUsersDiv = document.createElement('div');
     deleteUsersDiv.id = "delete-users-element";
@@ -88,9 +97,6 @@ async function getAllUsers() {
     deleteUserBtn.innerText = 'Delete selected user';
     deleteUserBtn.addEventListener('click', () => deleteUser() ) 
     deleteUsersDiv.append(deleteUserBtn);
-    
-    // After appending everything for deleting a user, load all users.
-    // getAllUsers();
 
     await fetch('http://localhost:8080/users/', {
         headers: {
@@ -185,4 +191,35 @@ async function deleteUser() {
             deleteUserResponse.innerHTML = '';
         }, 3500);
     })
+}
+
+async function createGDPRWindow() {
+    let gdprDiv = document.getElementById('gdpr')
+    let createGDPRControlDiv = document.createElement('div');
+    gdprDiv.appendChild(createGDPRControlDiv);
+    
+    let getAllDataGDPRBtn = document.createElement('button');
+    getAllDataGDPRBtn.innerText = 'Get all data related to me';
+    getAllDataGDPRBtn.addEventListener('click', () => getAllUserDataGDPR());
+
+    let removeAllDataGDPRBtn = document.createElement('button');
+    removeAllDataGDPRBtn.innerText = 'Remove all data related to me and my account';
+    removeAllDataGDPRBtn.disabled = true;
+    removeAllDataGDPRBtn.addEventListener('click', () => removeAllUserDataGDPR());
+    
+    createGDPRControlDiv.appendChild(getAllDataGDPRBtn);
+    createGDPRControlDiv.appendChild(removeAllDataGDPRBtn);
+}
+
+async function getAllUserDataGDPR() {
+    removeAllDataGDPRBtn.disabled = false;
+
+}
+
+async function removeAllUserDataGDPR() {
+    
+}
+
+async function returnToSignedInInterface() {
+
 }
