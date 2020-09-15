@@ -66,23 +66,23 @@ describe('Todoitems HTTP requests', function() {
 
     it('Should get a 201 with an array with eight of the latest created todo items', async function() {
         const resp = await chai.request(app)
-        .get('/todos/sort/created')
+        .get('/todos/sort/created/?todoListId=2')
         .set('Authorization', `Bearer ${this.test.token}`)
         .send();
         expect(resp).to.have.status(201);
         expect(resp).to.be.json;
-        expect(resp.body).to.be.an('array').with.length(8);
+        expect(resp.body).to.be.an('array').with.length(5);
         (resp.body).forEach(todoItem => expect(todoItem).to.have.all.keys(['_id', 'title', 'completed', 'userId', 'todoListId', 'created', 'updated']));
     });
 
     it('Should get a 201 with an array of eight of the latest updated todo items', async function() {
         const resp = await chai.request(app)
-        .get('/todos/sort/updated')
+        .get('/todos/sort/updated/?todoListId=2')
         .set('Authorization', `Bearer ${this.test.token}`)
         .send();
         expect(resp).to.have.status(201);
         expect(resp).to.be.json;
-        expect(resp.body).to.be.an('array').with.length(8);
+        expect(resp.body).to.be.an('array').with.length(5);
         (resp.body).forEach(todoItem => expect(todoItem).to.have.all.keys(['_id', 'title', 'completed', 'userId', 'todoListId', 'created', 'updated']));
     });
 

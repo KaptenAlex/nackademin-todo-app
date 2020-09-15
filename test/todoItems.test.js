@@ -164,7 +164,7 @@ describe('Todo model', async function() {
         await todosModel.createTodoItem(newTodo);
 
         // Act
-        let loadLatestCreated = await todosModel.loadLatestCreated();
+        let loadLatestCreated = await todosModel.loadLatestCreated('todolistTest');
         
         // Assert        
         loadLatestCreated.should.be.an('array');
@@ -185,7 +185,7 @@ describe('Todo model', async function() {
         await todosModel.createTodoItem(newTodo);
 
         // Act
-        let loadLatestUpdated = await todosModel.loadLatestUpdated();
+        let loadLatestUpdated = await todosModel.loadLatestUpdated('todolistTest');
         
         // Assert
         loadLatestUpdated.should.be.an('array');
