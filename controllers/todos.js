@@ -64,14 +64,14 @@ module.exports = {
     },
     loadLatestCreated: async(req, res) => {
         try {
-            res.status(201).json(await todoModel.loadLatestCreated());
+            res.status(201).json(await todoModel.loadLatestCreated(req.query.todoListId));
         } catch (error) {
             res.status(400).json(error);
         }
     },
     loadLatestUpdated: async(req, res) => {
         try {
-            res.status(201).json(await todoModel.loadLatestUpdated());
+            res.status(201).json(await todoModel.loadLatestUpdated(req.query.todoListId));
         } catch (error) {
             res.status(400).json(error);
         }

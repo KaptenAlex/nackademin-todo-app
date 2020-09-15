@@ -1,19 +1,20 @@
 import {editTodoItem} from './update.mjs';
 import {deleteTodoItem} from './delete.mjs';
+import {todoListID} from './read.mjs';
 
 document.getElementById('sort-by-created').addEventListener('click', () => sortByLatestCreated() );
 document.getElementById('sort-by-updated').addEventListener('click', () => sortByLatestUpdated() );
 
 async function sortByLatestCreated() {
-    sortTodos('sort/created');
+    sortTodos('sort/created/');
 }
 
 async function sortByLatestUpdated() {
-    sortTodos('sort/updated');
+    sortTodos('sort/updated/');
 }
 
 function sortTodos (sortByEndpoint) {
-    fetch('http://localhost:8080/todos/' + sortByEndpoint, {
+    fetch('http://localhost:8080/todos/' + sortByEndpoint + '?todoListId=' +todoListID, {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + window.sessionStorage.getItem('token')
