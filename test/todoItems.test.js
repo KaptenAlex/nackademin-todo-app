@@ -14,7 +14,9 @@ describe('Todo model', async function() {
             completed: false,
             created: Date.now(),
             updated: Date.now(),
-            userId: 'testing_with_chai'
+            userId: 'testing_with_chai',
+            todoListId: 'todolistTest'
+
         };
         let createdTodoItem = await todosModel.createTodoItem(todoItem);
         this.currentTest.createTodoItemId = createdTodoItem._id;
@@ -28,7 +30,8 @@ describe('Todo model', async function() {
                 completed: false,
                 created: Date.now(),
                 updated: Date.now(),
-                userId: 'testing_with_chai'
+                userId: 'testing_with_chai',
+                todoListId: 'todolistTest'
             };
             // Act
             let createTodoItem = await todosModel.createTodoItem(newTodo);
@@ -41,6 +44,7 @@ describe('Todo model', async function() {
                 created: newTodo.created,
                 updated: newTodo.updated,
                 userId: newTodo.userId,
+                todoListId: 'todolistTest',
                 _id: createTodoItem._id
             });
         });
@@ -51,7 +55,8 @@ describe('Todo model', async function() {
                 completed: false,
                 created: Date.now(),
                 updated: Date.now(),
-                userId: 'testing_with_chai'
+                userId: 'testing_with_chai',
+                todoListId: 'todolistTest'
             }
             // Act
             let createTodoItem = todosModel.createTodoItem(todoItem);
@@ -61,18 +66,19 @@ describe('Todo model', async function() {
         });
     })
 
-    it('loadAllTodoItems() | Should return a array with twi todo items from todo db', async function() {
+    it('loadAllTodoItems() | Should return a array with two todo items from todo db', async function() {
          // Arrange
          let newTodo = {
             title: "Mocha/Chai test title",
             completed: false,
             created: Date.now(),
             updated: Date.now(),
-            userId: 'testing_with_chai'
+            userId: 'testing_with_chai',
+            todoListId: 'todolistTest'
         };
         await todosModel.createTodoItem(newTodo);
          // Act
-         let loadAllTodoItems = await todosModel.loadAllTodoItems(0);
+         let loadAllTodoItems = await todosModel.loadAllTodoItems(0, 'todolistTest');
 
          // Assert
         loadAllTodoItems.should.be.an('array');
@@ -86,18 +92,18 @@ describe('Todo model', async function() {
             completed: false,
             created: Date.now(),
             updated: Date.now(),
-            userId: 'testing_with_chai'
+            userId: 'testing_with_chai',
+            todoListId: 'todolistTest'
         };
         await todosModel.createTodoItem(newTodo);
         // Act
-        let loadAllTodoItemsForUser = await todosModel.loadAllTodoItemsForUser(0, 'testing_with_chai');
+        let loadAllTodoItemsForUser = await todosModel.loadAllTodoItemsForUser(0, 'todolistTest');
         
         // Assert
         loadAllTodoItemsForUser.should.be.an('array');
         loadAllTodoItemsForUser.forEach(todoItem => expect(todoItem.userId).to.equal('testing_with_chai'));
         loadAllTodoItemsForUser.should.have.lengthOf(2);
         
-        //loadAllTodoItemsForUser[0].should.have.property('userId').with.equal('testing_with_chai')
     });
 
     it('countTodoItemsPages() | Should return a number representing how many pages should be created for the available todo items', async function() {
@@ -107,11 +113,12 @@ describe('Todo model', async function() {
             completed: false,
             created: Date.now(),
             updated: Date.now(),
-            userId: 'testing_with_chai'
+            userId: 'testing_with_chai',
+            todoListId: 'todolistTest'
         };
         await todosModel.createTodoItem(newTodo);
         // Act
-        let countTodoItems = await todosModel.countTodoItemsPages();
+        let countTodoItems = await todosModel.countTodoItemsPages('todolistTest');
         
         // Assert
         countTodoItems.should.be.an('number');
@@ -125,7 +132,8 @@ describe('Todo model', async function() {
             completed: false,
             created: Date.now(),
             updated: Date.now(),
-            userId: 'testing_with_chai'
+            userId: 'testing_with_chai',
+            todoListId: 'todolistTest'
         };
         let newTodoItem = await todosModel.createTodoItem(newTodo);
 
@@ -142,6 +150,7 @@ describe('Todo model', async function() {
         loadAllTodoItemsForUser.should.equal(1);
     });
 
+    //TODO: implement changes from models
     it('loadLatestCreated() | Should return an array with objects', async function() {
         // Arrange
         let newTodo = {
@@ -149,7 +158,8 @@ describe('Todo model', async function() {
             completed: false,
             created: Date.now(),
             updated: Date.now(),
-            userId: 'testing_with_chai'
+            userId: 'testing_with_chai',
+            todoListId: 'todolistTest'
         };
         await todosModel.createTodoItem(newTodo);
 
@@ -161,6 +171,7 @@ describe('Todo model', async function() {
         loadLatestCreated.should.have.lengthOf(2);
     });
 
+    //TODO: implement changes from models
     it('loadLatestUpdated() | Should return an array with objects', async function() {
         // Arrange
         let newTodo = {
@@ -168,7 +179,8 @@ describe('Todo model', async function() {
             completed: false,
             created: Date.now(),
             updated: Date.now(),
-            userId: 'testing_with_chai'
+            userId: 'testing_with_chai',
+            todoListId: 'todolistTest'
         };
         await todosModel.createTodoItem(newTodo);
 
@@ -187,7 +199,8 @@ describe('Todo model', async function() {
             completed: false,
             created: Date.now(),
             updated: Date.now(),
-            userId: 'testing_with_chai'
+            userId: 'testing_with_chai',
+            todoListId: 'todolistTest'
         };
         let newTodoItem = await todosModel.createTodoItem(newTodo);
         // Act
@@ -205,7 +218,8 @@ describe('Todo model', async function() {
             completed: false,
             created: Date.now(),
             updated: Date.now(),
-            userId: 'testing_with_chai'
+            userId: 'testing_with_chai',
+            todoListId: 'todolistTest'
         };
         await todosModel.createTodoItem(newTodo);
 

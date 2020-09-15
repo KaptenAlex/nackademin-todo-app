@@ -21,14 +21,14 @@ describe('Todoitems HTTP requests', function() {
             created: Date.now(),
             updated: Date.now(),
             userId: 'Fredde',
-            todoListId: 1
+            todoListId: '1'
         };
         for (let i = 0; i < 4; i++) {
             todoItem.title + i;
             await todosModel.createTodoItem(todoItem);
         }
         todoItem.userId = 'Alex';
-        todoItem.todoListId = 2;
+        todoItem.todoListId = '2';
         for (let i = 0; i < 5; i++) {
             todoItem.title + i;
             if (i != 4) {
@@ -55,12 +55,12 @@ describe('Todoitems HTTP requests', function() {
     //TODO: Add test where user has the role user
     it('Should get a 201 response with an array of eight of nine todo items', async function() {
         const resp = await chai.request(app)
-        .get('/todos/todos/')
+        .get('/todos/todos/?page=0&todoListId=1')
         .set('Authorization', `Bearer ${this.test.token}`)
         .send();
         expect(resp).to.have.status(201);
         expect(resp).to.be.json;
-        expect(resp.body).to.be.an('array').with.length(8);
+        expect(resp.body).to.be.an('array').with.length(4);
         (resp.body).forEach(todoItem => expect(todoItem).to.have.all.keys(['_id', 'title', 'completed', 'userId', 'todoListId', 'created', 'updated']));
     });
 
@@ -127,15 +127,15 @@ describe('Todoitems HTTP requests', function() {
 
     it('Should count the amount of pages needed for paginating all todo items in sets of eight', async function() {
         const resp = await chai.request(app)
-        .get('/todos/countTodoItems')
+        .get('/todos/countTodoItems/2')
         .set('Authorization', `Bearer ${this.test.token}`)
         .send();
         expect(resp).to.have.status(201);
         expect(resp).to.be.json;
-        expect(resp.body).to.be.an('number').equal(2);
+        expect(resp.body).to.be.an('number').equal(1);
     });
     
-    it('Should count the amount of pages needed for paginating all todo items in sets of eight', async function() {
+    it('Should return a redirect status and a message telling that the client is being redirected', async function() {
         const resp = await chai.request(app)
         .get('/todos/')
         .redirects(0)

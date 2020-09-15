@@ -72,6 +72,7 @@ module.exports = {
             });
         });
     },
+    //TODO: fix this to load latest created in a todolist
     async loadLatestCreated() {
         return new Promise( (resolve, reject) => {
             todoItemDatabase.find({}).sort({created: -1}).limit(8).exec( (err, todoItems) => {
@@ -83,6 +84,7 @@ module.exports = {
             })
         })
     },
+    //TODO: fix this to load latest updated in a todolist
     async loadLatestUpdated() {
         return new Promise( (resolve, reject) => {
             todoItemDatabase.find({}).sort({updated: -1}).limit(8).exec( (err, todoItems) => {
