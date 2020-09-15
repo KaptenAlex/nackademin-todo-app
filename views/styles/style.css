@@ -134,3 +134,15 @@ body {
     display: grid;
     justify-content: flex-end;
 }
+.user-data {
+    display: grid;
+    grid-template: 1fr / 1fr 1fr 1fr;
+}
+.users-todoitems {
+    height: 300px;
+    overflow-y: scroll;
+}
+.users-todolists {
+    height: 300px;
+    overflow-y: scroll;
+}

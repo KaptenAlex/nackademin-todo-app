@@ -67,7 +67,7 @@ async function authorizeUser() {
     }
     if(window.sessionStorage.getItem('role') == 'user') {
         let gdprBtn = document.createElement('button');
-        gdprBtn.innerText = 'How we follow GDPR';
+        gdprBtn.innerText = 'Privacy and Cookie policy';
         gdprBtn.addEventListener('click', () => createGDPRWindow());
         let signedInDiv = document.getElementById('signed-in-interface');
         signedInDiv.appendChild(gdprBtn);
@@ -119,6 +119,7 @@ function signOut() {
     window.sessionStorage.removeItem('token');
     window.sessionStorage.removeItem('username');
     window.sessionStorage.removeItem('role');
+    window.sessionStorage.removeItem('id');
 
     let signedInUser = document.getElementById('account-username');
 
@@ -190,19 +191,22 @@ async function deleteUser() {
         setTimeout( () => {
             deleteUserResponse.innerHTML = '';
         }, 3500);
-    })
+    });
 }
 
 async function createGDPRWindow() {
     let gdprDiv = document.getElementById('gdpr')
     let createGDPRControlDiv = document.createElement('div');
+    createGDPRControlDiv.id = 'gdpr-controls';
     gdprDiv.appendChild(createGDPRControlDiv);
     
     let getAllDataGDPRBtn = document.createElement('button');
     getAllDataGDPRBtn.innerText = 'Get all data related to me';
+    getAllDataGDPRBtn.id = 'get-user-data';
     getAllDataGDPRBtn.addEventListener('click', () => getAllUserDataGDPR());
 
     let removeAllDataGDPRBtn = document.createElement('button');
+    removeAllDataGDPRBtn.id = 'remove-all-user-data';
     removeAllDataGDPRBtn.innerText = 'Remove all data related to me and my account';
     removeAllDataGDPRBtn.disabled = true;
     removeAllDataGDPRBtn.addEventListener('click', () => removeAllUserDataGDPR());
@@ -212,12 +216,90 @@ async function createGDPRWindow() {
 }
 
 async function getAllUserDataGDPR() {
-    removeAllDataGDPRBtn.disabled = false;
+    let gdprDiv = document.getElementById('gdpr')
 
+    await fetch('http://localhost:8080/users/user/gdpr/getUserData', {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + window.sessionStorage.getItem('token')
+        }
+    })
+    .then(response => response.json())
+    .then(userData => {
+        let gdprUserData = document.createElement('div');
+        gdprUserData.id = 'user-data';
+        gdprUserData.classList.add('user-data');
+        gdprDiv.appendChild(gdprUserData);
+
+        let userObject = document.createElement('div');
+        userObject.innerHTML = '<h2>Your user data</h2>' +
+         `<p>Username: ${userData.user.username}</p>` +
+         `<p>Role: ${userData.user.role}</p>` +
+         `<p>ID: ${userData.user._id}</p>`;
+        gdprUserData.appendChild(userObject);
+
+        let todoListObject = document.createElement('div');
+        todoListObject.innerHTML = '<h2>Your todo lists</h2>';
+        todoListObject.classList.add('users-todolists');
+        
+        userData.todoLists.forEach(todoList => {
+            let todoListDiv = document.createElement('div');
+            todoListDiv.innerHTML += '<h4>Todo list</h4>' + 
+            `<p> Title: ${todoList.title}<p/>` +
+            `<p> Owner id: ${todoList.ownerId}<p/>` +
+            `<p> ID: ${todoList._id}<p/>` ;
+            todoListObject.appendChild(todoListDiv);
+        });
+        gdprUserData.appendChild(todoListObject);
+
+
+        let todoItemObject = document.createElement('div');
+        todoItemObject.innerHTML = '<h2>Your todo items</h2>';
+        todoItemObject.classList.add('users-todoitems')
+
+        userData.todoItems.forEach(todoItems => {
+            let todoItemDiv = document.createElement('div');
+            todoItemDiv.innerHTML += '<h4>Todoitem</h4>' + 
+            `<p>Title: ${todoItems.title}</p>` +
+            `<p>Completed: ${todoItems.completed}</p>` +
+            `<p>Created: ${todoItems.created}</p>` +
+            `<p>Updated: ${todoItems.updated}</p>` +
+            `<p>User ID: ${todoItems.userId}</p>` +
+            `<p>Todolist ID: ${todoItems.todoListId}</p>` +
+            `<p>Todoitem ID: ${todoItems._id}</p>`;
+            todoItemObject.appendChild(todoItemDiv);
+        });
+        gdprUserData.appendChild(todoItemObject);
+
+        let removeAllDataGDPRBtn = document.getElementById('remove-all-user-data');
+        removeAllDataGDPRBtn.disabled = false;
+        document.getElementById('get-user-data').disabled = true;
+    });
 }
 
 async function removeAllUserDataGDPR() {
-    
+    if(confirm('This action is irreversible and cannot be regretted later, are you sure you want to delete all data about you?')) {
+        await fetch('http://localhost:8080/users/user/gdpr/removeUserData', {
+            method: 'DELETE',
+            headers: {
+                'Authorization': 'Bearer ' + window.sessionStorage.getItem('token')
+            }
+        })
+        .then(response => response.json() )
+        .then(data => {
+            document.getElementById('user-data').remove();
+            document.getElementById('gdpr-controls').remove();
+
+            document.getElementById('todoLists').innerHTML = '';
+            document.getElementById('todo-items-list').innerHTML = '';
+
+            signOut();
+
+            alert(data.message)
+        });
+    } else {
+        alert('You have cancelled the request to delete all data related to you.')
+    }
 }
 
 async function returnToSignedInInterface() {
