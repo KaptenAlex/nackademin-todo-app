@@ -140,12 +140,4 @@ $RECYCLE.BIN/
 # .env
 *.env
 
-# .db
-todoItems.db
-todoList.db
-users.db
-todoListTest.db
-todosTest.db
-usersTest.db
-
 # End of https://www.toptal.com/developers/gitignore/api/node,windows
