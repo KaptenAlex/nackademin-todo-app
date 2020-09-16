@@ -11,7 +11,7 @@
         "nedb": "^1.8.0"
     },
     "scripts": {
-        "test": "cross-env ENVIROMENT=test mocha --recursive",
+        "test": "npx cross-env ENVIROMENT=test mocha --recursive",
         "start": "node start.js"
     },
     "devDependencies": {
