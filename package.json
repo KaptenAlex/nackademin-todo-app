@@ -4,7 +4,6 @@
         "chai": "^4.2.0",
         "chai-as-promised": "^7.1.1",
         "chai-http": "^4.3.0",
-        "cross-env": "^7.0.2",
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
         "jsonwebtoken": "^8.5.1",
@@ -12,7 +11,10 @@
         "nedb": "^1.8.0"
     },
     "scripts": {
-        "test": "SET ENVIROMENT=test&&mocha",
+        "test": "cross-env ENVIROMENT=test mocha --recursive",
         "start": "node start.js"
+    },
+    "devDependencies": {
+        "cross-env": "^7.0.2"
     }
 }
