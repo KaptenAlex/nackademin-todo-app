@@ -1,4 +1,5 @@
 const app = require('../app.js');
+const Database = require('../models/databaseConnection.js');
 const usersModel = require('../models/users.js');
 
 const chai = require('chai');
@@ -11,7 +12,10 @@ chai.use(chaiAsPromised);
 chai.use(chaiHttp);
 
 describe('Users integration tests', function() {
-    /*
+    before('Connect to database', async function() {
+        await Database.connect();
+    });
+
     beforeEach('Clear test DB and create two users with different roles, admin and user.', async function() {
         await usersModel.clearDatabase();
 
@@ -29,6 +33,10 @@ describe('Users integration tests', function() {
         await usersModel.createAccount(newUser.username, newUser.password, newUser.role);
         
         this.currentTest.token = await usersModel.loginUser(newUser.username, newUser.password);
+    });
+
+    after('Disconnect from database', async function() {
+        await Database.disconnect();
     });
 
     it('Should get a array with two user objects', async function() {
@@ -91,5 +99,4 @@ describe('Users integration tests', function() {
         expect(resp).to.be.json;
         expect(resp.body).to.have.all.keys(['id', 'username', 'role']);
     });
-    */
 });
