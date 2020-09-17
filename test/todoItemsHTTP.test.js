@@ -1,4 +1,5 @@
 const app = require('../app.js');
+const Database = require('../models/databaseConnection.js');
 const todosModel = require('../models/todos.js');
 const usersModel = require('../models/users.js');
 
@@ -12,7 +13,10 @@ chai.use(chaiAsPromised);
 chai.use(chaiHttp);
 
 describe('Todoitems HTTP requests', function() {
-    /*
+    before('Connect to database', async function() {
+        await Database.connect();
+    });
+
     beforeEach('Clear test DB and create some todo items', async function() {
         await todosModel.clearDatabase();
         await usersModel.clearDatabase();
@@ -22,12 +26,14 @@ describe('Todoitems HTTP requests', function() {
             created: Date.now(),
             updated: Date.now(),
             userId: 'Fredde',
+            //TODO: Import todolistModel to file and replace todoListId with a previously created todolist.
             todoListId: '1'
         };
         for (let i = 0; i < 4; i++) {
             todoItem.title + i;
             await todosModel.createTodoItem(todoItem);
         }
+
         todoItem.userId = 'Alex';
         todoItem.todoListId = '2';
         for (let i = 0; i < 5; i++) {
@@ -53,6 +59,11 @@ describe('Todoitems HTTP requests', function() {
         
         this.currentTest.token = await usersModel.loginUser(newUser.username, newUser.password);
     });
+
+    after('Disconnect from database', async function() {
+        await Database.disconnect();
+    });
+
     //TODO: Add test where user has the role user
     it('Should get a 201 response with an array of eight of nine todo items', async function() {
         const resp = await chai.request(app)
@@ -126,7 +137,7 @@ describe('Todoitems HTTP requests', function() {
         expect(resp.body).to.be.an('number').equal(1);
     });
 
-    it('Should count the amount of pages needed for paginating all todo items in sets of eight', async function() {
+    it('Should count the amount of pages needed for paginating all todo items in sets of eight, should return the number one', async function() {
         const resp = await chai.request(app)
         .get('/todos/countTodoItems/2')
         .set('Authorization', `Bearer ${this.test.token}`)
@@ -144,5 +155,4 @@ describe('Todoitems HTTP requests', function() {
         expect(resp).to.have.status(302);
         expect(resp.res.text).to.be.equal('Found. Redirecting to index.html');
     });
-    */
 });
