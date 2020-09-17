@@ -2,12 +2,11 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const mongooseDB = require('./databaseConnection.js');
 
 const userSchema = new mongoose.Schema({
     username: {type: String, unique: true},
-    password: String,
-    role: String,
+    password: {type: String, required: true},
+    role: {type: String, required: true}
 }, {versionKey: false });
 
 const User = mongoose.model('User', userSchema);
@@ -22,90 +21,56 @@ module.exports = {
             return {message: "User has not been created", status: false};
         }
     },
+    async loginUser(username, password) {
+        try {
+            // Todo: do this in schema
+            if(username === null || password === null || username.length == 0 || password.length == 0) {
+                return {message: "Must provide username and password", status: false};
+            }
+
+            let user = await User.findOne({username: username});
+            const passwordComparison = bcryptjs.compareSync(password, user.password);
+    
+            if (passwordComparison) {
+                const token = jwt.sign({username: user.username, role: user.role, id: user._id}, process.env.SECRET, {expiresIn: "7d"});
+                return token;
+            } else {
+                return { message: "Invalid password", status: false };
+            }
+               
+        } catch (error) {
+            return {message: "User was not signed in, try again", status: false};
+        }
+    },
     async clearDatabase() {
         try {
             return (await User.deleteMany({})).deletedCount;
         } catch (error) {
-            return error;
+            return {message: "User DB has not been cleared", status: false};
         }
     },
-        /*
-        return new Promise ( (resolve, reject) => {
-            usersDatabase.findOne({username: username}, (err, userObject) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    if(userObject === null) {
-                        let salt = bcryptjs.genSaltSync(10);
-                        let password = bcryptjs.hashSync(oldPassword, salt);
-                        usersDatabase.insert({username, password, role}, (err, newUser) => {
-                            if (err) {
-                                reject({ error: err, message: "User was not created, try again", status: false })
-                            } else {
-                                resolve({ message: "User has been created", status: true })
-                            }
-                        })
-                    } else {
-                        resolve({ message: "Username already exists", status: false })
-                    }
-                }
-            })
-        });
-    },
-    async loginUser(username, password) {
-        return new Promise( (resolve, reject) => {
-            if(username === null || password === null || username.length == 0 || password.length == 0) {
-                resolve({status: false, message: "Must provide username and password"});
-            }
-            usersDatabase.findOne({username: username}, (err, userObject) => {
-                if (err) {
-                    reject(err);
-                } else if (userObject === null) {
-                    resolve({status: false, message: "User does not exist"});
-                } else {
-                    const passwordComparison = bcryptjs.compareSync(password, userObject.password)
-                    if (passwordComparison) {
-                        const token = jwt.sign({username: userObject.username, role: userObject.role, id: userObject._id}, process.env.SECRET, {expiresIn: "7d"})
-                        resolve(token);
-                    } else {
-                        resolve({status:false, message: "Invalid password"});
-                    }
-                }
-            })
-        })
-    },
     async getUsers() {
-        return new Promise( (resolve, reject) => {
-            usersDatabase.find({}).projection({password: 0}).sort({username: 1}).exec((err, usersObject) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(usersObject);
-                }
-            })
-        })
+        try {
+            let users = await User.find({}, 'username role' );
+            return users;
+        } catch (error) {
+            return {message: "Could not get users, try again", status: false};
+        }
     },
     async getUser(username) {
-        return new Promise( (resolve, reject) => {
-            usersDatabase.findOne({username: username}).projection({password: 0}).exec((err, usersObject) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(usersObject);
-                }
-            })
-        })
+        try {
+            let user = await User.findOne({username: username}, 'username role' );
+            return user;
+        } catch (error) {
+            return {message: "Could not get user, try again", status: false};
+        }
     },
     async removeUser(id) {
-        return new Promise( (resolve, reject) => {
-            usersDatabase.remove({_id: id}, (err, result) => {
-                if (err) {
-                    reject(err)
-                } else {
-                    resolve(result)
-                }
-            });
-        })
-    },
-    */
+        try {
+            let user = (await User.deleteOne({_id: id})).deletedCount;
+            return user;
+        } catch (error) {
+            return {message: "Could not remove user, try again", status: false};
+        }
+    }
 }

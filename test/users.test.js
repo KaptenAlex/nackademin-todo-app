@@ -40,8 +40,6 @@ describe('Users model', async function() {
             message: 'User has been created',
             status: true
         });
-
-
     });
 
     it('Should clear the entire users test database', async function() {
@@ -52,7 +50,7 @@ describe('Users model', async function() {
         role = 'user';
 
         await usersModel.createAccount(username, password, role);
-        
+
         // Act
         let clearUsersTestDB = await usersModel.clearDatabase();
 
@@ -60,7 +58,7 @@ describe('Users model', async function() {
         clearUsersTestDB.should.be.an('number');
         clearUsersTestDB.should.equal(3);
     });
-    /*
+
     it('Should sign in a user and return a payload string', async function() {
         // Arrange
         let username, password, role;
@@ -77,22 +75,21 @@ describe('Users model', async function() {
         signInAccount.should.be.an('string');
 
     });
-    
     it('Should return a array with three user objects', async function() {
         // Arrange
         let username, password, role;
         username = 'tester';
         password = '123';
         role = 'user';
-
+        
         await usersModel.createAccount(username, password, role);
-
+        
         // Act
         let getUsers = await usersModel.getUsers();
-
+        
         // Assert
         getUsers.should.be.an('array').with.length(3);
-        getUsers.forEach(user => expect(user).to.all.have.keys(['_id', 'username', 'role']) );
+        getUsers.forEach(user => expect(user._doc).to.have.keys(['_id', 'username', 'role']) );
     });
     
     it('Should return a user object', async function() {
@@ -101,21 +98,21 @@ describe('Users model', async function() {
         username = 'tester';
         password = '123';
         role = 'user';
-
+        
         await usersModel.createAccount(username, password, role);
-
+        
         // Act
         let getUser = await usersModel.getUser(username);
 
         // Assert
-        getUser.should.be.an('object');
-        getUser.should.be.deep.equal({
+        getUser._doc.should.be.an('object');
+        getUser._doc.should.have.keys({
             username: username,
             role: role,
             _id: getUser._id
         });
     });
-
+    
     it('Should remove a user and return the number one', async function() {
         // Arrange
         let username, password, role;
@@ -124,14 +121,13 @@ describe('Users model', async function() {
         role = 'user';
 
         await usersModel.createAccount(username, password, role);
-        let getUser = await usersModel.getUser(username);
-
+        let getUserID = await usersModel.getUser(username);
         // Act
-        let deletedUser = await usersModel.removeUser(getUser._id);
+        let deletedUser = await usersModel.removeUser(getUserID._doc._id);
 
         // Assert
         deletedUser.should.be.an('number');
         deletedUser.should.equal(1);
     });
-    */
+    
 });
