@@ -1,3 +1,4 @@
+const Database = require('../models/databaseConnection.js');
 const todosModel = require('../models/todos.js');
 const chai = require('chai');
 let chaiAsPromised = require("chai-as-promised");
@@ -6,10 +7,13 @@ chai.should();
 chai.use(chaiAsPromised);
 
 describe('Todo model', async function() {
-    /*
-    beforeEach('Clear todo database and create one todo item before the next it clause', async function() {
+    before('Connect to database', async function() {
+        await Database.connect();
+    });
+
+    beforeEach('Clear todo item DB and add two todo items', async function() {
         await todosModel.clearDatabase();
-        
+
         let todoItem = {
             title: "Mocha/Chai test title",
             completed: false,
@@ -17,12 +21,18 @@ describe('Todo model', async function() {
             updated: Date.now(),
             userId: 'testing_with_chai',
             todoListId: 'todolistTest'
-
         };
-        let createdTodoItem = await todosModel.createTodoItem(todoItem);
-        this.currentTest.createTodoItemId = createdTodoItem._id;
-    });
 
+        let createTodoItem = await todosModel.createTodoItem(todoItem);
+        console.log(createTodoItem._doc._id);
+        this.currentTest.createTodoItem = createTodoItem._id;
+
+    });
+    
+    after('Disconnect from database', async function() {
+        await Database.disconnect();
+    });
+    /*
     describe('createTodoItem()', function() {
         it('Should create a todo item, then return the same todo item and save its id', async function() {
             // Arrange

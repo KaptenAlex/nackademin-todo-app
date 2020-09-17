@@ -5,15 +5,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "env": {
-                "ENVIRONMENT": "test"
-            },
             "args": [
+                "--exit",
                 "--timeout",
                 "999999",
                 "--colors",
                 "${workspaceFolder}/test"
             ],
+            "env": {
+                "ENVIRONMENT": "test"
+            },
             "internalConsoleOptions": "openOnSessionStart",
             "name": "Mocha Tests",
             "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",

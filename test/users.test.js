@@ -7,7 +7,7 @@ const { expect } = require('chai');
 chai.should();
 chai.use(chaiAsPromised);
 
-describe('Users model', async function() {
+describe('Users model', function() {
     before('Connect to database', async function() {
         await Database.connect();
     });
@@ -20,10 +20,17 @@ describe('Users model', async function() {
         this.currentTest.secret = usersModel.secret;
     });
     
-    after('Disconnect from database', async function() {
+    after(async function() {
         await Database.disconnect();
     });
 
+    /*
+    after('Disconnect from database', async function() {
+        await Database.disconnect();
+    });
+    */
+    
+    /*
     it('Should create a account and return a object with a message and status', async function() {
         // Arrange
         let username, password, role;
@@ -112,6 +119,7 @@ describe('Users model', async function() {
             _id: getUser._id
         });
     });
+    */
     
     it('Should remove a user and return the number one', async function() {
         // Arrange
@@ -129,5 +137,4 @@ describe('Users model', async function() {
         deletedUser.should.be.an('number');
         deletedUser.should.equal(1);
     });
-    
 });

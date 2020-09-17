@@ -1,6 +1,34 @@
-const {todoItemDatabase} = require('./databaseConnection.js');
+const mongoose = require('mongoose');
+
+const todoItemSchema = new mongoose.Schema({
+    title: {type: String, required: true},
+    completed: {type: Boolean, required: true},
+    created: {type: Date, required: true},
+    updated: {type: Date, required: true},
+    userId: {type: String, required: true},
+    todoListId: {type: String, required: true}
+}, {versionKey: false });
+
+const Todoitem = mongoose.model('Todoitem', todoItemSchema);
 
 module.exports = {
+    async clearDatabase() {
+        try {
+            return (await Todoitem.deleteMany({})).deletedCount;
+        } catch (error) {
+            return {message: "Todo item DB has not been cleared", status: false};
+        }
+    },
+    async createTodoItem(todoItem) {
+        try {
+            let todoItem = await Todoitem.create(todoItem);
+            console.log(todoItem);
+            return todoItem;
+        } catch (error) {
+            return {message: "Todo item has not been created", status: false};
+        }
+    }
+    /*
     async createTodoItem(todoItem) {
         return new Promise( (resolve, reject) => {
             if(todoItem.title.length < 5 || todoItem.title.length > 50 ) { reject(new Error('The title must be between 5-50 characters long')) }
@@ -105,17 +133,6 @@ module.exports = {
             })
         })
     },
-    async clearDatabase() {
-        return new Promise( (resolve, reject) => {
-            todoItemDatabase.remove({}, {multi: true}, (err, results) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(results);
-                }
-            });
-        })
-    },
     async findOneTodoItem(id) {
         return new Promise( (resolve, reject) => {
             todoItemDatabase.findOne({_id: id}, (err, todoItem) => {
@@ -149,4 +166,5 @@ module.exports = {
             });
         });
     }
+    */
 };
