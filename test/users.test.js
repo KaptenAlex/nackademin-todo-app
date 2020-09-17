@@ -19,18 +19,12 @@ describe('Users model', function() {
         
         this.currentTest.secret = usersModel.secret;
     });
-    
-    after(async function() {
-        await Database.disconnect();
-    });
 
-    /*
     after('Disconnect from database', async function() {
         await Database.disconnect();
     });
-    */
+
     
-    /*
     it('Should create a account and return a object with a message and status', async function() {
         // Arrange
         let username, password, role;
@@ -119,7 +113,6 @@ describe('Users model', function() {
             _id: getUser._id
         });
     });
-    */
     
     it('Should remove a user and return the number one', async function() {
         // Arrange

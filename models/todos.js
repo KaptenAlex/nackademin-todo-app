@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const todoItemSchema = new mongoose.Schema({
     title: {type: String, required: true},
     completed: {type: Boolean, required: true},
-    created: {type: Date, required: true},
-    updated: {type: Date, required: true},
+    created: {type: String, default: Date.now(), required: true},
+    updated: {type: String, default: Date.now(), required: true},
     userId: {type: String, required: true},
     todoListId: {type: String, required: true}
 }, {versionKey: false });
@@ -19,152 +19,103 @@ module.exports = {
             return {message: "Todo item DB has not been cleared", status: false};
         }
     },
-    async createTodoItem(todoItem) {
+    async createTodoItem(todoObject) {
         try {
-            let todoItem = await Todoitem.create(todoItem);
-            console.log(todoItem);
+            let todoItem = await Todoitem.create(todoObject);
             return todoItem;
         } catch (error) {
             return {message: "Todo item has not been created", status: false};
         }
-    }
-    /*
-    async createTodoItem(todoItem) {
-        return new Promise( (resolve, reject) => {
-            if(todoItem.title.length < 5 || todoItem.title.length > 50 ) { reject(new Error('The title must be between 5-50 characters long')) }
-            todoItemDatabase.insert(todoItem, (err, newTodoItem) => {
-                    if(err) {
-                        reject(err);
-                    } else {
-                        resolve(newTodoItem);
-                    }
-               });
-        });
-    },
-    async deleteTodoItem(todoItemID) {
-        return new Promise( (resolve, reject) => {
-            todoItemDatabase.remove({_id: todoItemID}, {}, (err, numOfTodoItemRemoved) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(numOfTodoItemRemoved);
-                }
-            });
-        });
     },
     async loadAllTodoItems(skipNumber = 5, todoListId) {
-        return new Promise( (resolve, reject) => {
-            todoItemDatabase.find({todoListId :todoListId}).sort({ created: -1}).skip(skipNumber * 5).limit(8).exec((err, allTodoItems) => {
-                if (err) {
-                    reject(err)
-                } else {
-                    resolve(allTodoItems)
-                }
-            });
-        });
-    },
-    async loadAllTodoItemsForUser(skipNumber = 5, todoListId) {
-        return new Promise( (resolve, reject) => {
-            todoItemDatabase.find({todoListId :todoListId}).sort({ created: -1}).skip(skipNumber * 5).limit(8).exec((err, allTodoItems) => {
-                if (err) {
-                    reject(err)
-                } else {
-                    resolve(allTodoItems)
-                }
-            });
-        });
+        try {
+            let todoItems = await Todoitem.find({todoListId: todoListId}).limit(8).skip(skipNumber * 5);
+            return todoItems;
+        } catch (error) {
+            return {message: "Todo items could not be loaded", status: false};
+        }
     },
     async countTodoItemsPages(todoListId) {
-        return new Promise( (resolve, reject) => {
-            todoItemDatabase.count({todoListId: todoListId}, (err, numOfTodoItems) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    //Calculate how many pages are required to show all documents on the SPA
-                    let numOfTodoItemsPages = numOfTodoItems / 8;
-                    // Then round it upwards to be able to show the last page of all todoitems.
-                    let numOfPagesNeeded = Math.ceil(numOfTodoItemsPages);
-                    resolve(numOfPagesNeeded);
-                }
+        try {
+            let countTodoItems = await Todoitem.countDocuments({todoListId: todoListId}, function(err, count) {
+                if (err) { return error; }
+                let numOfTodoItemsPages = count / 8;
+                let numOfPagesNeeded = Math.ceil(numOfTodoItemsPages);
+                return numOfPagesNeeded;
             });
-        });
+            return countTodoItems;
+        } catch (error) {
+            return {message: "Could not load todo items", status: false};
+        }
     },
     async updateTodoItem(todoItem, todoItemID) {
-        return new Promise( (resolve, reject) => {
-            todoItemDatabase.update({_id: todoItemID}, {$set:todoItem}, (err, updatedTodoItem) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(updatedTodoItem);
-                }
-            });
-        });
+        try {
+            let updateTodoItem = await Todoitem.updateOne( {_id: todoItemID}, todoItem );
+            return updateTodoItem.nModified;   
+        } catch (error) {
+            return {message: "Could not update todo item, please try again", status: false};
+        }
     },
     async loadLatestCreated(todoListId) {
-        return new Promise( (resolve, reject) => {
-            todoItemDatabase.find({todoListId: todoListId}).sort({created: -1}).limit(8).exec( (err, todoItems) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(todoItems);
-                }
-            })
-        })
+        try {
+            let latestCreated = await Todoitem.find({todoListId: todoListId}).sort('created -created').limit(8);
+            return latestCreated;
+        } catch (error) {
+            return {message: "Could not load latest created, please try again", status: false};
+        }
     },
     async loadLatestUpdated(todoListId) {
-        return new Promise( (resolve, reject) => {
-            todoItemDatabase.find({todoListId: todoListId}).sort({updated: -1}).limit(8).exec( (err, todoItems) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(todoItems);
-                }
-            })
-        })
+        try {
+            let latestUpdated = await Todoitem.find({todoListId: todoListId}).sort('updated -updated').limit(8);
+            return latestUpdated;
+        } catch (error) {
+            return {message: "Could not load latest updated, please try again", status: false};
+        }
+    },    
+    async deleteTodoItem(todoItemID) {
+        try {
+            let deleteTodoItem = (await Todoitem.deleteOne({_id: todoItemID})).deletedCount;
+            return deleteTodoItem;
+        } catch (error) {
+            return {message: "Could not delete todo item, please try again", status: false};
+        }
     },
     async countTodosItems() {
-        return new Promise( (resolve, reject) => {
-            todoItemDatabase.count({}, (err, numOfTodos) => {
-                if (err) {
-                    reject(err)
-                } else {
-                    resolve(numOfTodos)
-                }
-            })
-        })
-    },
-    async findOneTodoItem(id) {
-        return new Promise( (resolve, reject) => {
-            todoItemDatabase.findOne({_id: id}, (err, todoItem) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(todoItem);
-                }
+        try {
+            let countTodoItems = await Todoitem.countDocuments({}, function(error, numberOfTodoItems) {
+                if (error) { return error; }
+                return numberOfTodoItems;
             });
-        });
+            return countTodoItems;
+        } catch (error) {
+            return {message: "Could not count todo items, please try again", status: false};
+        }
+    },
+    async findOneTodoItem(todoItemID) { 
+        try {
+            let findTodoItem = await Todoitem.findById(todoItemID, function(error, todoItem) {
+                if (error) { return error; }
+                return todoItem;
+            });
+            return findTodoItem;
+        } catch (error) {
+            return {message: "Could not find the todo item, please try again", status: false };
+        }
     },
     async deleteUsersTodoItems(userId) {
-        return new Promise( (resolve, reject) => {
-            todoItemDatabase.remove({userId: userId}, {multi: true}, (err, numOfTodoItemRemoved) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(numOfTodoItemRemoved);
-                }
-            });
-        });
+        try {
+            let deleteUsersTodoItems = await Todoitem.deleteMany({userId: userId});
+            return deleteUsersTodoItems.deletedCount;
+        } catch (error) {
+            return {message: "Could not delete delete users todo items, please try again", status: false };
+        }
     },
     async getUsersTodoItems(userId) {
-        return new Promise( (resolve, reject ) => {
-            todoItemDatabase.find({userId: userId}, (err, usersTodoItems) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(usersTodoItems);
-                }
-            });
-        });
+        try {
+            let getUsersTodoItems = await Todoitem.find({userid: userId});
+            return getUsersTodoItems;
+        } catch (error) {
+            return {message: "Could not get users todo items, please try again", status: false };
+        }
     }
-    */
 };
