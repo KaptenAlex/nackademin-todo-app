@@ -5,7 +5,7 @@ const authorizationController = require('../controllers/authorization.js')
 
 // Admin routers
 router.get("/", authorizationController.authorize, usersController.getAllUsers)
-router.post("/", authorizationController.authorize, usersController.createUserAccount);
+router.post("/", /*authorizationController.authorize,*/ usersController.createUserAccount);
 router.delete('/:id', authorizationController.authorize, usersController.removeUserAccount);
 
 // Users routers

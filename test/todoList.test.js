@@ -7,6 +7,7 @@ chai.should();
 chai.use(chaiAsPromised);
 
 describe('Todo list model', async function() {
+    /*
     beforeEach('Clear DB and create three lists', async function() {
         await todoListModel.clearTodoListDatabase();
         for (let i = 0; i < 3; i++) {
@@ -99,4 +100,5 @@ describe('Todo list model', async function() {
         await expect(todoListModel.getTodoList(createTodoList._id)).to.be.rejectedWith(Error);
         
     })
+    */
 });

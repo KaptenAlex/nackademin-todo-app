@@ -12,6 +12,7 @@ chai.use(chaiAsPromised);
 chai.use(chaiHttp);
 
 describe('Todoitems HTTP requests', function() {
+    /*
     beforeEach('Clear test DB and create some todo items', async function() {
         await todosModel.clearDatabase();
         await usersModel.clearDatabase();
@@ -143,4 +144,5 @@ describe('Todoitems HTTP requests', function() {
         expect(resp).to.have.status(302);
         expect(resp.res.text).to.be.equal('Found. Redirecting to index.html');
     });
+    */
 });

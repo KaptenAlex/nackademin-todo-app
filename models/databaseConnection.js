@@ -1,33 +1,23 @@
-const mongoose = require('mongoose');
-require('dotenv').config();
+const mongoose = require('mongoose')
+require('dotenv').config()
 
-let developmentDB, testDB;
+let mongoDatabase
 
-switch (process.env.ENVIROMENT) {
+switch(process.env.ENVIRONMENT){
     case 'development':
-        const {MongoMemoryServer} = require('mongodb-memory-server');
-        developmentDB = new MongoMemoryServer();
-        break;
     case 'test':
         const {MongoMemoryServer} = require('mongodb-memory-server')
-        testDB = new MongoMemoryServer();
+        mongoDatabase = new MongoMemoryServer({ binary: {version: '4.4.1'} })
         break;
-
-        default:
-            console.log("Running databaseconnection on default");
-            break;
-        /*
+    case 'production':
     case 'staging':
         mongoDatabase = {
             // mongodb+srv://user:password@host/dbname
             getUri: async () => 
-                `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/${process.env.DB_NAME}?retryWrites=true&w=majority`
+            //'mongodb+srv://localhost' 
+            `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/${process.env.DB_NAME}?retryWrites=true&w=majority`
         }
         break;
-    case 'production':
-    
-        break;
-        */
 }
 
 async function connect(){
@@ -43,7 +33,9 @@ async function connect(){
 }
 
 async function disconnect(){
-    await mongoDatabase.stop()
+    if(process.env.ENVIRONMENT == 'test' || process.env.ENVIRONMENT == 'development'){
+        await mongoDatabase.stop()
+    }
     await mongoose.disconnect()
 }
 

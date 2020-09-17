@@ -11,6 +11,7 @@ chai.use(chaiAsPromised);
 chai.use(chaiHttp);
 
 describe('Users integration tests', function() {
+    /*
     beforeEach('Clear test DB and create two users with different roles, admin and user.', async function() {
         await usersModel.clearDatabase();
 
@@ -90,4 +91,5 @@ describe('Users integration tests', function() {
         expect(resp).to.be.json;
         expect(resp.body).to.have.all.keys(['id', 'username', 'role']);
     });
+    */
 });

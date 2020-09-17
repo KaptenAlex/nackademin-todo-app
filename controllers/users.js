@@ -5,17 +5,18 @@ const todoListModel = require('../models/todoList.js');
 module.exports = {
     createUserAccount: async(req, res) => {
         try {
+            /*
             if (req.user.role != "admin") {
                 res.status(401).json({error: "User needs to be an admin to create new account"});
+            } else {*/
+                console.log('controller');
+            let createAccountResults = await usersModel.createAccount(req.body.username, req.body.password, req.body.role);
+            if (createAccountResults.status) {
+                res.status(201).json(createAccountResults.message);
             } else {
-                let createAccountResults = await usersModel.createAccount(req.body.username, req.body.password, req.body.role);
-
-                if (createAccountResults.status) {
-                    res.status(201).json(createAccountResults.message);
-                } else {
-                    res.status(400).json(createAccountResults.message);
-                }
+                res.status(400).json(createAccountResults.message);
             }
+            //}
         } catch (error) {
             res.json(error)
         }

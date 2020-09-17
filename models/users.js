@@ -1,10 +1,35 @@
-const {usersDatabase} = require('./databaseConnection.js');
+require('dotenv').config();
+const mongoose = require('mongoose');
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const secret = "f8a466e19a3140ae4545a9e3d8684368";
+const mongooseDB = require('./databaseConnection.js');
+
+const userSchema = new mongoose.Schema({
+    username: {type: String, unique: true},
+    password: String,
+    role: String,
+}, {versionKey: false });
+
+const User = mongoose.model('User', userSchema);
 
 module.exports = {
     async createAccount(username, oldPassword, role) {
+        let password = bcryptjs.hashSync(oldPassword, 10);
+        try {
+            await User.create({username, password, role});
+            return {message: "User has been created", status: true}
+        } catch (error) {
+            return {message: "User has not been created", status: false};
+        }
+    },
+    async clearDatabase() {
+        try {
+            return (await User.deleteMany({})).deletedCount;
+        } catch (error) {
+            return error;
+        }
+    },
+        /*
         return new Promise ( (resolve, reject) => {
             usersDatabase.findOne({username: username}, (err, userObject) => {
                 if (err) {
@@ -40,7 +65,7 @@ module.exports = {
                 } else {
                     const passwordComparison = bcryptjs.compareSync(password, userObject.password)
                     if (passwordComparison) {
-                        const token = jwt.sign({username: userObject.username, role: userObject.role, id: userObject._id}, secret, {expiresIn: "7d"})
+                        const token = jwt.sign({username: userObject.username, role: userObject.role, id: userObject._id}, process.env.SECRET, {expiresIn: "7d"})
                         resolve(token);
                     } else {
                         resolve({status:false, message: "Invalid password"});
@@ -82,15 +107,5 @@ module.exports = {
             });
         })
     },
-    async clearDatabase() {
-        return new Promise( (resolve, reject) => {
-            usersDatabase.remove({}, {multi: true}, (err, results) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(results);
-                }
-            });
-        })
-    }
+    */
 }

@@ -1,20 +1,27 @@
+const Database = require('../models/databaseConnection.js');
 const usersModel = require('../models/users.js');
 const chai = require('chai');
 let chaiAsPromised = require("chai-as-promised");
 const { expect } = require('chai');
-const users = require('../models/users.js');
 
 chai.should();
 chai.use(chaiAsPromised);
 
 describe('Users model', async function() {
-    beforeEach('Clear users test DB and add two users', async function() {
-        await usersModel.clearDatabase();
+    before('Connect to database', async function() {
+        await Database.connect();
+    });
 
+    beforeEach('Clear users DB and add two users', async function() {
+        await usersModel.clearDatabase();
         await usersModel.createAccount('kalle', '123', 'user');
         await usersModel.createAccount('alex', '123', 'admin');
-
+        
         this.currentTest.secret = usersModel.secret;
+    });
+    
+    after('Disconnect from database', async function() {
+        await Database.disconnect();
     });
 
     it('Should create a account and return a object with a message and status', async function() {
@@ -37,6 +44,23 @@ describe('Users model', async function() {
 
     });
 
+    it('Should clear the entire users test database', async function() {
+        // Arrange
+        let username, password, role;
+        username = 'tester';
+        password = '123';
+        role = 'user';
+
+        await usersModel.createAccount(username, password, role);
+        
+        // Act
+        let clearUsersTestDB = await usersModel.clearDatabase();
+
+        // Assert
+        clearUsersTestDB.should.be.an('number');
+        clearUsersTestDB.should.equal(3);
+    });
+    /*
     it('Should sign in a user and return a payload string', async function() {
         // Arrange
         let username, password, role;
@@ -109,20 +133,5 @@ describe('Users model', async function() {
         deletedUser.should.be.an('number');
         deletedUser.should.equal(1);
     });
-
-    it('Should clear the entire users test database and return the number three', async function() {
-        // Arrange
-        let username, password, role;
-        username = 'tester';
-        password = '123';
-        role = 'user';
-
-        await usersModel.createAccount(username, password, role);
-        // Act
-        let clearUsersTestDB = await usersModel.clearDatabase();
-
-        // Assert
-        clearUsersTestDB.should.be.an('number');
-        clearUsersTestDB.should.equal(3);
-    });
-})
+    */
+});
