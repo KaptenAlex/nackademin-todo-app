@@ -91,7 +91,7 @@ describe('Todo model', function() {
         
         // Assert
         countTodoItems.should.be.an('number');
-        countTodoItems.should.equal(2);
+        countTodoItems.should.equal(1);
     });
 
 
@@ -164,8 +164,6 @@ describe('Todo model', function() {
         let newTodo = {
             title: "Mocha/Chai test title",
             completed: false,
-            created: Date.now(),
-            updated: Date.now(),
             userId: 'testing_with_chai',
             todoListId: 'todolistTest'
         };
@@ -185,8 +183,6 @@ describe('Todo model', function() {
         let newTodo = {
             title: "Mocha/Chai test title",
             completed: false,
-            created: Date.now(),
-            updated: Date.now(),
             userId: 'testing_with_chai',
             todoListId: 'todolistTest'
         };
@@ -205,8 +201,6 @@ describe('Todo model', function() {
         let newTodo = {
             title: "Mocha/Chai test title",
             completed: false,
-            created: Date.now(),
-            updated: Date.now(),
             userId: 'testing_with_chai',
             todoListId: 'todolistTest'
         };
@@ -225,8 +219,6 @@ describe('Todo model', function() {
         let newTodo = {
             title: "Mocha/Chai test title",
             completed: false,
-            created: Date.now(),
-            updated: Date.now(),
             userId: 'testing_with_chai',
             todoListId: 'todolistTest'
         };
@@ -247,8 +239,6 @@ describe('Todo model', function() {
         let newTodo = {
             title: "Mocha/Chai test title",
             completed: false,
-            created: Date.now(),
-            updated: Date.now(),
             userId: 'testing_with_chai',
             todoListId: 'todolistTest'
         };

@@ -8,7 +8,6 @@ module.exports = {
             if (req.user.role != "admin") {
                 res.status(401).json({error: "User needs to be an admin to create new account"});
             } else {
-                console.log('controller');
             let createAccountResults = await usersModel.createAccount(req.body.username, req.body.password, req.body.role);
             if (createAccountResults.status) {
                 res.status(201).json(createAccountResults.message);

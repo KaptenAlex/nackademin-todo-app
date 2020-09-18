@@ -37,13 +37,11 @@ module.exports = {
     },
     async countTodoItemsPages(todoListId) {
         try {
-            let countTodoItems = await Todoitem.countDocuments({todoListId: todoListId}, function(err, count) {
-                if (err) { return error; }
-                let numOfTodoItemsPages = count / 8;
-                let numOfPagesNeeded = Math.ceil(numOfTodoItemsPages);
-                return numOfPagesNeeded;
-            });
-            return countTodoItems;
+            let countTodoItems = await Todoitem.countDocuments({todoListId: todoListId});
+
+            let numOfTodoItemsPages = countTodoItems / 8;
+            let numOfPagesNeeded = Math.ceil(numOfTodoItemsPages);
+            return numOfPagesNeeded;
         } catch (error) {
             return {message: "Could not load todo items", status: false};
         }
