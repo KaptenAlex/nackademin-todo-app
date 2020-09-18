@@ -1,4 +1,5 @@
 const app = require('../app.js');
+const Database = require('../models/databaseConnection.js');
 const todoListModel = require('../models/todoList.js');
 const usersModel = require('../models/users.js');
 
@@ -12,7 +13,10 @@ chai.use(chaiAsPromised);
 chai.use(chaiHttp);
 
 describe('TodoList HTTP requests', async function() {
-    /*
+    before('Connect to database', async function() {
+        await Database.connect();
+    });
+
     beforeEach('Clear users DB and create admin account', async function() {
         await todoListModel.clearTodoListDatabase();
         await usersModel.clearDatabase();
@@ -38,6 +42,10 @@ describe('TodoList HTTP requests', async function() {
         await todoListModel.createTodoList(todoList);
 
         this.currentTest.token = await usersModel.loginUser(newUser.username, newUser.password);
+    });
+
+    after('Disconnect from database', async function() {
+        await Database.disconnect();
     });
 
     it('Should return two todo lists', async function() {
@@ -123,5 +131,4 @@ describe('TodoList HTTP requests', async function() {
         expect(resp).to.be.json;
         expect(resp).to.have.status(200);
     });
-    */
-})
+});
